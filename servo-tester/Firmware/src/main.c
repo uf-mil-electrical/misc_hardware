@@ -10,8 +10,14 @@
 #include "hardware/irq.h"
 #include "hardware/i2c.h"
 
-#include "MIL_USB2CAN.h"
-#include "MIL_electrical_message_system.h"
+#include "MIL_electrical_protocol_macros.h"
+#include "MIL_electrical_protocol_msg.h"
+
+#include "servo-pwm.h"
+
+#include "ssd1306.h"
+
+#include "mil-logo.h"
 
 /* -------------------------------------------------------------------------- */
 /*                                   MACROS                                   */
@@ -22,13 +28,16 @@
 
 /* ------------------------------ THRUSTER PINS ----------------------------- */
 
-#define SERVO_PIN 2
+#define SERVO_PIN 8
 
-/* ----------------------------- ESC PWM VALUES ----------------------------- */
+/* ----------------------------------- I2C ---------------------------------- */
 
-#define MAX_FWR_VAL 2200 // us, max forward pwm value in microseconds
-#define MAX_REV_VAL 800 // us, max reverse pwm value in microseconds
-#define STOP_VAL    1500 // us, nuetral/starting pwm value in microseconds
+#define I2C_PORT i2c1
+#define SDA_PIN 2
+#define SCL_PIN 3
+#define BAUD (400 * 1000)
+
+#define ADDR 0x3C
 
 /* -------------------------------------------------------------------------- */
 /*                                 GLOBAL VARS                                */
@@ -44,42 +53,30 @@
 /*                                 PROTOTYPES                                 */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------- THRUSTER -------------------------------- */
-
-/**
- * @brief Function that initalizes a pin to have PWM (50 Hz)
- * 
- * @param pin 
- */
-void servo_init(const uint pin);
-
-/**
- * @brief Function that re-maps a number from one range to another \
- *          Based off arduino map function, which is just y-y1 = m(x-x1)
- * 
- * @param x input value
- * @param in_min minimum value of the input range
- * @param in_max maximum value of the input range
- * @param out_min minimum value of the output range
- * @param out_max maximum value of the output range
-
- * @return [int] output value based on in and out
- */
-int map(int x,  int in_min, int in_max, int out_min, int out_max);
+/* ----------------------------------- I2C ---------------------------------- */
 
 /**
  * @brief 
  * 
- * @param speed float value [-1,1] to convert to servo duty values
- * @return uint frequency value for the servo
+ * @param i2c 
+ * @param baud_rate 
+ * @param sda 
+ * @param scl 
  */
-uint servo_duty(float speed);
+void i2c_pin_init(i2c_inst_t *i2c, const uint baud_rate, const uint8_t sda, const uint8_t scl);
 
-/**
- * @brief Set Pwm of pass pin to 1500 us, typical 0deg position
- * 
- * @param pin 
- */
+static void i2c_scan(i2c_inst_t *port) {
+    printf("I2C scan:\n");
+    for (int addr = 0x08; addr < 0x78; addr++) {
+        uint8_t rxdata;
+        int ret = i2c_read_blocking(port, addr, &rxdata, 1, false);
+        if (ret >= 0) printf(" - found device at 0x%02X\n", addr);
+        sleep_ms(5);
+    }
+}
+
+/* ---------------------------------- SERVO --------------------------------- */
+
 void start_servo(const uint pin );
 
 /* ----------------------------------- MSG ---------------------------------- */
@@ -100,24 +97,56 @@ usb_errcode_t read_message(usb_message_t *msg);
 int main() {
     stdio_init_all();
 
-    // LED to indicate the board is flashed
+    // ---- On Board LED ----
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
     
-    // Intialize pwm pins
-    servo_init(SERVO_PIN);
+    // ---- PWM -----
+    servo_pwm_init(SERVO_PIN);
     start_servo(SERVO_PIN);
 
+    // ---- I2C -----
+    char *loading = "Loading...";
+    char *words = "Hello, World!";
+
+    i2c_pin_init(I2C_PORT, BAUD, SDA_PIN, SCL_PIN);
+    ssd1306_t disp;
+    disp.external_vcc = false;
+    ssd1306_init(&disp, 128, 64, ADDR, I2C_PORT);
+
+    // Fake loading bc I hate mechanical team
+    ssd1306_clear(&disp);
+    ssd1306_draw_string(&disp, 32, 56, 1, loading);
+    ssd1306_bmp_show_image(&disp, mil_logo_bmp_data, mil_logo_bmp_size);
+    ssd1306_show(&disp);
+    sleep_ms(2000);
+
+
+
     while (1) {
+
+        // usb_message_t msg;
+        // usb_errcode_t parse_status = parse_message(&msg);
+        // // printf("Parse Status: %d\n", parse_status);
+
+        // if(parse_status == SUCCESS) 
+        //     read_message(&msg);
+
+        for (int y = 8; y < 56; y++) {
+            ssd1306_clear(&disp);
+            ssd1306_draw_string(&disp, 8, y, 1, words);
+            ssd1306_show(&disp);
+            sleep_ms(100);   
+        }
+
+        for (int y = 56; y > 8; y--) {
+            ssd1306_clear(&disp);
+            ssd1306_draw_string(&disp, 8, y, 1, words);
+            ssd1306_show(&disp);
+            sleep_ms(100);   
+        }
         
-        usb_message_t msg;
-        usb_errcode_t parse_status = parse_message(&msg);
-        // printf("Parse Status: %d\n", parse_status);
-
-        if(parse_status == SUCCESS) 
-            read_message(&msg);
-
         tight_loop_contents();
     }
 
@@ -128,51 +157,18 @@ int main() {
 /*                                 DEFINITIONS                                */
 /* -------------------------------------------------------------------------- */
 
+/* ----------------------------------- I2C ---------------------------------- */
+void i2c_pin_init(i2c_inst_t *i2c, const uint baud_rate, const uint8_t sda, const uint8_t scl){
+    i2c_init(i2c, baud_rate);
+
+    gpio_set_function(sda, GPIO_FUNC_I2C);
+    gpio_set_function(scl, GPIO_FUNC_I2C);
+
+    gpio_pull_up(sda);
+    gpio_pull_up(scl);
+}
+
 /* -------------------------------- THRUSTERS ------------------------------- */
-
-void servo_init(const uint pin){
-
-    // Set up a pwm config
-    pwm_config cfg = pwm_get_default_config();
-
-    // Set the PWM frequency to 50 Hz
-    // The formula for PWM frequency is: f = clock_freq / (divider * (TOP + 1))
-    // For a 50 Hz frequency with a 125 MHz base clock, and assuming a TOP value of 
-    // 19999 (for a resolution of 1us),
-    // the divider should be approximately 125.
-    pwm_config_set_clkdiv(&cfg, 125.0f);
-    pwm_config_set_wrap(&cfg, 19999); // Set the TOP value for 1us resolution
-
-    gpio_set_function(pin, GPIO_FUNC_PWM);
-
-    uint8_t slice = pwm_gpio_to_slice_num(pin);
-
-    pwm_init(slice, &cfg, true);
-    pwm_set_enabled(slice, true);
-
-    return;
-}
-
-int map(int x,  int in_min, int in_max, int out_min, int out_max){
-    return ((x-in_min)*(out_max-out_min)/ (in_max-in_min) + out_min);
-}
-
-uint servo_duty(float speed){
-    // Bound it just incase
-    if (speed > 1)
-        speed = 1;
-    if (speed < -1)
-        speed = -1;
-
-    // Stopped, prob unnecessry
-    if (speed == 0)
-        return STOP_VAL;
-
-    // Explicit type casting just to be safe, with 2 decimal point precision
-    int speed_int = (int)(speed*100);
-
-    return map(speed_int, -100, 100, MAX_REV_VAL, MAX_FWR_VAL);
-}
 
 void start_servo(const uint pin ) {
     pwm_set_gpio_level(pin, STOP_VAL);
@@ -210,7 +206,7 @@ usb_errcode_t read_message(usb_message_t *msg) {
             memcpy(&speed, &msg->payload[1], sizeof(float)); 
 
             // Calculate pmw, set the thruster
-            uint pmwVal = servo_duty(speed);
+            uint pmwVal = servo_effort_to_duty(speed);
             // printf("Got %f from msg, converted it to %d\n", speed, pmwVal);
             pwm_set_gpio_level(SERVO_PIN, pmwVal);
 

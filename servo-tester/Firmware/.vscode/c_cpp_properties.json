@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Windows",
+            "includePath": [
+                "${env:PICO_SDK_PATH}/**",
+                "${workspaceFolder}/**",
+                "C:/Program Files (x86)/GNU Arm Embedded Toolchain/12.2.rel1/include",
+                "C:/Program Files (x86)/GNU Arm Embedded Toolchain/12.2.rel1/arm-none-eabi/include"
+            ],
+            "compilerPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/12.2.rel1/bin/arm-none-eabi-gcc.exe",
+            "intelliSenseMode": "gcc-arm"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${env:PICO_SDK_PATH}/**",
+                "${workspaceFolder}/**",
+                "/usr/include/**",
+                "/usr/local/include/**"
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": [
+                "${workspaceFolder}/build/compile_commands.json"
+            ]
+        }
+    ],
+    "version": 4
+}

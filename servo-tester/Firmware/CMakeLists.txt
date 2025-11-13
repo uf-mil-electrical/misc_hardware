@@ -21,10 +21,17 @@ set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_C_FLAGS "-mcpu=cortex-m0plus -mthumb")
 set(CMAKE_EXE_LINKER_FLAGS "-mcpu=cortex-m0plus -mthumb")
 
+add_subdirectory(
+	lib/pico-ssd1306
+)
+
 add_executable(servo-tester
     src/main.c
-	src/MIL_USB2CAN.h
-	src/MIL_electrical_message_system.c
+	
+	src/MIL_electrical_protocol_macros.h
+	src/MIL_electrical_protocol_msg.c
+
+	src/servo-pwm.c
 )
 
 pico_enable_stdio_usb(servo-tester 1)
@@ -32,5 +39,15 @@ pico_enable_stdio_uart(servo-tester 0)
 
 pico_add_extra_outputs(servo-tester)
 
-target_link_libraries(servo-tester pico_stdlib hardware_pwm hardware_uart hardware_gpio hardware_irq hardware_i2c)
+target_link_libraries(servo-tester 
+	pico_stdlib 
+
+	hardware_pwm 
+	hardware_uart 
+	hardware_gpio
+	hardware_irq
+	hardware_i2c
+
+	ssd1306
+)
 
