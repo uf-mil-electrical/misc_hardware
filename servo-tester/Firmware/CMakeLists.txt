@@ -28,9 +28,6 @@ add_subdirectory(
 add_executable(servo-tester
     src/main.c
 	
-	src/MIL_electrical_protocol_macros.h
-	src/MIL_electrical_protocol_msg.c
-
 	src/servo-pwm.c
 )
 

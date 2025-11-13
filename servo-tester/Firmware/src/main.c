@@ -10,9 +10,6 @@
 #include "hardware/irq.h"
 #include "hardware/i2c.h"
 
-#include "MIL_electrical_protocol_macros.h"
-#include "MIL_electrical_protocol_msg.h"
-
 #include "servo-pwm.h"
 
 #include "ssd1306.h"
@@ -26,7 +23,7 @@
 /* --------------------------------- LED PIN -------------------------------- */
 #define LED_PIN 25  
 
-/* ------------------------------ THRUSTER PINS ----------------------------- */
+/* ---------------------------------- SERVO --------------------------------- */
 
 #define SERVO_PIN 8
 
@@ -40,23 +37,13 @@
 #define ADDR 0x3C
 
 /* -------------------------------------------------------------------------- */
-/*                                 GLOBAL VARS                                */
-/* -------------------------------------------------------------------------- */
-
-
-/* -------------------------------------------------------------------------- */
-/*                                   STRUCTS                                  */
-/* -------------------------------------------------------------------------- */
-
-
-/* -------------------------------------------------------------------------- */
 /*                                 PROTOTYPES                                 */
 /* -------------------------------------------------------------------------- */
 
 /* ----------------------------------- I2C ---------------------------------- */
 
 /**
- * @brief 
+ * @brief Initializes i2c based on passed i2c port, pins, and baud rate
  * 
  * @param i2c 
  * @param baud_rate 
@@ -65,30 +52,23 @@
  */
 void i2c_pin_init(i2c_inst_t *i2c, const uint baud_rate, const uint8_t sda, const uint8_t scl);
 
-static void i2c_scan(i2c_inst_t *port) {
-    printf("I2C scan:\n");
-    for (int addr = 0x08; addr < 0x78; addr++) {
-        uint8_t rxdata;
-        int ret = i2c_read_blocking(port, addr, &rxdata, 1, false);
-        if (ret >= 0) printf(" - found device at 0x%02X\n", addr);
-        sleep_ms(5);
-    }
-}
+/* --------------------------------- DRAWING -------------------------------- */
+
+/**
+ * @brief Draws pulse on screen
+ * 
+ * @param disp 
+ * @param duty 
+ */
+void draw_pulse(ssd1306_t *disp, uint duty);
 
 /* ---------------------------------- SERVO --------------------------------- */
 
-void start_servo(const uint pin );
+void start_servo(const uint pin);
 
-/* ----------------------------------- MSG ---------------------------------- */
+/* --------------------------------- BUTTON --------------------------------- */
 
-/**
- * @brief Qunction to read usb packets
- * 
- * @param msg 
- * @return usb_errcode_t 
- */
-
-usb_errcode_t read_message(usb_message_t *msg);
+void button_init(const uint pin);
 
 /* -------------------------------------------------------------------------- */
 /*                                    MAIN                                    */
@@ -122,31 +102,21 @@ int main() {
     ssd1306_show(&disp);
     sleep_ms(2000);
 
-
-
     while (1) {
 
-        // usb_message_t msg;
-        // usb_errcode_t parse_status = parse_message(&msg);
-        // // printf("Parse Status: %d\n", parse_status);
+        uint16_t duty = get_pwm_level(SERVO_PIN);
 
-        // if(parse_status == SUCCESS) 
-        //     read_message(&msg);
+        draw_pulse(&disp, duty);
 
-        for (int y = 8; y < 56; y++) {
-            ssd1306_clear(&disp);
-            ssd1306_draw_string(&disp, 8, y, 1, words);
-            ssd1306_show(&disp);
-            sleep_ms(100);   
-        }
+        duty = (duty > PWM_MAX_VAL) ? PWM_MIN_VAL : duty + 100;
 
-        for (int y = 56; y > 8; y--) {
-            ssd1306_clear(&disp);
-            ssd1306_draw_string(&disp, 8, y, 1, words);
-            ssd1306_show(&disp);
-            sleep_ms(100);   
-        }
+        pwm_set_gpio_level(SERVO_PIN, duty);
+
+        sleep_ms(1000);
         
+        if (duty > PWM_MAX_VAL)
+            duty = PWM_MIN_VAL;
+
         tight_loop_contents();
     }
 
@@ -168,54 +138,48 @@ void i2c_pin_init(i2c_inst_t *i2c, const uint baud_rate, const uint8_t sda, cons
     gpio_pull_up(scl);
 }
 
-/* -------------------------------- THRUSTERS ------------------------------- */
+/* --------------------------------- DRAWING -------------------------------- */
+
+void draw_pulse(ssd1306_t *disp, uint duty) {
+    if (!disp) return;
+    if (duty > PWM_MAX_VAL) duty = PWM_MAX_VAL;
+    if (duty < PWM_MIN_VAL) duty = PWM_MIN_VAL;
+
+    int rising_x = 10;
+    int falling_x = map(duty, PWM_MIN_VAL/2, PERIOD_US/2, rising_x, 127);
+    int low_y = 40; 
+    int high_y = 20;
+
+    ssd1306_clear(disp);
+
+    ssd1306_draw_line(disp, 0, low_y, rising_x, low_y);             // left part of low voltage
+    ssd1306_draw_line(disp, rising_x, high_y, rising_x, low_y);     // rising edge (in order to work, you have to draw top to bottom, right to left)
+    ssd1306_draw_line(disp, rising_x, high_y, falling_x, high_y);   // high voltage
+    ssd1306_draw_line(disp, falling_x, high_y, falling_x, low_y);   // falling edge
+    ssd1306_draw_line(disp, falling_x, low_y, 127, low_y);          // right part of low voltage
+
+    char buf[32];
+    snprintf(buf, sizeof(buf), "duty: %u us", duty);
+    ssd1306_draw_string(disp, 0, 0, 1, buf);
+
+    ssd1306_show(disp);
+}
+
+
+/* ---------------------------------- SERVO --------------------------------- */
 
 void start_servo(const uint pin ) {
-    pwm_set_gpio_level(pin, STOP_VAL);
+    pwm_set_gpio_level(pin, PWM_MID_VAL);
 
     // Sleep for 2 seconds to give the thrusters time to start
     sleep_ms(2000);
     return;
 }
 
-/* ----------------------------------- MSG ---------------------------------- */
+/* --------------------------------- BUTTON --------------------------------- */
 
-usb_errcode_t read_message(usb_message_t *msg) {
-
-    if (msg == NULL)
-        return FAILURE;
-
-    uint8_t classID = msg->class_id;
-    uint8_t subClassID = msg->subclass_id;
-    
-    float speed;
-
-    bool kill;
-
-    // Check if message is for thrusters
-    if (classID != SUB9TK_CLASSID)
-        return WRONG_CLASS;
-
-    switch (subClassID) {
-        // Thrust Set
-        case SUB9TK_SUBID_THR_SETPACK:
-
-            // In order to get the float, we will need to do 
-            // memcpy and sizeof instead of doing:
-            // speed = msg->payload[1];
-            memcpy(&speed, &msg->payload[1], sizeof(float)); 
-
-            // Calculate pmw, set the thruster
-            uint pmwVal = servo_effort_to_duty(speed);
-            // printf("Got %f from msg, converted it to %d\n", speed, pmwVal);
-            pwm_set_gpio_level(SERVO_PIN, pmwVal);
-
-            // Return Ack
-            send_ACK();
-
-            return SUCCESS;
-    
-        default:
-            return FAILURE;
-        }
+void button_init(const uint pin) {
+    gpio_init(pin);
+    gpio_set_dir(pin, GPIO_IN);
+    gpio_pull_up(pin);
 }
