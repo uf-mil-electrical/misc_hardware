@@ -151,6 +151,23 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
+[Document7]
+DocumentPath=Door Sensor PCB V2.BomDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
 DocumentPath=Project Outputs for Door Sensor PCB\Design Rule Check - main.html
 DItemRevisionGUID=
@@ -180,103 +197,207 @@ DocumentPath=Project Outputs for Door Sensor PCB\main.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Project Outputs for Door Sensor PCB\main.EXTREP
+DocumentPath=Project Outputs for Door Sensor PCB V2\main.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Project Outputs for Door Sensor PCB\main.LDP
+DocumentPath=Project Outputs for Door Sensor PCB\main.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Project Outputs for Door Sensor PCB\main.REP
+DocumentPath=Project Outputs for Door Sensor PCB V2\main.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Project Outputs for Door Sensor PCB\main.TXT
+DocumentPath=Project Outputs for Door Sensor PCB\main.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_1.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_2.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main.REP
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_Bot.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main.REP
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_Top.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Drawing_1.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Drillmap_1.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Keep-out.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Copper_Signal_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Legend_Bot.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_2.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument20]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Legend_Top.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Copper_Signal_2.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument21]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_1.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_13.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument23]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_15.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument24]
-DocumentPath=Project Outputs for Door Sensor PCB\main_NPTH_Drill.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument25]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Pads_Bot.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Drawing_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument26]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Pads_Top.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Drawing_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument27]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Paste_Bot.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Drillmap_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument28]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Paste_Top.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Drillmap_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument29]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Profile.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Keep-out.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument30]
-DocumentPath=Project Outputs for Door Sensor PCB\main_PTH_Drill.gbr
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Keep-out.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument31]
-DocumentPath=Project Outputs for Door Sensor PCB\main_Soldermask_Bot.gbr
+DocumentPath=Project Outputs for Door Sensor PCB\main_Legend_Bot.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument32]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Legend_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument33]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Legend_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument34]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Legend_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument35]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_1.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument36]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Mechanical_1.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument37]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_13.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument38]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Mechanical_13.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument39]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Mechanical_15.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument40]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Mechanical_15.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument41]
+DocumentPath=Project Outputs for Door Sensor PCB\main_NPTH_Drill.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument42]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Pads_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument43]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Pads_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument44]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Pads_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument45]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Pads_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument46]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Paste_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument47]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Paste_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument48]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Paste_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument49]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Paste_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument50]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Poly_Planning.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument51]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Profile.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument52]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Profile.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument53]
+DocumentPath=Project Outputs for Door Sensor PCB\main_PTH_Drill.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument54]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_PTH_Drill.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument55]
+DocumentPath=Project Outputs for Door Sensor PCB\main_Soldermask_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument56]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Soldermask_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument57]
 DocumentPath=Project Outputs for Door Sensor PCB\main_Soldermask_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument58]
+DocumentPath=Project Outputs for Door Sensor PCB V2\main_Soldermask_Top.gbr
 DItemRevisionGUID=
 
 [Configuration1]
@@ -618,7 +739,7 @@ OutputDefault10=0
 Configuration10_Name1=ForceUpdateSettings
 Configuration10_Item1=False
 Configuration10_Name2=OutputConfigurationParameter1
-Configuration10_Item2=BoardID=BWNQUOFR|FileComment= |FileSubject=Autodetect|GenerateDRCRulesFile=False|GenerateReports=True|GerberUnit=Metric|IncludeUnconnectedMidLayerPads=True|MergePadAndRegion=False|MinusApertureTolerance=50|NumberOfDecimals=3|OptimizeChangeLocationCommands=True|OutputFormat=Single|PlotBackDrillingPairs=False|PlotBlindViasPairs=False|PlotBoardProfile=True|PlotBoardProfileFileName= |PlotCounterHolesPairs=False|PlotDrillDrawingPair0_Backdrill=False|PlotDrillDrawingPair0_Checked=True|PlotDrillDrawingPair0_DrillType=Regular|PlotDrillDrawingPair0_FileName= |PlotDrillDrawingPair0_HighLayer=Bottom Layer|PlotDrillDrawingPair0_LowLayer=Top Layer|PlotDrillDrawingPairs=False|PlotDrillGuidePair0_Backdrill=False|PlotDrillGuidePair0_Checked=True|PlotDrillGuidePair0_DrillType=Regular|PlotDrillGuidePair0_FileName= |PlotDrillGuidePair0_HighLayer=Bottom Layer|PlotDrillGuidePair0_LowLayer=Top Layer|PlotDrillGuidePairs=False|PlotMicroViasPairs=False|PlotNPTHPair0_Backdrill=False|PlotNPTHPair0_Checked=True|PlotNPTHPair0_DrillType=Regular|PlotNPTHPair0_FileName= |PlotNPTHPair0_HighLayer=Top Layer|PlotNPTHPair0_LowLayer=Bottom Layer|PlotNPTHPairs=False|PlotPTHPair0_Backdrill=False|PlotPTHPair0_Checked=True|PlotPTHPair0_DrillType=Regular|PlotPTHPair0_FileName= |PlotPTHPair0_HighLayer=Top Layer|PlotPTHPair0_LowLayer=Bottom Layer|PlotPTHPairs=False|PlotViaTypeDrillDrawingPairs=False|PlotViaTypeDrillGuidePairs=False|PlotViaTypeDrillPairs=False|PlotX2.Set=SerializeLayerHash.Version~2,ClassName~TPlotLayerStateArray,16777217~1,16777218~1,16777219~1,16842751~1,16973830~1,16973831~1,16973834~1,16973835~1,16973832~1,16973833~1,16908289~1,16908301~1,16908303~1,16973837~1,16973848~1,16973849~1|PlusApertureTolerance=50|Record=GerberX2View|Sorted=False|DocumentPath=C:\Users\russe\Repositories\MIL\Misc-Hardware\Door Sensor PCB\main.PcbDoc
+Configuration10_Item2=BoardID=BWNQUOFR|FileComment= |FileSubject=Autodetect|GenerateDRCRulesFile=False|GenerateReports=True|GerberUnit=Metric|IncludeUnconnectedMidLayerPads=True|MergePadAndRegion=False|MinusApertureTolerance=50|NumberOfDecimals=3|OptimizeChangeLocationCommands=True|OutputFormat=Single|PlotBackDrillingPairs=False|PlotBlindViasPairs=False|PlotBoardProfile=True|PlotBoardProfileFileName= |PlotCounterHolesPairs=False|PlotDrillDrawingPair0_Backdrill=False|PlotDrillDrawingPair0_Checked=True|PlotDrillDrawingPair0_DrillType=Regular|PlotDrillDrawingPair0_FileName= |PlotDrillDrawingPair0_HighLayer=Bottom Layer|PlotDrillDrawingPair0_LowLayer=Top Layer|PlotDrillDrawingPairs=False|PlotDrillGuidePair0_Backdrill=False|PlotDrillGuidePair0_Checked=True|PlotDrillGuidePair0_DrillType=Regular|PlotDrillGuidePair0_FileName= |PlotDrillGuidePair0_HighLayer=Bottom Layer|PlotDrillGuidePair0_LowLayer=Top Layer|PlotDrillGuidePairs=False|PlotMicroViasPairs=False|PlotNPTHPairs=False|PlotPTHPair0_Backdrill=False|PlotPTHPair0_Checked=True|PlotPTHPair0_DrillType=Regular|PlotPTHPair0_FileName= |PlotPTHPair0_HighLayer=Top Layer|PlotPTHPair0_LowLayer=Bottom Layer|PlotPTHPairs=False|PlotViaTypeDrillDrawingPairs=False|PlotViaTypeDrillGuidePairs=False|PlotViaTypeDrillPairs=False|PlotX2.Set=SerializeLayerHash.Version~2,ClassName~TPlotLayerStateArray,16777217~1,16777218~1,16777219~1,16842751~1,16973830~1,16973831~1,16973834~1,16973835~1,16973832~1,16973833~1,16908289~1,16908301~1,16908303~1,16973837~1,16973848~1,16973849~1,16908290~1|PlusApertureTolerance=50|Record=GerberX2View|Sorted=False|UncheckPlotNPTHPair0_Backdrill=False|UncheckPlotNPTHPair0_Checked=False|UncheckPlotNPTHPair0_DrillType=Regular|UncheckPlotNPTHPair0_FileName= |UncheckPlotNPTHPair0_HighLayer=Top Layer|UncheckPlotNPTHPair0_LowLayer=Bottom Layer|DocumentPath=C:\Users\russe\Repositories\MIL\Misc-Hardware\Door Sensor PCB\main.PcbDoc
 OutputType11=Final
 OutputName11=Final Artwork Prints
 OutputDocumentPath11=
