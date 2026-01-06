@@ -16,7 +16,7 @@ else()
     set(USERHOME $ENV{HOME})
 endif()
 set(sdkVersion 2.2.0)
-set(toolchainVersion RISCV_ZCB_RPI_2_2_0_3)
+set(toolchainVersion 14_2_Rel1)
 set(picotoolVersion 2.2.0-a4)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 if (EXISTS ${picoVscode})
@@ -28,48 +28,39 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(Door-Sensor-V2 C CXX ASM)
+project(attempt2 C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(Door-Sensor-V2 Door-Sensor-V2.c )
 
-# Add all .c files here
-target_sources(Door-Sensor-V2 PRIVATE
-    peripherals/src/doorsense_gpio.c
-    peripherals/src/doorsense_i2c.c
-    peripherals/src/doorsense_spi.c
-    peripherals/src/doorsense_uart.c
-	
-	tof_lib/src/tof_core.c
-	tof_lib/src/tof_i2c.c
-)
+add_executable(attempt2 attempt2.cpp )
 
-pico_set_program_name(Door-Sensor-V2 "Door-Sensor-V2")
-pico_set_program_version(Door-Sensor-V2 "0.1")
-
+pico_set_program_name(attempt2 "attempt2")
+pico_set_program_version(attempt2 "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(Door-Sensor-V2 0)
-pico_enable_stdio_usb(Door-Sensor-V2 1)
+pico_enable_stdio_uart(attempt2 0)
+pico_enable_stdio_usb(attempt2 1)
 
 # Add the standard library to the build
-target_link_libraries(Door-Sensor-V2
+target_link_libraries(attempt2
         pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(Door-Sensor-V2 PRIVATE
+target_include_directories(attempt2 PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # Add any user requested libraries
-target_link_libraries(Door-Sensor-V2 
-        hardware_spi
-        hardware_i2c
-        
-        )
+add_subdirectory(lib/vl53l1x-pico)
 
-pico_add_extra_outputs(Door-Sensor-V2)
+target_link_libraries(attempt2 
+        hardware_i2c
+        #pico_cyw43_arch_none
+		VL53L1X
+	)
+
+pico_add_extra_outputs(attempt2)
 

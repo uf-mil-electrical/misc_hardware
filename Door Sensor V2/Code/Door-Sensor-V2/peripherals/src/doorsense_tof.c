@@ -4,6 +4,10 @@
 /******************</Dependencies>*****************/
 
 
+/******************<Data Structures>*****************/
+/******************</Data Structures>*****************/
+
+
 /******************<Public Functions>*****************/
 /*******init_tof*******
  * Description
@@ -14,7 +18,7 @@
         > N/A
 */
 void init_tof(){
-    // First, init the XSHUT pin, set as OUTPUT
+    // First, init the XSHUT pin, set as OUTPUT, turn OFF (low)
         gpio_init(TOF_XSHUT_PIN);
         gpio_set_dir(TOF_XSHUT_PIN, SET_GPIO_OUTPUT);
         gpio_put(TOF_XSHUT_PIN, GPIO_SET_LOW);
@@ -23,12 +27,11 @@ void init_tof(){
     	gpio_init(TOF_GPIO1_PIN);
 		gpio_set_dir(TOF_GPIO1_PIN, SET_GPIO_INPUT);
 
-    // Third, set the XSHUT pin HIGH to enable the ToF sensor
-        gpio_put(TOF_XSHUT_PIN, GPIO_SET_HIGH);
-        sleep_ms(100);  // brief delay to allow ToF to init
+	// Third, turn ToF sensor/XSHUT ON (high)
+		gpio_put(TOF_XSHUT_PIN, GPIO_SET_HIGH);
 
-    // [API] Fourth, call data init
-		VL53L1_DataInit();
+	// Fourth, 
+
 
     // Lastly, return to main program
         return;
@@ -48,7 +51,8 @@ void init_tof(){
  * Returns
         > N/A
 */
-void DEBUG_read_tof(uint8_t addr, uint16_t reg, uint8_t* data, uint8_t num_bytes){
+void read_tof(uint8_t addr, uint16_t reg, uint8_t* data, uint8_t num_bytes){
+		uint8_t buf[6];
 
        // First, separate register address intwo two bytes
               uint8_t regbuf[2] = { (uint8_t)(reg >> 8), (uint8_t)(reg & 0xFF) };
@@ -65,5 +69,4 @@ void DEBUG_read_tof(uint8_t addr, uint16_t reg, uint8_t* data, uint8_t num_bytes
        // Lastly, return to main program
               return;
 }
-
 /******************</Public Functions>*****************/

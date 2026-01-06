@@ -27,7 +27,11 @@
 
 
 /******************<Functions>*****************/
-void init_doorsense_i2c(void);
+void init_i2c(i2c_inst_t* i2c_bus, uint baudrate, uint8_t SDA_pin, uint8_t SCL_pin);
+int i2c_write_raw(i2c_inst_t* i2c_bus, uint8_t addr, uint8_t* data, uint8_t num_bytes);
+int i2c_write_register(i2c_inst_t* i2c_bus, uint8_t addr, uint16_t reg, uint8_t* data, uint8_t num_bytes);
+int i2c_read_register(i2c_inst_t* i2c_bus, uint8_t addr, uint16_t reg, uint8_t* data, uint8_t num_bytes);
+void i2c_device_scan();
 /******************</Functions>*****************/
 
 #endif // DOORSENSE_I2C_H
