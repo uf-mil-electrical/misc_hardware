@@ -20,6 +20,7 @@
 #include "pico/cyw43_arch.h"
 #include "pico/btstack_cyw43.h"
 
+#include "hardware/adc.h"
 
 #include "setup.h"
 /******************</Dependencies>*****************/

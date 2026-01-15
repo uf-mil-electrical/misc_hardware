@@ -77,5 +77,4 @@ target_include_directories(door-sense-v2-code PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/.. # For our common btstack config
     )
 
-pico_btstack_make_gatt_header(door-sense-v2-code PRIVATE "${CMAKE_CURRENT_LIST_DIR}/temp_sensor.gatt")
 pico_add_extra_outputs(door-sense-v2-code)
