@@ -28,48 +28,29 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(Door-Sensor-V2 C CXX ASM)
+project(picow_ble_temp_sensor C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(Door-Sensor-V2 Door-Sensor-V2.c )
 
-# Add all .c files here
-target_sources(Door-Sensor-V2 PRIVATE
-    peripherals/src/doorsense_gpio.c
-    peripherals/src/doorsense_i2c.c
-    peripherals/src/doorsense_spi.c
-    peripherals/src/doorsense_uart.c
-	
-	tof_lib/src/tof_core.c
-	tof_lib/src/tof_i2c.c
-	tof_lib/src/tof_calibration.c
-
-	operation/src/door_state.c
-)
-
-pico_set_program_name(Door-Sensor-V2 "Door-Sensor-V2")
-pico_set_program_version(Door-Sensor-V2 "0.1")
-
-
-# Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(Door-Sensor-V2 0)
-pico_enable_stdio_usb(Door-Sensor-V2 1)
-
-# Add the standard include files to the build
-target_include_directories(Door-Sensor-V2 PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
-)
-
-# Add any user requested libraries
-target_link_libraries(Door-Sensor-V2 PRIVATE
+# Standalone example that reads from the on board temperature sensor and sends notifications via BLE
+# Flashes slowly each second to show it's running
+add_executable(picow_ble_temp_sensor
+    server.c
+    )
+target_link_libraries(picow_ble_temp_sensor
     pico_stdlib
-    pico_cyw43_arch_lwip_threadsafe_background
-    hardware_spi
-    hardware_i2c
-)
+    pico_btstack_ble
+    pico_btstack_cyw43
+    pico_cyw43_arch_none
+    hardware_adc
+    )
+target_include_directories(picow_ble_temp_sensor PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}/.. # For our common btstack config
+    )
+pico_btstack_make_gatt_header(picow_ble_temp_sensor PRIVATE "${CMAKE_CURRENT_LIST_DIR}/temp_sensor.gatt")
 
-pico_add_extra_outputs(Door-Sensor-V2)
-
+pico_add_extra_outputs(picow_ble_temp_sensor)
