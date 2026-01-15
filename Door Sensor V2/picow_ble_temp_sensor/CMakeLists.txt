@@ -34,12 +34,16 @@ project(picow_ble_temp_sensor C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
-# Standalone example that reads from the on board temperature sensor and sends notifications via BLE
-# Flashes slowly each second to show it's running
 add_executable(picow_ble_temp_sensor
     server.c
     )
+
+# Modify the below lines to enable/disable output over UART/USB
+pico_enable_stdio_uart(picow_ble_temp_sensor 0)
+pico_enable_stdio_usb(picow_ble_temp_sensor 1)
+
+
+# Add any user requested libraries
 target_link_libraries(picow_ble_temp_sensor
     pico_stdlib
     pico_btstack_ble
@@ -47,6 +51,7 @@ target_link_libraries(picow_ble_temp_sensor
     pico_cyw43_arch_none
     hardware_adc
     )
+
 target_include_directories(picow_ble_temp_sensor PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_CURRENT_LIST_DIR}/.. # For our common btstack config

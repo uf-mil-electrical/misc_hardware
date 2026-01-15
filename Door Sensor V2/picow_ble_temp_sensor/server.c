@@ -1,17 +1,47 @@
-/**
- * Copyright (c) 2023 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+/*
+  __  __ _____ _                                             
+ |  \/  |_   _| |                                            
+ | \  / | | | | |                                            
+ | |\/| | | | | |                                            
+ | |  | |_| |_| |____                                        
+ |_|__|_|_____|______|       _____                           
+ 
+ |  __ \                    / ____|                          
+ | |  | | ___   ___  _ __  | (___   ___ _ __  ___  ___  _ __ 
+ | |  | |/ _ \ / _ \| '__|  \___ \ / _ \ '_ \/ __|/ _ \| '__|
+ | |__| | (_) | (_) | |     ____) |  __/ | | \__ \ (_) | |   
+ |_____/ \___/ \___/|_|    |_____/ \___|_| |_|___/\___/|_|   
 
+ \ \    / /__ \                                              
+  \ \  / /   ) |                                             
+   \ \/ /   / /                                              
+    \  /   / /_                                              
+     \/   |____|                                             
+                                                             
+    Door Sensor Board V2
+    Pico 2 W
+    Written by Russell MacGregor 
+*/
+
+
+//*****************<Includes>*****************//
+// Core system dependencies
 #include <stdio.h>
+#include "pico/stdlib.h"
+
+// BLE Dependencies
 #include "btstack.h"
 #include "pico/cyw43_arch.h"
 #include "pico/btstack_cyw43.h"
-#include "hardware/adc.h"
-#include "pico/stdlib.h"
 
+// Misc system dependencies
+#include "hardware/adc.h"
 #include "temp_sensor.h"
+
+// My code to include
+
+
+//*****************</Includes>*****************//
 
 #define HEARTBEAT_PERIOD_MS 1000
 #define ADC_CHANNEL_TEMPSENSOR 4
