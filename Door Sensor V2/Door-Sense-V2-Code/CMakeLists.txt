@@ -28,48 +28,36 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(Door-Sensor-V2 C CXX ASM)
+project(Door-Sense-V2-Code C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(Door-Sensor-V2 Door-Sensor-V2.c )
 
-# Add all .c files here
-target_sources(Door-Sensor-V2 PRIVATE
-    peripherals/src/doorsense_gpio.c
-    peripherals/src/doorsense_i2c.c
-    peripherals/src/doorsense_spi.c
-    peripherals/src/doorsense_uart.c
-	
-	tof_lib/src/tof_core.c
-	tof_lib/src/tof_i2c.c
-)
+add_executable(Door-Sense-V2-Code Door-Sense-V2-Code.cpp )
 
-pico_set_program_name(Door-Sensor-V2 "Door-Sensor-V2")
-pico_set_program_version(Door-Sensor-V2 "0.1")
-
+pico_set_program_name(Door-Sense-V2-Code "Door-Sense-V2-Code")
+pico_set_program_version(Door-Sense-V2-Code "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(Door-Sensor-V2 0)
-pico_enable_stdio_usb(Door-Sensor-V2 1)
+pico_enable_stdio_uart(Door-Sense-V2-Code 0)
+pico_enable_stdio_usb(Door-Sense-V2-Code 1)
 
 # Add the standard library to the build
-target_link_libraries(Door-Sensor-V2
+target_link_libraries(Door-Sense-V2-Code
         pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(Door-Sensor-V2 PRIVATE
+target_include_directories(Door-Sense-V2-Code PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # Add any user requested libraries
-target_link_libraries(Door-Sensor-V2 
-        hardware_spi
+target_link_libraries(Door-Sense-V2-Code 
         hardware_i2c
-        
+        pico_cyw43_arch_lwip_poll
         )
 
-pico_add_extra_outputs(Door-Sensor-V2)
+pico_add_extra_outputs(Door-Sense-V2-Code)
 
