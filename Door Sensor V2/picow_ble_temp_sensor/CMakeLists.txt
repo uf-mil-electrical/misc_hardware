@@ -27,21 +27,21 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
-project(picow_ble_temp_sensor C CXX ASM)
+project(door-sense-v2-code C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(picow_ble_temp_sensor
-    server.c
+add_executable(door-sense-v2-code
+    main.c
     )
 
-pico_set_program_name(picow_ble_temp_sensor "picow_ble_temp_sensor")
-pico_set_program_version(picow_ble_temp_sensor "0.1")
+pico_set_program_name(door-sense-v2-code "door-sense-v2-code")
+pico_set_program_version(door-sense-v2-code "0.1")
 
 # Add other .c files in project
-target_sources(picow_ble_temp_sensor PRIVATE
+target_sources(door-sense-v2-code PRIVATE
     peripherals/src/doorsense_gpio.c
     peripherals/src/doorsense_i2c.c
     peripherals/src/doorsense_spi.c
@@ -55,11 +55,11 @@ target_sources(picow_ble_temp_sensor PRIVATE
 )
 
 # Enable/disable output over UART/USB
-pico_enable_stdio_uart(picow_ble_temp_sensor 0)
-pico_enable_stdio_usb(picow_ble_temp_sensor 1)
+pico_enable_stdio_uart(door-sense-v2-code 0)
+pico_enable_stdio_usb(door-sense-v2-code 1)
 
 # Add necessary libraries
-target_link_libraries(picow_ble_temp_sensor
+target_link_libraries(door-sense-v2-code
     pico_stdlib
     pico_btstack_ble
     pico_btstack_cyw43
@@ -71,10 +71,10 @@ target_link_libraries(picow_ble_temp_sensor
     )
 
 # BLE-related directories
-target_include_directories(picow_ble_temp_sensor PRIVATE
+target_include_directories(door-sense-v2-code PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_CURRENT_LIST_DIR}/.. # For our common btstack config
     )
 
-pico_btstack_make_gatt_header(picow_ble_temp_sensor PRIVATE "${CMAKE_CURRENT_LIST_DIR}/temp_sensor.gatt")
-pico_add_extra_outputs(picow_ble_temp_sensor)
+pico_btstack_make_gatt_header(door-sense-v2-code PRIVATE "${CMAKE_CURRENT_LIST_DIR}/temp_sensor.gatt")
+pico_add_extra_outputs(door-sense-v2-code)
