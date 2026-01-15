@@ -23,7 +23,7 @@
     Written by Russell MacGregor 
 */
 
-//*****************<Includes>***************** */
+//*****************<Includes>*****************//
 #include <stdio.h>
 #include <stdint.h>
 #include "pico/stdlib.h"
@@ -46,7 +46,7 @@
 
 #include "tof_lib/tof_core.h"
 
-//*****************</Includes>*****************
+//*****************</Includes>*****************//
 
 int main()
 {
