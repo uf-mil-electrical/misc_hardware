@@ -34,11 +34,24 @@ project(Door-Sense-Code-V2 C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
 add_executable(Door-Sense-Code-V2 Door-Sense-Code-V2.cpp )
 
 pico_set_program_name(Door-Sense-Code-V2 "Door-Sense-Code-V2")
 pico_set_program_version(Door-Sense-Code-V2 "0.1")
+
+
+target_sources(Door-Sense-Code-V2 PRIVATE
+    peripherals/src/doorsense_gpio.c
+    peripherals/src/doorsense_i2c.c
+    peripherals/src/doorsense_spi.c
+    peripherals/src/doorsense_uart.c
+	
+	tof_lib/src/tof_core.c
+	tof_lib/src/tof_i2c.c
+	tof_lib/src/tof_calibration.c
+
+	operation/src/door_state.c
+)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(Door-Sense-Code-V2 0)
