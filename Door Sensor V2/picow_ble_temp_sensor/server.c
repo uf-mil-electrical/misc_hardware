@@ -40,6 +40,9 @@
 #include "operation/door_state.h"
 
 volatile uint32_t times_isr_fired;	// keeps track of how many times the timer ISR has been called (once every 500ms)
+volatile uint32_t countdown_time;	// time (in 500ms increments) until lab state change occurs
+
+
 bool lab_open = false;				// true=lab is open, false=lab is closed
 uint8_t lab_state = 0;				// 0=closed, 1=open
 bool change_state = false;			// true=lab state will change after countdown, false=no change
@@ -49,7 +52,7 @@ bool data_ready = false;			// stores if data is ready to be read from ToF sensor
 bool door_state = false;			// current door state
 bool candidate_state = false;		// candidate door state (state being considered during countdown)
 
-bool run_countdown = false;			// true=currently running countdown to change door state
+volatile bool run_countdown = false;			// true=currently running countdown to change door state
 
 //*****************</Temp>*****************//
 
@@ -152,6 +155,11 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
         }
     }
 
+	// If countdown is running...
+	if (run_countdown == true){
+		countdown_time += 1;
+	}
+
     // Invert the led
     static int led_on = true;
     led_on = !led_on;
@@ -215,6 +223,71 @@ int main() {
 
 			absolute_time_t t = delayed_by_ms(get_absolute_time(), 5);
 			async_context_wait_for_work_until(cyw43_arch_async_context(), t);
+
+		// Check to see if ToF data is ready
+			if (tof_check_data_ready() == 0){data_ready = false;}
+			else {data_ready = true;}
+
+
+		// If data ready...
+			if (data_ready == true){
+				door_state = is_door_open();  //read distance, determine door state
+				data_ready = false;				  // reset data ready status
+
+				// check if door state has changed AND countdown is not already running
+				if ( (door_state != lab_open) && (run_countdown == false) ){
+					printf("Door state change detected!\n");
+					candidate_state = door_state;		// set candidate state
+					countdown_time = 0;					// reset variable
+					run_countdown = true;				// start countdown
+				}
+
+				// cancel countdown if door state changes during countdown
+				if ( (run_countdown == true) && (candidate_state != door_state) ){
+					printf("Cancelled state change\n");
+					run_countdown = false;
+					countdown_time = 0;	
+
+					if (lab_open == true){set_led('g', true);}
+					else {set_led('g', false);}
+				}
+			}
+
+		// If countdown is running...
+			if (run_countdown == true){
+				// blink LED (change state once every 500ms)
+					if (countdown_time % 2 == 0){set_led('g', true);}
+					else {set_led('g', false);}
+
+				// check to see if timer has counted to 10 seconds
+					if (countdown_time >= 20){			// 500ms * 20 = 10 seconds
+						run_countdown = false;
+						change_state = true;			// change lab state
+						countdown_time = 0;
+						printf("New lab state\n");
+					}
+
+				// brief safety delay
+					sleep_ms(10);
+			}
+
+
+		// Update lab state variable as needed
+			if (change_state == true){
+				change_state = false;
+				lab_open = candidate_state;
+
+				if (lab_open == true){
+					printf("Lab is now OPEN\n");
+					current_temp = 1;
+					set_led('g', true);
+				}
+				else {
+					printf("Lab is now CLOSED\n");
+					current_temp = 0;
+					set_led('g', false);
+				}
+			}
     }
 
     return 0;

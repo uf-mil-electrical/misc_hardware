@@ -32,6 +32,7 @@
 
 
 /******************<Functions>*****************/
+bool is_door_open();
 /******************</Functions>*****************/
 
 #endif // DOOR_STATE_H

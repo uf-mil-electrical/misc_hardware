@@ -142,10 +142,7 @@ int tof_init(){
 		} while (tof_check_booted() == 0);
 
 		printf("tof_init(): sensor booted.\n");
-		gpio_put(RED_LED, GPIO_SET_HIGH);
-
-		sleep_ms(1000);
-
+		
 
 	// Fifth, write default configuration to ToF sensor (see "tof_config.h")
 		uint8_t tmp_addr = 0;		// stores a temporary register addr
