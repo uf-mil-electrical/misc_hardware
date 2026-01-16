@@ -1,14 +1,15 @@
-#ifndef DOOR_STATE_H
-#define DOOR_STATE_H
+#ifndef TOF_CALIBRATION_H
+#define TOF_CALIBRATION_H
 
 /******************<Summary>*****************
- * Name: door_state.h
+ * Name: tof_calibration.h
  * Purpose:
- *      > Major functions for regular operation
- * 		> E.g., determining if door open, pushing update to Discord, etc.
+ *      > Provides calibration functions for tuning the ToF sensor
+ * 		  if its values are inaccurate
  * Written / updated by:
  *      > Russell
 ******************</Summary>*****************/
+
 
 
 /******************<Dependencies>*****************/
@@ -16,13 +17,14 @@
 #include <stdint.h>
 #include "pico/stdlib.h"
 
+#include "hardware/gpio.h"
+
 #include "setup.h"
+#include "peripherals/doorsense_i2c.h"
 
 #include "tof_lib/tof_core.h"
 #include "tof_lib/tof_i2c.h"
 #include "tof_lib/tof_registers.h"
-
-#include "peripherals/doorsense_gpio.h"
 /******************</Dependencies>*****************/
 
 
@@ -34,4 +36,4 @@
 /******************<Functions>*****************/
 /******************</Functions>*****************/
 
-#endif // DOOR_STATE_H
+#endif // TOF_CALIBRATION_H

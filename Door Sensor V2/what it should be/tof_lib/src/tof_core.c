@@ -142,10 +142,6 @@ int tof_init(){
 		} while (tof_check_booted() == 0);
 
 		printf("tof_init(): sensor booted.\n");
-		gpio_put(RED_LED, GPIO_SET_HIGH);
-
-		sleep_ms(1000);
-
 
 	// Fifth, write default configuration to ToF sensor (see "tof_config.h")
 		uint8_t tmp_addr = 0;		// stores a temporary register addr
@@ -153,6 +149,7 @@ int tof_init(){
 		for (tmp_addr = TOF_CONFIG_START_ADDR; tmp_addr <= TOF_CONFIG_END_ADDR; tmp_addr++){
 			tof_write_byte(tmp_addr, VL53L1X_DEFAULT_CONFIGURATION[tmp_addr - TOF_CONFIG_START_ADDR]);
 		}
+
 		
 	// Sixth, enable range data collection (ranging)
 		tof_enable(true);
