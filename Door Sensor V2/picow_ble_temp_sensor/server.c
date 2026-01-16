@@ -1,20 +1,81 @@
-/**
- * Copyright (c) 2023 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+/*
+  __  __ _____ _                                             
+ |  \/  |_   _| |                                            
+ | \  / | | | | |                                            
+ | |\/| | | | | |                                            
+ | |  | |_| |_| |____                                        
+ |_|__|_|_____|______|                                  
+  _____                      _____
+ |  __ \                    / ____|                          
+ | |  | | ___   ___  _ __  | (___   ___ _ __  ___  ___  _ __ 
+ | |  | |/ _ \ / _ \| '__|  \___ \ / _ \ '_ \/ __|/ _ \| '__|
+ | |__| | (_) | (_) | |     ____) |  __/ | | \__ \ (_) | |   
+ |_____/ \___/ \___/|_|    |_____/ \___|_| |_|___/\___/|_|   
 
+ \ \    / /__ \                                              
+  \ \  / /   ) |                                             
+   \ \/ /   / /                                              
+    \  /   / /_                                              
+     \/   |____|                                             
+                                                             
+    Door Sensor Board V2
+    Pico 2 W
+    Written by Russell MacGregor 
+*/
+
+
+//*****************<Includes>*****************//
+// Core libraries
 #include <stdio.h>
+#include "pico/stdlib.h"
+
+// BLE Stack
 #include "btstack.h"
 #include "pico/cyw43_arch.h"
 #include "pico/btstack_cyw43.h"
-#include "hardware/adc.h"
-#include "pico/stdlib.h"
-
 #include "temp_sensor.h"
 
-#define HEARTBEAT_PERIOD_MS 1000
-#define ADC_CHANNEL_TEMPSENSOR 4
+// Peripheral includes
+#include "pico/time.h"
+
+#include "hardware/irq.h"
+#include "hardware/spi.h"
+#include "hardware/uart.h"
+#include "hardware/i2c.h"
+
+#include "pico/cyw43_arch.h"
+
+// Program files to include
+#include "setup.h"
+#include "peripherals/doorsense_gpio.h"
+#include "peripherals/doorsense_i2c.h"
+#include "peripherals/doorsense_spi.h"
+#include "peripherals/doorsense_uart.h"
+
+#include "tof_lib/tof_core.h"
+
+#include "operation/door_state.h"
+
+//*****************</Includes>*****************//
+
+
+
+volatile uint32_t times_isr_fired;	// keeps track of how many times the timer ISR has been called (once every 500ms)
+bool lab_open = false;				// true=lab is open, false=lab is closed
+uint8_t lab_state = 0;				// 0=closed, 1=open
+bool change_state = false;			// true=lab state will change after countdown, false=no change
+
+bool data_ready = false;			// stores if data is ready to be read from ToF sensor
+
+bool door_state = false;			// current door state
+bool candidate_state = false;		// candidate door state (state being considered during countdown)
+
+
+bool run_countdown = false;			// true=currently running countdown to change door state
+
+
+//*****************<BLE Code>*****************//
+#define HEARTBEAT_PERIOD_MS 500
 #define APP_AD_FLAGS 0x06
 
 static uint8_t adv_data[] = {
@@ -33,7 +94,6 @@ static btstack_timer_source_t heartbeat;
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
 extern uint8_t const profile_data[];
-static void poll_temp(void);
 
 static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size) {
     UNUSED(size);
@@ -59,7 +119,6 @@ static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packe
             gap_advertisements_set_data(adv_data_len, (uint8_t*) adv_data);
             gap_advertisements_enable(1);
 
-            poll_temp();
 
             break;
         case HCI_EVENT_DISCONNECTION_COMPLETE:
@@ -96,17 +155,13 @@ static int att_write_callback(hci_con_handle_t connection_handle, uint16_t att_h
     return 0;
 }
 
-static void poll_temp(void) {
-    current_temp += 1;
- }
 
 static void heartbeat_handler(struct btstack_timer_source *ts) {
-    static uint32_t counter = 0;
-    counter++;
+    // Increment times_isr_fired variable
+	times_isr_fired += 1;
 
-    // Update the temp every 10s
-    if (counter % 10 == 0) {
-        poll_temp();
+    // Update door state every 5s
+    if (times_isr_fired % 10 == 0) {
         if (le_notification_enabled) {
             att_server_request_can_send_now_event(con_handle);
         }
@@ -121,69 +176,128 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
     btstack_run_loop_set_timer(ts, HEARTBEAT_PERIOD_MS);
     btstack_run_loop_add_timer(ts);
 }
+//*****************</BLE Code>*****************//
 
-static volatile bool key_pressed;
-void key_pressed_func(void *param) {
-    int key = getchar_timeout_us(0); // get any pending key press but don't wait
-    if (key == 's' || key == 'S') {
-        key_pressed = true;
-    }
-}
 
 int main() {
-    stdio_init_all();
 
-	sleep_ms(5000);
+	// Initialize stdio
+    	stdio_init_all();
 
-restart:
-    // initialize CYW43 driver architecture (will enable BT if/because CYW43_ENABLE_BLUETOOTH == 1)
-    if (cyw43_arch_init()) {
-        printf("failed to initialise cyw43_arch\n");
-        return -1;
+	// Brief delay to allow time for terminal connection
+		sleep_ms(5000);
+
+	// Initialize basic peripherals
+		init_doorsense_leds();
+		init_i2c(TOF_I2C_PORT, TOF_I2C_BAUDRATE, TOF_SDA, TOF_SCL);
+		printf("Initialized peripherals\n");
+
+	// Initialize ToF sensor
+		sleep_ms(200);
+		tof_init();
+		printf("Initialized ToF\n");
+
+    // Initialize BLE / WiFi architecture
+		if (cyw43_arch_init()) {
+			printf("failed to initialise cyw43_arch\n");
+			return -1;
+		}
+
+		// Initialize BLE stack
+		l2cap_init();
+		sm_init();
+
+		// Initialize Bluetooth ATT server
+		att_server_init(profile_data, att_read_callback, att_write_callback);
+
+		// Register for HCI events
+		hci_event_callback_registration.callback = &packet_handler;
+		hci_add_event_handler(&hci_event_callback_registration);
+
+		// Register for ATT event
+		att_server_register_packet_handler(packet_handler);
+
+		// Create BLE heartbeat timer
+		heartbeat.process = &heartbeat_handler;
+		btstack_run_loop_set_timer(&heartbeat, HEARTBEAT_PERIOD_MS);
+		btstack_run_loop_add_timer(&heartbeat);
+
+		// Enable bluetooth
+		hci_power_control(HCI_POWER_ON);
+
+	// Main program loop
+    while(true) {
+
+		// BLE stack processing
+			async_context_poll(cyw43_arch_async_context());
+
+			absolute_time_t t = delayed_by_ms(get_absolute_time(), 5);
+			async_context_wait_for_work_until(cyw43_arch_async_context(), t);
+
+
+		// Reset times_isr_fired variable if it gets too large (not during countdown)
+			if (!run_countdown && times_isr_fired >= 100) times_isr_fired = 0;
+
+		// Check to see if ToF data is ready
+			if (tof_check_data_ready() == 0){data_ready = false;}
+			else {data_ready = true;}
+
+		// If data ready...
+			if (data_ready == true){
+				door_state = is_door_open();  //read distance, determine door state
+				data_ready = false;				  // reset data ready status
+
+				// check if door state has changed AND countdown is not already running
+				if ( (door_state != lab_open) && (run_countdown == false) ){
+					printf("Door state change detected!\n");
+					candidate_state = door_state;		// set candidate state
+					times_isr_fired = 0;				// reset variable
+					run_countdown = true;				// start countdown
+				}
+
+				// cancel countdown if door state changes during countdown
+				if ( (run_countdown == true) && (candidate_state != door_state) ){
+					printf("Cancelled state change\n");
+					set_led('g', false);
+					run_countdown = false;
+					times_isr_fired = 0;
+				}
+			}
+
+		// If countdown is running...
+			if (run_countdown == true){
+				// blink LED (change state once every 500ms)
+					if (times_isr_fired % 2 == 0){set_led('g', true);}
+					else {set_led('g', false);}
+
+				// check to see if timer has counted to 10 seconds
+					if (times_isr_fired >= 20){			// 500ms * 20 = 10 seconds
+						run_countdown = false;
+						change_state = true;			// change lab state
+						printf("New lab state\n");
+					}
+
+				// brief safety delay
+					sleep_ms(10);
+			}
+
+		// Update lab state variable as needed
+			if (change_state == true){
+				change_state = false;
+				lab_open = candidate_state;
+
+				if (lab_open == true){
+					printf("Lab is now OPEN\n");
+					current_temp = 1;
+					set_led('g', true);
+				}
+				else {
+					printf("Lab is now CLOSED\n");
+					current_temp = 0;
+					set_led('g', false);
+				}
+			}
     }
 
-    // Get notified if the user presses a key
-    printf("Press the \"S\" key to Stop bluetooth\n");
-    stdio_set_chars_available_callback(key_pressed_func, NULL);
-
-    // Initialise adc for the temp sensor
-    adc_init();
-    adc_select_input(ADC_CHANNEL_TEMPSENSOR);
-    adc_set_temp_sensor_enabled(true);
-
-    l2cap_init();
-    sm_init();
-
-    att_server_init(profile_data, att_read_callback, att_write_callback);
-
-    // inform about BTstack state
-    hci_event_callback_registration.callback = &packet_handler;
-    hci_add_event_handler(&hci_event_callback_registration);
-
-    // register for ATT event
-    att_server_register_packet_handler(packet_handler);
-
-    // set one-shot btstack timer
-    heartbeat.process = &heartbeat_handler;
-    btstack_run_loop_set_timer(&heartbeat, HEARTBEAT_PERIOD_MS);
-    btstack_run_loop_add_timer(&heartbeat);
-
-    // turn on bluetooth!
-    hci_power_control(HCI_POWER_ON);
-
-    key_pressed = false;
-    while(!key_pressed) {
-        async_context_poll(cyw43_arch_async_context());
-        async_context_wait_for_work_until(cyw43_arch_async_context(), at_the_end_of_time);
-    }
-
-    cyw43_arch_deinit();
-
-    printf("Press the \"S\" key to Start bluetooth\n");
-    key_pressed = false;
-    while(!key_pressed) {
-        sleep_ms(1000);
-    }
-    goto restart;
     return 0;
 }

@@ -33,7 +33,6 @@
 
 /******************<Functions>*****************/
 bool is_door_open();
-void run_door_sensor();
 /******************</Functions>*****************/
 
 #endif // DOOR_STATE_H
