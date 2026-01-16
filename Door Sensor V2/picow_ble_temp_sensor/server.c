@@ -98,7 +98,7 @@ static int att_write_callback(hci_con_handle_t connection_handle, uint16_t att_h
 
 static void poll_temp(void) {
     current_temp += 1;
-}
+ }
 
 static void heartbeat_handler(struct btstack_timer_source *ts) {
     static uint32_t counter = 0;
@@ -135,11 +135,21 @@ int main() {
 
 	sleep_ms(5000);
 
+restart:
     // initialize CYW43 driver architecture (will enable BT if/because CYW43_ENABLE_BLUETOOTH == 1)
     if (cyw43_arch_init()) {
         printf("failed to initialise cyw43_arch\n");
         return -1;
     }
+
+    // Get notified if the user presses a key
+    printf("Press the \"S\" key to Stop bluetooth\n");
+    stdio_set_chars_available_callback(key_pressed_func, NULL);
+
+    // Initialise adc for the temp sensor
+    adc_init();
+    adc_select_input(ADC_CHANNEL_TEMPSENSOR);
+    adc_set_temp_sensor_enabled(true);
 
     l2cap_init();
     sm_init();
@@ -161,10 +171,19 @@ int main() {
     // turn on bluetooth!
     hci_power_control(HCI_POWER_ON);
 
-    while(true) {
+    key_pressed = false;
+    while(!key_pressed) {
         async_context_poll(cyw43_arch_async_context());
         async_context_wait_for_work_until(cyw43_arch_async_context(), at_the_end_of_time);
     }
 
+    cyw43_arch_deinit();
+
+    printf("Press the \"S\" key to Start bluetooth\n");
+    key_pressed = false;
+    while(!key_pressed) {
+        sleep_ms(1000);
+    }
+    goto restart;
     return 0;
 }
