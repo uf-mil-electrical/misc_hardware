@@ -50,6 +50,7 @@
 
 #define APP_AD_FLAGS 0x06
 #define HEARTBEAT_PERIOD_MS 250
+#define ADV_NAME_DIGIT_INDEX 23
 
 static uint8_t adv_data[] = {
 
@@ -57,7 +58,7 @@ static uint8_t adv_data[] = {
     0x02, BLUETOOTH_DATA_TYPE_FLAGS, APP_AD_FLAGS,
 
     // Complete local name
-    0x0F, BLUETOOTH_DATA_TYPE_COMPLETE_LOCAL_NAME, 'D', 'o', 'o', 'r', ' ', 'S', 'e', 'n', 's', 'o', 'r', ' ', 'V', '2',
+    0x15, BLUETOOTH_DATA_TYPE_COMPLETE_LOCAL_NAME, 'D', 'o', 'o', 'r', ' ', 'S', 'e', 'n', 's', 'o', 'r', ' ', 'V', '2', ' ', '-', ' ', '[', '0', ']',
 
 	// Manufacturer Specific Data: company=0xFFFF, door_state=0/1
     0x04, BLUETOOTH_DATA_TYPE_MANUFACTURER_SPECIFIC_DATA, 0xFF, 0xFF, 0x00,	// last byte is door_state (placeholder)
@@ -81,7 +82,8 @@ static void start_advertising(void) {
     uint16_t adv_int_min = 800;
     uint16_t adv_int_max = 800;
 
-    uint8_t adv_type = 0; // connectable undirected in BTstack examples
+    uint8_t adv_type = 0;
+
     bd_addr_t null_addr;
     memset(null_addr, 0, 6);
 
@@ -122,10 +124,16 @@ uint8_t read_door_state(void) {
 	return level;
 }
 
-static void update_advertisement_door_state(uint8_t new_state) {
+static void update_advertisement(uint8_t new_state) {
+    // update name digit (single digit)
+    adv_data[ADV_NAME_DIGIT_INDEX] = '0' + (new_state % 10);
+
+    // keep manufacturer byte too (optional but nice)
     adv_data[ADV_DATA_DOOR_STATE_INDEX] = new_state;
+
     gap_advertisements_set_data(adv_data_len, adv_data);
 }
+
 
 static void heartbeat_handler(struct btstack_timer_source *ts) {
     static uint8_t last = 0xFF;
