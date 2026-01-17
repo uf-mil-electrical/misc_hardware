@@ -70,7 +70,7 @@ static const uint8_t adv_data_len = sizeof(adv_data);
 
 int le_notification_enabled;
 hci_con_handle_t con_handle;
-uint16_t current_temp = 10;
+uint16_t current_temp = 0;
 static btstack_timer_source_t heartbeat;
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
@@ -139,7 +139,8 @@ static int att_write_callback(hci_con_handle_t connection_handle, uint16_t att_h
 }
 
 static void poll_temp(void) {
-    current_temp += 1;
+    //current_temp += 1;
+	sleep_ms(5);
  }
 
 static void heartbeat_handler(struct btstack_timer_source *ts) {
@@ -174,7 +175,7 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
 int main() {
     stdio_init_all();
 
-	sleep_ms(5000);
+	sleep_ms(2000);
 
 
 	// Initialize basic peripherals
@@ -240,6 +241,8 @@ int main() {
 					candidate_state = door_state;		// set candidate state
 					countdown_time = 0;					// reset variable
 					run_countdown = true;				// start countdown
+
+					set_led('r', true);
 				}
 
 				// cancel countdown if door state changes during countdown
@@ -250,6 +253,8 @@ int main() {
 
 					if (lab_open == true){set_led('g', true);}
 					else {set_led('g', false);}
+
+					set_led('r', false);
 				}
 			}
 
