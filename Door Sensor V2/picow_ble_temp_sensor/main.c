@@ -1,13 +1,31 @@
-/**
- * Copyright (c) 2023 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+/*
+  __  __ _____ _                                             
+ |  \/  |_   _| |                                            
+ | \  / | | | | |                                            
+ | |\/| | | | | |                                            
+ | |  | |_| |_| |____                                        
+ |_|__|_|_____|______|                                  
+  _____                      _____
+ |  __ \                    / ____|                          
+ | |  | | ___   ___  _ __  | (___   ___ _ __  ___  ___  _ __ 
+ | |  | |/ _ \ / _ \| '__|  \___ \ / _ \ '_ \/ __|/ _ \| '__|
+ | |__| | (_) | (_) | |     ____) |  __/ | | \__ \ (_) | |   
+ |_____/ \___/ \___/|_|    |_____/ \___|_| |_|___/\___/|_|   
+ __		 __ __
+ \ \    / /__ \                                              
+  \ \  / /   ) |                                             
+   \ \/ /   / /                                              
+    \  /   / /_                                              
+     \/   |____|                                             
+                                                             
+    Door Sensor Board V2
+    Pico 2 W
+    Written by Russell MacGregor 
+*/
 
 
 
-//*****************<Temp>*****************//
-
+//*****************<Includes>*****************//
 // Core libraries
 #include <stdio.h>
 #include "pico/stdlib.h"
@@ -16,7 +34,7 @@
 #include "btstack.h"
 #include "pico/cyw43_arch.h"
 #include "pico/btstack_cyw43.h"
-#include "temp_sensor.h"
+#include "door_sense.h"
 
 // Peripheral includes
 #include "pico/time.h"
@@ -26,7 +44,6 @@
 #include "hardware/uart.h"
 #include "hardware/i2c.h"
 
-#include "pico/cyw43_arch.h"
 
 // Program files to include
 #include "setup.h"
@@ -39,6 +56,8 @@
 
 #include "operation/door_state.h"
 
+//*****************</Includes>*****************//
+
 
 #define TOF_CHECK_INTERVAL_MS		100		// how often to check ToF sensor for data ready (in ms)
 #define BLE_POLL_INTERVAL_MS		100		// how often to poll the BLE stack (in ms)
@@ -48,7 +67,7 @@ volatile uint32_t times_isr_fired;	// keeps track of how many times the timer IS
 volatile uint32_t countdown_time;	// time (in 500ms increments) until lab state change occurs
 
 
-uint8_t lab_open = 0;				// 0=closed, 1=open
+uint16_t lab_open_ble = 0;				// 0=closed, 1=open
 bool lab_state = false;				// true=lab is open, false=lab is closed
 bool change_state = false;			// true=lab state will change after countdown, false=no change
 
@@ -72,14 +91,13 @@ static uint8_t adv_data[] = {
     // Flags general discoverable
     0x02, BLUETOOTH_DATA_TYPE_FLAGS, APP_AD_FLAGS,
     // Name
-    0x17, BLUETOOTH_DATA_TYPE_COMPLETE_LOCAL_NAME, 'P', 'i', 'c', 'o', ' ', '0', '0', ':', '0', '0', ':', '0', '0', ':', '0', '0', ':', '0', '0', ':', '0', '0',
+    0x14, BLUETOOTH_DATA_TYPE_COMPLETE_LOCAL_NAME, 'M', 'I', 'L', ' ', 'D', 'o', 'o', 'r', ' ', 'S', 'e', 'n', 's', 'o', 'r', ' ', 'V', '2',
     0x03, BLUETOOTH_DATA_TYPE_COMPLETE_LIST_OF_16_BIT_SERVICE_CLASS_UUIDS, 0x1a, 0x18,
 };
 static const uint8_t adv_data_len = sizeof(adv_data);
 
 int le_notification_enabled;
 hci_con_handle_t con_handle;
-uint16_t current_temp = 0;
 static btstack_timer_source_t heartbeat;
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
@@ -114,7 +132,7 @@ static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packe
             le_notification_enabled = 0;
             break;
         case ATT_EVENT_CAN_SEND_NOW:
-            att_server_notify(con_handle, ATT_CHARACTERISTIC_ORG_BLUETOOTH_CHARACTERISTIC_TEMPERATURE_01_VALUE_HANDLE, (uint8_t*)&current_temp, sizeof(current_temp));
+            att_server_notify(con_handle, ATT_CHARACTERISTIC_ORG_BLUETOOTH_CHARACTERISTIC_TEMPERATURE_01_VALUE_HANDLE, (uint8_t*)&lab_open_ble, sizeof(lab_open_ble));
             break;
         default:
             break;
@@ -125,7 +143,7 @@ static uint16_t att_read_callback(hci_con_handle_t connection_handle, uint16_t a
     UNUSED(connection_handle);
 
     if (att_handle == ATT_CHARACTERISTIC_ORG_BLUETOOTH_CHARACTERISTIC_TEMPERATURE_01_VALUE_HANDLE){
-        return att_read_callback_handle_blob((const uint8_t *)&current_temp, sizeof(current_temp), offset, buffer, buffer_size);
+        return att_read_callback_handle_blob((const uint8_t *)&lab_open_ble, sizeof(lab_open_ble), offset, buffer, buffer_size);
     }
     return 0;
 }
@@ -149,7 +167,7 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
     
 	times_isr_fired += 1;
 
-	// Update door state once per second
+	// Update broadcast value once per second
     if (times_isr_fired >= 2) {
 		times_isr_fired = 0;
         if (le_notification_enabled) {
@@ -168,11 +186,6 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
     btstack_run_loop_add_timer(ts);
 }
 
-
-void ble_update_lab_state(bool lab_open){
-	if (lab_open == true){current_temp = 1;}
-	else {current_temp = 0;}
-}
 
 int main() {
     stdio_init_all();
@@ -255,18 +268,6 @@ int main() {
 						door_state = is_door_open();  //read distance, determine door state
 						data_ready = false;			  // reset data ready status
 
-						/*
-						// DEBUG: print door state
-						if (door_state == true){
-							set_led('r', true); // door open
-							printf("Door OPEN\n");
-						}		
-						else {
-							set_led('r', false); // door closed
-							printf("Door CLOSED\n");
-						}
-						*/
-
 						// Check if door state is different from lab state AND countdown not started
 							if ((door_state != lab_state) && (run_countdown == false)){
 								printf("Door state change detected!\n");
@@ -311,19 +312,17 @@ int main() {
 		// Update lab state variable as needed
 			if (change_state == true){
 				change_state = false;
-				lab_open = candidate_state;
+				lab_state = candidate_state;
 
-				if (lab_open == true){
+				if (lab_state == true){
 					printf("Lab is now OPEN\n");
 					set_led('g', true);
-					current_temp = 1;
-					lab_state = true;
+					lab_open_ble = 1;
 				}
-				else if (lab_open == false){
+				else if (lab_state == false){
 					printf("Lab is now CLOSED\n");
 					set_led('g', false);
-					current_temp = 0;
-					lab_state = false;
+					lab_open_ble = 0;
 				}
 			}
     }

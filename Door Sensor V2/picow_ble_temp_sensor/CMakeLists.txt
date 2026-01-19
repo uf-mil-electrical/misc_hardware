@@ -28,19 +28,22 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(picow_ble_temp_sensor C CXX ASM)
+project(Door-Sense-V2-Code C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-# Add executable. Default name is the project name, version 0.1
-add_executable(picow_ble_temp_sensor
-    server.c
+# Add executable and version information
+add_executable(Door-Sense-V2-Code
+    main.c
     )
+
+pico_set_program_name(Door-Sense-V2-Code "Door-Sense-V2-Code")
+pico_set_program_version(Door-Sense-V2-Code "1.0")
 
 
 # Add other program files
-target_sources(picow_ble_temp_sensor PRIVATE
+target_sources(Door-Sense-V2-Code PRIVATE
     peripherals/src/doorsense_gpio.c
     peripherals/src/doorsense_i2c.c
     peripherals/src/doorsense_spi.c
@@ -54,12 +57,12 @@ target_sources(picow_ble_temp_sensor PRIVATE
 )
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(picow_ble_temp_sensor 0)
-pico_enable_stdio_usb(picow_ble_temp_sensor 1)
+pico_enable_stdio_uart(Door-Sense-V2-Code 0)
+pico_enable_stdio_usb(Door-Sense-V2-Code 1)
 
 
 # Add required libraries to the build
-target_link_libraries(picow_ble_temp_sensor
+target_link_libraries(Door-Sense-V2-Code
     pico_stdlib
     pico_btstack_ble
     pico_btstack_cyw43
@@ -71,11 +74,13 @@ target_link_libraries(picow_ble_temp_sensor
 	hardware_uart
     )
 
-# Add BLstack to build + GATT file generation
-target_include_directories(picow_ble_temp_sensor PRIVATE
+# Add BLstack to build
+target_include_directories(Door-Sense-V2-Code PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_CURRENT_LIST_DIR}/.. # For our common btstack config
     )
-pico_btstack_make_gatt_header(picow_ble_temp_sensor PRIVATE "${CMAKE_CURRENT_LIST_DIR}/temp_sensor.gatt")
 
-pico_add_extra_outputs(picow_ble_temp_sensor)
+# Generate the GATT header file
+pico_btstack_make_gatt_header(Door-Sense-V2-Code PRIVATE "${CMAKE_CURRENT_LIST_DIR}/door_sense.gatt")
+
+pico_add_extra_outputs(Door-Sense-V2-Code)
