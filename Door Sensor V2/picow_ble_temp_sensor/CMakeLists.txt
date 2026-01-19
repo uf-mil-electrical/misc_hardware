@@ -63,7 +63,7 @@ target_link_libraries(picow_ble_temp_sensor
     pico_stdlib
     pico_btstack_ble
     pico_btstack_cyw43
-    pico_cyw43_arch_threadsafe_background
+    pico_cyw43_arch_none
     hardware_adc
 	hardware_i2c
 	hardware_gpio

@@ -39,12 +39,17 @@
 
 #include "operation/door_state.h"
 
+
+#define TOF_CHECK_INTERVAL_MS		100		// how often to check ToF sensor for data ready (in ms)
+#define BLE_POLL_INTERVAL_MS		100		// how often to poll the BLE stack (in ms)
+#define COUNTDOWN_CHECK_INTERVAL_MS 500		// how often to check countdown timer (in ms)
+
 volatile uint32_t times_isr_fired;	// keeps track of how many times the timer ISR has been called (once every 500ms)
 volatile uint32_t countdown_time;	// time (in 500ms increments) until lab state change occurs
 
 
-bool lab_open = false;				// true=lab is open, false=lab is closed
-uint8_t lab_state = 0;				// 0=closed, 1=open
+uint8_t lab_open = 0;				// 0=closed, 1=open
+bool lab_state = false;				// true=lab is open, false=lab is closed
 bool change_state = false;			// true=lab state will change after countdown, false=no change
 
 bool data_ready = false;			// stores if data is ready to be read from ToF sensor
@@ -55,6 +60,10 @@ bool candidate_state = false;		// candidate door state (state being considered d
 volatile bool run_countdown = false;			// true=currently running countdown to change door state
 
 //*****************</Temp>*****************//
+
+
+
+
 
 #define HEARTBEAT_PERIOD_MS 500
 #define APP_AD_FLAGS 0x06
@@ -75,7 +84,6 @@ static btstack_timer_source_t heartbeat;
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
 extern uint8_t const profile_data[];
-static void poll_temp(void);
 
 static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size) {
     UNUSED(size);
@@ -100,8 +108,6 @@ static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *packe
             assert(adv_data_len <= 31); // ble limitation
             gap_advertisements_set_data(adv_data_len, (uint8_t*) adv_data);
             gap_advertisements_enable(1);
-
-            poll_temp();
 
             break;
         case HCI_EVENT_DISCONNECTION_COMPLETE:
@@ -138,18 +144,13 @@ static int att_write_callback(hci_con_handle_t connection_handle, uint16_t att_h
     return 0;
 }
 
-static void poll_temp(void) {
-    //current_temp += 1;
-	sleep_ms(5);
- }
 
 static void heartbeat_handler(struct btstack_timer_source *ts) {
     
 	times_isr_fired += 1;
 
-    // Update the temp every 10s
-    if (times_isr_fired >= 10) {
-        poll_temp();
+	// Update door state once per second
+    if (times_isr_fired >= 2) {
 		times_isr_fired = 0;
         if (le_notification_enabled) {
             att_server_request_can_send_now_event(con_handle);
@@ -161,11 +162,17 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
     led_on = !led_on;
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, led_on);
 
+
     // Restart timer
     btstack_run_loop_set_timer(ts, HEARTBEAT_PERIOD_MS);
     btstack_run_loop_add_timer(ts);
 }
 
+
+void ble_update_lab_state(bool lab_open){
+	if (lab_open == true){current_temp = 1;}
+	else {current_temp = 0;}
+}
 
 int main() {
     stdio_init_all();
@@ -193,10 +200,8 @@ int main() {
 
 	// Initialize BLE stack
 
-	/*
 		l2cap_init();
 		sm_init();
-
 		att_server_init(profile_data, att_read_callback, att_write_callback);
 
 		// inform about BTstack state
@@ -214,69 +219,94 @@ int main() {
 		// turn on bluetooth!
 		hci_power_control(HCI_POWER_ON);
 
-		*/
+	// Preparation for main program loop
+
+		// main loop timing control
+		uint32_t last_tof_check_time = 0;
+		uint32_t last_ble_poll_time = 0;
+		uint32_t last_countdown_check_time = 0;
 
 
     while(true) {
 
-		// BLE stack processing
-			//async_context_poll(cyw43_arch_async_context());
+		// Get current time
+			uint32_t current_time = to_ms_since_boot(get_absolute_time());
 
-			//absolute_time_t t = delayed_by_ms(get_absolute_time(), 5);
-			//async_context_wait_for_work_until(cyw43_arch_async_context(), t);
+		// Poll BLE stack at regular intervals
+			if (current_time - last_ble_poll_time >= BLE_POLL_INTERVAL_MS){
+				// i: reset last poll time
+					last_ble_poll_time = current_time;
 
-		// Check to see if ToF data is ready
-			if (tof_check_data_ready() == 0){data_ready = false;}
-			else {data_ready = true;}
-
-
-
-		// If data ready...
-			if (data_ready == true){
-				door_state = is_door_open();  //read distance, determine door state
-				data_ready = false;			  // reset data ready status
-
-				// debug LED indication of door state
-					if (door_state == true){set_led('r', true);}		// door open
-					else {set_led('r', false);}						// door closed
-
-				// check if door state has changed AND countdown is not already running
-				if ( (door_state != lab_open) && (run_countdown == false) ){
-					printf("Door state change detected!\n");
-					candidate_state = door_state;		// set candidate state
-					countdown_time = 0;					// reset variable
-					run_countdown = true;				// start countdown
-				}
-
-				// cancel countdown if door state changes during countdown
-				if ( (run_countdown == true) && (candidate_state != door_state) ){
-					printf("Cancelled state change\n");
-					run_countdown = false;
-					countdown_time = 0;	
-
-					if (lab_open == true){set_led('g', true);}
-					else {set_led('g', false);}
-				}
+				// ii: run BLE task
+					cyw43_arch_poll();
 			}
 
-		// If countdown is running...
-			if (run_countdown == true){
-				// blink LED (change state once every 500ms)
+		// Check ToF sensor at regular intervals
+			if (current_time - last_tof_check_time >= TOF_CHECK_INTERVAL_MS){
+				// i: reset last check time
+					last_tof_check_time = current_time;
+
+				// ii: check if ToF data is ready
+					if (tof_check_data_ready() == 0){data_ready = false;}
+					else {data_ready = true;}
+
+				// iii: if data ready...
+					if (data_ready == true){
+						door_state = is_door_open();  //read distance, determine door state
+						data_ready = false;			  // reset data ready status
+
+						/*
+						// DEBUG: print door state
+						if (door_state == true){
+							set_led('r', true); // door open
+							printf("Door OPEN\n");
+						}		
+						else {
+							set_led('r', false); // door closed
+							printf("Door CLOSED\n");
+						}
+						*/
+
+						// Check if door state is different from lab state AND countdown not started
+							if ((door_state != lab_state) && (run_countdown == false)){
+								printf("Door state change detected!\n");
+								candidate_state = door_state;		// set candidate state
+								countdown_time = 0;					// reset variable
+								run_countdown = true;				// start countdown
+							}
+
+						// Cancel countdown if door state changes during countdown
+							if ( (run_countdown == true) && (candidate_state != door_state) ){
+								printf("Cancelled state change\n");
+								run_countdown = false;
+								countdown_time = 0;	
+
+								if (lab_state == true){set_led('g', true);}
+								else {set_led('g', false);}
+							}
+					}
+			}
+
+		// Run countdown with non-blocking timing (as needed)
+			if (run_countdown == true && (current_time - last_countdown_check_time >= COUNTDOWN_CHECK_INTERVAL_MS)) {
+				// i: reset last check time
+					last_countdown_check_time = current_time;
+
+				// ii: increment countdown timer
+					countdown_time += 1;
+
+				// iii: blink LED (change state once every 500ms)
 					if (countdown_time % 2 == 0){set_led('g', true);}
 					else {set_led('g', false);}
 
-				// check to see if timer has counted to 10 seconds
+				// iv: check to see if timer has counted to 10 seconds
 					if (countdown_time >= 20){			// 500ms * 20 = 10 seconds
 						run_countdown = false;
 						change_state = true;			// change lab state
 						countdown_time = 0;
 						printf("New lab state\n");
 					}
-
-				// brief safety delay
-					sleep_ms(10);
 			}
-
 
 		// Update lab state variable as needed
 			if (change_state == true){
@@ -285,16 +315,18 @@ int main() {
 
 				if (lab_open == true){
 					printf("Lab is now OPEN\n");
-					current_temp = 1;
 					set_led('g', true);
+					current_temp = 1;
+					lab_state = true;
 				}
 				else if (lab_open == false){
 					printf("Lab is now CLOSED\n");
-					current_temp = 0;
 					set_led('g', false);
+					current_temp = 0;
+					lab_state = false;
 				}
 			}
     }
-
-    return 0;
+	
+	return 0;   
 }
