@@ -156,11 +156,6 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
         }
     }
 
-	// If countdown is running...
-	if (run_countdown == true){
-		countdown_time += 1;
-	}
-
     // Invert the led
     static int led_on = true;
     led_on = !led_on;
@@ -195,8 +190,10 @@ int main() {
 			return -1;
 		}
 
-	
+
 	// Initialize BLE stack
+
+	/*
 		l2cap_init();
 		sm_init();
 
@@ -217,23 +214,31 @@ int main() {
 		// turn on bluetooth!
 		hci_power_control(HCI_POWER_ON);
 
+		*/
+
+
     while(true) {
 
 		// BLE stack processing
-			async_context_poll(cyw43_arch_async_context());
+			//async_context_poll(cyw43_arch_async_context());
 
-			absolute_time_t t = delayed_by_ms(get_absolute_time(), 5);
-			async_context_wait_for_work_until(cyw43_arch_async_context(), t);
+			//absolute_time_t t = delayed_by_ms(get_absolute_time(), 5);
+			//async_context_wait_for_work_until(cyw43_arch_async_context(), t);
 
 		// Check to see if ToF data is ready
 			if (tof_check_data_ready() == 0){data_ready = false;}
 			else {data_ready = true;}
 
 
+
 		// If data ready...
 			if (data_ready == true){
 				door_state = is_door_open();  //read distance, determine door state
-				data_ready = false;				  // reset data ready status
+				data_ready = false;			  // reset data ready status
+
+				// debug LED indication of door state
+					if (door_state == true){set_led('r', true);}		// door open
+					else {set_led('r', false);}						// door closed
 
 				// check if door state has changed AND countdown is not already running
 				if ( (door_state != lab_open) && (run_countdown == false) ){
@@ -241,8 +246,6 @@ int main() {
 					candidate_state = door_state;		// set candidate state
 					countdown_time = 0;					// reset variable
 					run_countdown = true;				// start countdown
-
-					set_led('r', true);
 				}
 
 				// cancel countdown if door state changes during countdown
@@ -253,8 +256,6 @@ int main() {
 
 					if (lab_open == true){set_led('g', true);}
 					else {set_led('g', false);}
-
-					set_led('r', false);
 				}
 			}
 
@@ -287,7 +288,7 @@ int main() {
 					current_temp = 1;
 					set_led('g', true);
 				}
-				else {
+				else if (lab_open == false){
 					printf("Lab is now CLOSED\n");
 					current_temp = 0;
 					set_led('g', false);

@@ -288,7 +288,7 @@ uint8_t tof_check_data_ready() {
   tof_read_byte(GPIO__TIO_HV_STATUS, &tmp);
 
   // Check if value is ready based on interrupt polarity
-  uint8_t dataReady = (tmp & 0x1) == iPol;
+  uint8_t dataReady = ((tmp & 0x1) == iPol) ;
   return dataReady;
 }
 
