@@ -44,6 +44,7 @@ pico_set_program_version(Door-Sense-V2-Code "1.0")
 
 # Add other program files
 target_sources(Door-Sense-V2-Code PRIVATE
+	peripherals/src/doorsense_dfplayer.c
     peripherals/src/doorsense_gpio.c
     peripherals/src/doorsense_i2c.c
     peripherals/src/doorsense_spi.c

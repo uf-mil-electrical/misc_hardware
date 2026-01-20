@@ -47,6 +47,8 @@
 
 // Program files to include
 #include "setup.h"
+
+#include "peripherals/doorsense_dfplayer.h"
 #include "peripherals/doorsense_gpio.h"
 #include "peripherals/doorsense_i2c.h"
 #include "peripherals/doorsense_spi.h"

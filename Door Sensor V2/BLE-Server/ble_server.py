@@ -32,7 +32,7 @@ def door_state_notification_handler(sender, data):
     # Print status
     state = "OPEN" if value == 1 else "CLOSED"
     logger.info(f"Door state changed: {state}")
-    print(f"Door is now {state}")
+    #print(f"Door is now {state}")
 
 async def connect_to_device(address):
     """Connect to the device by MAC address and set up notifications"""

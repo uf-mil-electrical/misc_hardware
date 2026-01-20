@@ -1,10 +1,12 @@
-#ifndef DOORSENSE_UART_H
-#define DOORSENSE_UART_H
+#ifndef DOORSENSE_BLE_H
+#define DOORSENSE_BLE_H
 
 /******************<Summary>*****************
- * Name: doorsense_UART.h
+ * Name: doorsense_ble.h
  * Purpose:
- *      > Functions for UART communication
+ *      > Functions for using the BLE stack
+ * 		> Responsible for functions used for broadcasting
+ * 		  door/lab state via BLE
  * Written / updated by:
  *      > Russell
 ******************</Summary>*****************/
@@ -13,9 +15,12 @@
 /******************<Dependencies>*****************/
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "pico/stdlib.h"
 
-#include "hardware/uart.h"
+#include "btstack.h"
+#include "pico/cyw43_arch.h"
+#include "pico/btstack_cyw43.h"
 
 #include "setup.h"
 /******************</Dependencies>*****************/
@@ -26,9 +31,6 @@
 
 
 /******************<Functions>*****************/
-void init_doorsense_uart();
-void uart_send(uart_inst_t* uart, uint8_t *data, size_t length);
-void uart_receive(uart_inst_t* uart, uint8_t *data, size_t length);
 /******************</Functions>*****************/
 
-#endif // DOORSENSE_UART_H
+#endif // DOORSENSE_BLE_H
