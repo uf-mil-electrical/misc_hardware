@@ -59,10 +59,14 @@
 /******************<UART Setup>*****************/
 #define UART_ID_DFPLAYER        uart0       // UART port to use for DFplayer
 #define UART_ID_SPARE           uart1       // extra UART port
-#define UART_BAUD_RATE          115200
+#define UART_BAUD_RATE          9600
 /******************</UART Setup>*****************/
 
 
+/******************<DFPlayer Setup>*****************/
+#define DFPLAYER_VOLUME		 	1         	// default volume level (0-30)
+#define DFPLAYER_SLEEP_TIME_MS	100         // time (in ms) to wait after sending command before next command
+/******************</DFPlayer Setup>*****************/
 
 /******************<ToF Setup>*****************/
 #define TOF_I2C_BAUDRATE        100*1000    // initialize I2C at 100 kHz

@@ -27,6 +27,8 @@
 
 /******************<Functions>*****************/
 void init_doorsense_uart();
+void uart_send(uart_inst_t* uart, uint8_t *data, size_t length);
+void uart_receive(uart_inst_t* uart, uint8_t *data, size_t length);
 /******************</Functions>*****************/
 
 #endif // DOORSENSE_UART_H

@@ -24,7 +24,6 @@
 */
 
 
-
 //*****************<Includes>*****************//
 // Core libraries
 #include <stdio.h>
@@ -47,6 +46,8 @@
 
 // Program files to include
 #include "setup.h"
+
+#include "peripherals/doorsense_dfplayer.h"
 #include "peripherals/doorsense_gpio.h"
 #include "peripherals/doorsense_i2c.h"
 #include "peripherals/doorsense_spi.h"
@@ -59,6 +60,8 @@
 //*****************</Includes>*****************//
 
 
+#pragma region BLE_Functionality
+//*****************<BLE Functionality>*****************//
 #define TOF_CHECK_INTERVAL_MS		100		// how often to check ToF sensor for data ready (in ms)
 #define BLE_POLL_INTERVAL_MS		100		// how often to poll the BLE stack (in ms)
 #define COUNTDOWN_CHECK_INTERVAL_MS 500		// how often to check countdown timer (in ms)
@@ -77,11 +80,6 @@ bool door_state = false;			// current door state
 bool candidate_state = false;		// candidate door state (state being considered during countdown)
 
 volatile bool run_countdown = false;			// true=currently running countdown to change door state
-
-//*****************</Temp>*****************//
-
-
-
 
 
 #define HEARTBEAT_PERIOD_MS 500
@@ -185,12 +183,15 @@ static void heartbeat_handler(struct btstack_timer_source *ts) {
     btstack_run_loop_set_timer(ts, HEARTBEAT_PERIOD_MS);
     btstack_run_loop_add_timer(ts);
 }
+//*****************</BLE Functionality>*****************//
+#pragma endregion BLE_Functionality
 
 
+//*****************<Main Program>*****************//
 int main() {
     stdio_init_all();
 
-	sleep_ms(2000);
+	sleep_ms(5000);
 
 
 	// Initialize basic peripherals
@@ -198,6 +199,50 @@ int main() {
 		init_i2c(TOF_I2C_PORT, TOF_I2C_BAUDRATE, TOF_SDA, TOF_SCL);
 		printf("Initialized peripherals\n");
 
+	// Initialize DFPlayer module
+			/*
+			dfplayer_init(UART_ID_DFPLAYER, DFPLAYER_SLEEP_TIME_MS, true); // debug enabled
+			sleep_ms(1000);
+			printf("Resetting DFPlayer...\n");
+			if (reset()) {
+				printf("DFPlayer reset successful!\n");
+			} else {
+				printf("DFPlayer reset failed!\n");
+			}
+
+			sleep_ms(500);
+
+			printf("Selecting SD card source...\n");
+			if (!select_source("sdcard")) {
+				printf("Failed to select SD card source, but continuing...\n");
+			}
+
+			sleep_ms(200);
+		
+		// Query number of files on SD card
+			printf("Checking number of files on SD card...\n");
+			int num_files = query_num_files("sdcard");
+			if (num_files > 0) {
+				printf("Found %d files on SD card\n", num_files);
+			} else {
+				printf("Could not determine number of files on SD card\n");
+			}
+			
+			sleep_ms(200);
+		
+		// Set volume (0-30)
+			printf("Setting volume...\n");
+			if (set_volume(DFPLAYER_VOLUME)) {
+				printf("Volume set to 10\n");
+			}
+			
+			sleep_ms(200);
+
+			// Stop any playback that might have auto-started
+			printf("Stopping any playback...\n");
+			stop();
+			sleep_ms(200);
+		*/
 
 	// Initialize ToF sensor
 		sleep_ms(200);
@@ -212,7 +257,6 @@ int main() {
 
 
 	// Initialize BLE stack
-
 		l2cap_init();
 		sm_init();
 		att_server_init(profile_data, att_read_callback, att_write_callback);
@@ -247,6 +291,7 @@ int main() {
 
 		// Poll BLE stack at regular intervals
 			if (current_time - last_ble_poll_time >= BLE_POLL_INTERVAL_MS){
+				printf("polling BLE\n");
 				// i: reset last poll time
 					last_ble_poll_time = current_time;
 
@@ -260,8 +305,19 @@ int main() {
 					last_tof_check_time = current_time;
 
 				// ii: check if ToF data is ready
-					if (tof_check_data_ready() == 0){data_ready = false;}
-					else {data_ready = true;}
+					if (tof_check_data_ready() == 0){
+						data_ready = false;
+						printf("ERROR: ToF data NOT READY\n");
+						printf("Current time = %u\n", current_time);
+
+						tof_clear_int();
+						tof_clear_int();
+
+						sleep_ms(500);
+					}
+					else {
+						data_ready = true; printf("ToF data true\n");
+					}
 
 				// iii: if data ready...
 					if (data_ready == true){
@@ -318,14 +374,17 @@ int main() {
 					printf("Lab is now OPEN\n");
 					set_led('g', true);
 					lab_open_ble = 1;
+					//play(MIL_OPEN_TRACK);		// DFPlayer announcement
 				}
 				else if (lab_state == false){
 					printf("Lab is now CLOSED\n");
 					set_led('g', false);
 					lab_open_ble = 0;
+					//play(MIL_CLOSE_TRACK);		// DFPlayer announcement
 				}
 			}
     }
 	
 	return 0;   
 }
+//*****************</Main Program>*****************//
