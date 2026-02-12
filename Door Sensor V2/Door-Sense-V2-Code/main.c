@@ -291,6 +291,7 @@ int main() {
 
 		// Poll BLE stack at regular intervals
 			if (current_time - last_ble_poll_time >= BLE_POLL_INTERVAL_MS){
+				printf("polling BLE\n");
 				// i: reset last poll time
 					last_ble_poll_time = current_time;
 
@@ -304,8 +305,19 @@ int main() {
 					last_tof_check_time = current_time;
 
 				// ii: check if ToF data is ready
-					if (tof_check_data_ready() == 0){data_ready = false;}
-					else {data_ready = true;}
+					if (tof_check_data_ready() == 0){
+						data_ready = false;
+						printf("ERROR: ToF data NOT READY\n");
+						printf("Current time = %u\n", current_time);
+
+						tof_clear_int();
+						tof_clear_int();
+
+						sleep_ms(500);
+					}
+					else {
+						data_ready = true; printf("ToF data true\n");
+					}
 
 				// iii: if data ready...
 					if (data_ready == true){
