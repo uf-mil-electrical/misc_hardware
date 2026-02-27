@@ -6,7 +6,7 @@ import requests
 import time
 
 # HTTP Request setup (communication w/ Discord bot)
-URL = "http://10.138.173.121:5001/"
+URL = "https://hooks.cbrxyz.com/"
 HEADERS = {
 	"Content-Type": "application/json",
 	"X-Github-Event": "door_toggled",
@@ -17,7 +17,7 @@ ToF = qwiic_vl53l1x.QwiicVL53L1X()
 ToF.sensor_init()
 
 # Settings
-tof_read_delay = 0.005		# delay time in seconds
+tof_read_delay = 0.1	# delay time in seconds
 countdown_length = 10		# countdown duration in seconds
 open_door_distance = 100	# how close the door must be to be "open"
 
@@ -26,30 +26,28 @@ lab_state = None
 last_door_state = None
 countdown_active = False
 timer_start = None
+last_printed_second = 0
 
-
-# HTTP POST function
-def post_lab_state(lab_state: str) -> None:
-	
+# HTTP Request Function
+def post_lab_state(lab_state):
 	payload = {"door_status": "open" if lab_state == "OPEN" else "closed"}
 	
 	try:
-		r = requests.post(URL, headers=HEADERS, json=payload, timeout=5)
+		r = requests.post(URL, headers=HEADERS, json=payload, timeout = 5)
 		print(f"POST {URL} -> {r.status_code} {r.text}")
-	
-	except requests.RequestException as e:
+	except Exception as e:
 		print(f"HTTP error: {e}")
 
 
-# Run main program
 while True:
 	try:
-		
-		# Read distance from ToF
+		# Read distance
 		ToF.start_ranging()
 		time.sleep(tof_read_delay)
 		distance = ToF.get_distance()
 		ToF.stop_ranging()
+		time.sleep(tof_read_delay)
+	
 		
 		# Determine door state
 		if distance <= open_door_distance:
@@ -57,21 +55,29 @@ while True:
 		else:
 			door_state = "CLOSED"
 			
-		# Debug print statement
-		#print(f"Distance = {distance}, Door = {door_state}, countdown_active = {countdown_active}")
-		
-		# Check if the door's state has changed
+			
+		# Print state
+		print(f"distance = {distance}, state = {door_state}")
+			
+			
+		# Check if state has changed
 		if door_state != last_door_state:
-			print(f"Door state changed to {door_state}, starting countdown")
+			#print(f"Door state changed to {door_state}, starting countdown")
 			countdown_active = True
 			timer_start = time.time()
 			last_door_state = door_state
 			
-		# If countdown is active...
+		# If the countdown is active:
 		if countdown_active:
 			
 			# check elapsed time
 			elapsed = time.time() - timer_start
+			
+			# print out time remaining in seconds
+			current_second = int(elapsed)
+			if (current_second != last_printed_second):
+				last_printed_second = current_second
+				print(f"Time elapsed: {current_second}")
 			
 			# if door state changes again during countdown
 			if door_state != last_door_state:
@@ -82,10 +88,14 @@ while True:
 			elif elapsed >= countdown_length:
 				lab_state = door_state
 				countdown_active = False
-				post_lab_state(lab_state)
-				print(f"Countdown complete! - lab state changed to {lab_state}")
+				elapsed = 0
 				
-		time.sleep(0.1)
+				if lab_state is not None:
+					post_lab_state(lab_state)
+					print(f"Countdown complete! - lab state changed to {lab_state}")
+				else:
+					print(f"Countdown complete. First run -> no update to channel name.")
+				
 		
 	except Exception as e:
-		print(e)
+		print(f"sadness: {e}")
