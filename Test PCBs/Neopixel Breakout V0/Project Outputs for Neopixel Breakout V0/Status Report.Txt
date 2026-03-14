@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Neopixel Breakout V0.PrjPcb]
+   Generated File[Main.TXT]
+   Generated File[Main.LDP]
+   Generated File[Main.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 15:18:39 On 03/13/26

@@ -1,0 +1,32 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [USB Hub Breakout.PrjPcb]
+   Generated File[Main_Copper_Signal_Top.gbr]
+   Generated File[Main_Copper_Signal_1.gbr]
+   Generated File[Main_Copper_Signal_2.gbr]
+   Generated File[Main_Copper_Signal_Bot.gbr]
+   Generated File[Main_Pads_Bot.gbr]
+   Generated File[Main_Pads_Top.gbr]
+   Generated File[Main_Legend_Top.gbr]
+   Generated File[Main_Legend_Bot.gbr]
+   Generated File[Main_Soldermask_Top.gbr]
+   Generated File[Main_Soldermask_Bot.gbr]
+   Generated File[Main_Paste_Top.gbr]
+   Generated File[Main_Paste_Bot.gbr]
+   Generated File[Main_Keep-out.gbr]
+   Generated File[Main_Mechanical_1.gbr]
+   Generated File[Main_Poly_Planning.gbr]
+   Generated File[Main_Mechanical_13.gbr]
+   Generated File[Main_Mechanical_15.gbr]
+   Generated File[Main_Profile.gbr]
+   Generated File[Main_PTH_Drill.gbr]
+   Generated File[Main_Drawing_1.gbr]
+   Generated File[Main_Drillmap_1.gbr]
+   Generated File[Main.EXTREP]
+   Generated File[Main.REP]
+
+
+Files Generated   : 23
+Documents Printed : 0
+
+Finished Output Generation At 14:33:33 On 03/13/26
