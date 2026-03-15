@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [3V3 Regulator Breakout.PrjPcb]
+   Generated File[Main.TXT]
+   Generated File[Main.LDP]
+   Generated File[Main.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 14:07:04 On 03/13/26

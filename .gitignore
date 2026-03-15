@@ -2,5 +2,8 @@
 *.PcbDoc.Zip
 *.SchDoc.Zip
 *.PrjPcb.Zip
+*.BomDoc.Zip
 *.LOG
 *.SchDocPreview
+*.PcbDocPreview
+*.BomDocPreview
