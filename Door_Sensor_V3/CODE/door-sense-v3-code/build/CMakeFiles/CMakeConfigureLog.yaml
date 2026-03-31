@@ -1,0 +1,476 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      The target system is: PICO -  - hazard3
+      The host system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/riscv32-unknown-elf-gcc.exe 
+      Build flags: -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp;-mabi=ilp32
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/3.31.5/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/riscv32-unknown-elf-g++.exe 
+      Build flags: -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp;-mabi=ilp32
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/3.31.5/CompilerIdCXX/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1237 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      riscv32-unknown-elf-gcc.exe () 15.1.0
+      Copyright (C) 2025 Free Software Foundation, Inc.
+      This is free software; see the source for copying conditions.  There is NO
+      warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-9nsj9z"
+      binary: "C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-9nsj9z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32"
+      CMAKE_C_FLAGS_DEBUG: "-Og -g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/russe/.pico-sdk/sdk/2.2.0/cmake"
+      PICO_SDK_PATH: "C:/Users/russe/.pico-sdk/sdk/2.2.0"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-9nsj9z'
+        
+        Run Build Command(s): C:/Users/russe/.pico-sdk/ninja/v1.12.1/ninja.exe -v cmTC_3b84a
+        [1/2] C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe   -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32  -std=gnu11   -v -o CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj -c C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe
+        Target: riscv32-unknown-elf
+        Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c,c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 () 
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/cc1.exe -quiet -v -imultilib . -iprefix C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/ -isysroot C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_3b84a.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -misa-spec=20191213 -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -std=gnu11 -version -o C:\\Users\\russe\\AppData\\Local\\Temp\\ccjlZThZ.s
+        GNU C11 () version 15.1.0 (riscv32-unknown-elf)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include"
+        ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfP:/build/riscv-install/ucrt64/lib/gcc/riscv32-unknown-elf/15.1.0/../../../../include"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include"
+        ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfD:/a/_temp/msys64/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include
+        End of search list.
+        Compiler executable checksum: 0a1dd197fbce9e27868e27296eabb050
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/as.exe -v --traditional-format -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -mabi=ilp32 -misa-spec=20191213 -o CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj C:\\Users\\russe\\AppData\\Local\\Temp\\ccjlZThZ.s
+        GNU assembler version 2.45 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.45
+        COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/
+        LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.'\x0d
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -Wl,--build-id=none -nostdlib -v CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj -o cmTC_3b84a.elf   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe
+        COLLECT_LTO_WRAPPER=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe
+        Target: riscv32-unknown-elf
+        Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c,c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 () 
+        COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/
+        LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_3b84a.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_3b84a.elf.'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe -plugin C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll -plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\ccvzmq29.res --sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf -melf32lriscv -X -o cmTC_3b84a.elf -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0 -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib --build-id=none CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj
+        C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/ld.exe: warning: cannot find entry symbol _start; defaulting to 00010094
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_3b84a.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_3b84a.elf.'\x0d
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include]
+        end of search list found
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include]
+        implicit include dirs: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-9nsj9z']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Users/russe/.pico-sdk/ninja/v1.12.1/ninja.exe -v cmTC_3b84a]
+        ignore line: [[1/2] C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe   -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32  -std=gnu11   -v -o CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj -c C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe]
+        ignore line: [Target: riscv32-unknown-elf]
+        ignore line: [Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--]
+        ignore line: [rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 () ]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/']
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/cc1.exe -quiet -v -imultilib . -iprefix C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/ -isysroot C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_3b84a.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -misa-spec=20191213 -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -std=gnu11 -version -o C:\\Users\\russe\\AppData\\Local\\Temp\\ccjlZThZ.s]
+        ignore line: [GNU C11 () version 15.1.0 (riscv32-unknown-elf)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include"]
+        ignore line: [ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfP:/build/riscv-install/ucrt64/lib/gcc/riscv32-unknown-elf/15.1.0/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include"]
+        ignore line: [ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfD:/a/_temp/msys64/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 0a1dd197fbce9e27868e27296eabb050]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/']
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/as.exe -v --traditional-format -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -mabi=ilp32 -misa-spec=20191213 -o CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj C:\\Users\\russe\\AppData\\Local\\Temp\\ccjlZThZ.s]
+        ignore line: [GNU assembler version 2.45 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.45]
+        ignore line: [COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/]
+        ignore line: [LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.'\x0d]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -Wl --build-id=none -nostdlib -v CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj -o cmTC_3b84a.elf   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-gcc.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe]
+        ignore line: [Target: riscv32-unknown-elf]
+        ignore line: [Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--]
+        ignore line: [rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 () ]
+        ignore line: [COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/]
+        ignore line: [LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_3b84a.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_3b84a.elf.']
+        link line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe -plugin C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll -plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\ccvzmq29.res --sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf -melf32lriscv -X -o cmTC_3b84a.elf -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0 -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib --build-id=none CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj]
+          arg [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\ccvzmq29.res] ==> ignore
+          arg [--sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf] ==> ignore
+          arg [-melf32lriscv] ==> ignore
+          arg [-X] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_3b84a.elf] ==> ignore
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib]
+          arg [--build-id=none] ==> ignore
+          arg [CMakeFiles/cmTC_3b84a.dir/CMakeCCompilerABI.c.obj] ==> ignore
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/ld.exe: warning: cannot find entry symbol _start]
+        ignore line: [ defaulting to 00010094]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_3b84a.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_3b84a.elf.'\x0d]
+        ignore line: []
+        ignore line: []
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-anqw85"
+      binary: "C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-anqw85"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32"
+      CMAKE_CXX_FLAGS_DEBUG: "-Og -g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/russe/.pico-sdk/sdk/2.2.0/cmake"
+      PICO_SDK_PATH: "C:/Users/russe/.pico-sdk/sdk/2.2.0"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-anqw85'
+        
+        Run Build Command(s): C:/Users/russe/.pico-sdk/ninja/v1.12.1/ninja.exe -v cmTC_8b8e9
+        [1/2] C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe   -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32  -std=gnu++17   -v -o CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe
+        Target: riscv32-unknown-elf
+        Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c,c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 () 
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/cc1plus.exe -quiet -v -imultilib . -iprefix C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/ -isysroot C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_8b8e9.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -misa-spec=20191213 -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -std=gnu++17 -version -o C:\\Users\\russe\\AppData\\Local\\Temp\\cc4g0pNv.s
+        GNU C++17 () version 15.1.0 (riscv32-unknown-elf)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/."
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include"
+        ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfP:/build/riscv-install/ucrt64/lib/gcc/riscv32-unknown-elf/15.1.0/../../../../include"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed"
+        ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include"
+        ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfD:/a/_temp/msys64/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/.
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include
+        End of search list.
+        Compiler executable checksum: 613ca696a15e441e7e59774d92ab2fa7
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/as.exe -v --traditional-format -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -mabi=ilp32 -misa-spec=20191213 -o CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\russe\\AppData\\Local\\Temp\\cc4g0pNv.s
+        GNU assembler version 2.45 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.45
+        COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/
+        LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.'\x0d
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -Wl,--build-id=none -nostdlib -v CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_8b8e9.elf   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe
+        COLLECT_LTO_WRAPPER=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe
+        Target: riscv32-unknown-elf
+        Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c,c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow'
+        Thread model: single
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 () 
+        COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/
+        LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_8b8e9.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_8b8e9.elf.'
+         C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe -plugin C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll -plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\cc2hxX6K.res --sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf -melf32lriscv -X -o cmTC_8b8e9.elf -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0 -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib --build-id=none CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj
+        C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/ld.exe: warning: cannot find entry symbol _start; defaulting to 00010094
+        COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_8b8e9.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_8b8e9.elf.'\x0d
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/.]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+          add: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include]
+        end of search list found
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/.] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0/backward]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+        collapse include dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include]
+        implicit include dirs: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include/c++/15.1.0/backward;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:31 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/CMakeFiles/CMakeScratch/TryCompile-anqw85']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Users/russe/.pico-sdk/ninja/v1.12.1/ninja.exe -v cmTC_8b8e9]
+        ignore line: [[1/2] C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe   -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32  -std=gnu++17   -v -o CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe]
+        ignore line: [Target: riscv32-unknown-elf]
+        ignore line: [Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--]
+        ignore line: [rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 () ]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/']
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/cc1plus.exe -quiet -v -imultilib . -iprefix C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/ -isysroot C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf C:/Users/russe/.pico-sdk/cmake/v3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_8b8e9.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -misa-spec=20191213 -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -std=gnu++17 -version -o C:\\Users\\russe\\AppData\\Local\\Temp\\cc4g0pNv.s]
+        ignore line: [GNU C++17 () version 15.1.0 (riscv32-unknown-elf)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/."]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include"]
+        ignore line: [ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfP:/build/riscv-install/ucrt64/lib/gcc/riscv32-unknown-elf/15.1.0/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/../../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include"]
+        ignore line: [ignoring nonexistent directory "C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elfD:/a/_temp/msys64/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf/.]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include/c++/15.1.0/backward]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed]
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 613ca696a15e441e7e59774d92ab2fa7]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/']
+        ignore line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/as.exe -v --traditional-format -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs -mabi=ilp32 -misa-spec=20191213 -o CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\russe\\AppData\\Local\\Temp\\cc4g0pNv.s]
+        ignore line: [GNU assembler version 2.45 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.45]
+        ignore line: [COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/]
+        ignore line: [LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.'\x0d]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe -march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp -mabi=ilp32 -Wl --build-id=none -nostdlib -v CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_8b8e9.elf   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Users\\russe\\.pico-sdk\\toolchain\\RISCV_ZCB_RPI_2_2_0_3\\bin\\riscv32-unknown-elf-g++.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe]
+        ignore line: [Target: riscv32-unknown-elf]
+        ignore line: [Configured with: /p/build/riscv-gnu-toolchain/gcc/configure --target=riscv32-unknown-elf --prefix=/p/build/riscv-install/ucrt64 --disable-shared --disable-threads --enable-languages=c c++ --with-pkgversion= --with-system-zlib --enable-tls --with-newlib --with-sysroot=/p/build/riscv-install/ucrt64/riscv32-unknown-elf --with-native-system-header-dir=/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --disable-tm-clone-registry --src=.././gcc --enable-multilib --with-multilib-generator='rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp-ilp32--]
+        ignore line: [rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--' --with-abi=ilp32 --with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp --with-isa-spec=20191213 'CFLAGS_FOR_TARGET=-Os    -mcmodel=medlow' 'CXXFLAGS_FOR_TARGET=-Os    -mcmodel=medlow']
+        ignore line: [Thread model: single]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 () ]
+        ignore line: [COMPILER_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/]
+        ignore line: [LIBRARY_PATH=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib/]
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_8b8e9.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_8b8e9.elf.']
+        link line: [ C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe -plugin C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll -plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\cc2hxX6K.res --sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf -melf32lriscv -X -o cmTC_8b8e9.elf -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0 -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib -LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib --build-id=none CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj]
+          arg [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../libexec/gcc/riscv32-unknown-elf/15.1.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\russe\\AppData\\Local\\Temp\\cc2hxX6K.res] ==> ignore
+          arg [--sysroot=C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf] ==> ignore
+          arg [-melf32lriscv] ==> ignore
+          arg [-X] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_8b8e9.elf] ==> ignore
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib]
+          arg [-LC:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib] ==> dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib]
+          arg [--build-id=none] ==> ignore
+          arg [CMakeFiles/cmTC_8b8e9.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+        ignore line: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/bin/ld.exe: warning: cannot find entry symbol _start]
+        ignore line: [ defaulting to 00010094]
+        ignore line: [COLLECT_GCC_OPTIONS='-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp' '-mabi=ilp32' '-nostdlib' '-v' '-o' 'cmTC_8b8e9.elf' '-misa-spec=20191213' '-march=rv32imab_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcb_zcmp_zba_zbb_zbkb_zbs' '-dumpdir' 'cmTC_8b8e9.elf.'\x0d]
+        ignore line: []
+        ignore line: []
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../lib/gcc/riscv32-unknown-elf/15.1.0/../../../../riscv32-unknown-elf/lib] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        collapse library dir [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/bin/../riscv32-unknown-elf/lib] ==> [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: [C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc/riscv32-unknown-elf/15.1.0;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/lib/gcc;C:/Users/russe/.pico-sdk/toolchain/RISCV_ZCB_RPI_2_2_0_3/riscv32-unknown-elf/lib]
+        implicit fwks: []
+      
+      
+...

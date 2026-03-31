@@ -1,0 +1,105 @@
+
+C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.elf:     file format elf32-littleriscv
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000a0  20081f00  20081f00  00000f00  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .riscv.attributes 0000008d  00000000  00000000  00000fa0  2**0
+                  CONTENTS, READONLY
+  2 .debug_line   000001cd  00000000  00000000  0000102d  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  3 .debug_line_str 0000012d  00000000  00000000  000011fa  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  4 .debug_info   00000025  00000000  00000000  00001327  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  5 .debug_abbrev 00000014  00000000  00000000  0000134c  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  6 .debug_aranges 00000020  00000000  00000000  00001360  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  7 .debug_str    000000b1  00000000  00000000  00001380  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+C:/Users/russe/Repositories/MIL/Misc-Hardware/Door_Sensor_V3/CODE/door-sense-v3-code/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+20081f00 <_stage2_boot>:
+20081f00:	8286                	mv	t0,ra
+
+20081f02 <_pad_config>:
+20081f02:	400406b7          	lui	a3,0x40040
+20081f06:	02100513          	li	a0,33
+20081f0a:	c2c8                	sw	a0,4(a3)
+20081f0c:	400436b7          	lui	a3,0x40043
+20081f10:	4509                	li	a0,2
+20081f12:	c688                	sw	a0,8(a3)
+20081f14:	c6c8                	sw	a0,12(a3)
+20081f16:	ca88                	sw	a0,16(a3)
+20081f18:	cac8                	sw	a0,20(a3)
+20081f1a:	400d06b7          	lui	a3,0x400d0
+
+20081f1e <program_sregs>:
+20081f1e:	078005b7          	lui	a1,0x7800
+20081f22:	04158593          	addi	a1,a1,65 # 7800041 <_stage2_boot-0x18881ebf>
+20081f26:	c28c                	sw	a1,0(a3)
+20081f28:	428c                	lw	a1,0(a3)
+20081f2a:	8989                	andi	a1,a1,2
+20081f2c:	fdf5                	bnez	a1,20081f28 <program_sregs+0xa>
+20081f2e:	03500513          	li	a0,53
+20081f32:	2085                	jal	20081f92 <read_flash_sreg>
+20081f34:	1579                	addi	a0,a0,-2
+20081f36:	c11d                	beqz	a0,20081f5c <_skip_sreg_programming>
+20081f38:	4519                	li	a0,6
+20081f3a:	c2c8                	sw	a0,4(a3)
+20081f3c:	20b9                	jal	20081f8a <wait_qmi_ready>
+20081f3e:	4688                	lw	a0,8(a3)
+20081f40:	4505                	li	a0,1
+20081f42:	c2c8                	sw	a0,4(a3)
+20081f44:	0006a223          	sw	zero,4(a3) # 400d0004 <read_flash_sreg+0x2004e072>
+20081f48:	4509                	li	a0,2
+20081f4a:	c2c8                	sw	a0,4(a3)
+20081f4c:	283d                	jal	20081f8a <wait_qmi_ready>
+20081f4e:	4688                	lw	a0,8(a3)
+20081f50:	4688                	lw	a0,8(a3)
+20081f52:	4688                	lw	a0,8(a3)
+20081f54:	4515                	li	a0,5
+20081f56:	2835                	jal	20081f92 <read_flash_sreg>
+20081f58:	8905                	andi	a0,a0,1
+20081f5a:	fd6d                	bnez	a0,20081f54 <program_sregs+0x36>
+
+20081f5c <_skip_sreg_programming>:
+20081f5c:	99f9                	andi	a1,a1,-2
+20081f5e:	c28c                	sw	a1,0(a3)
+
+20081f60 <_qmi_config>:
+20081f60:	40000537          	lui	a0,0x40000
+20081f64:	20250513          	addi	a0,a0,514 # 40000202 <read_flash_sreg+0x1ff7e270>
+20081f68:	c6c8                	sw	a0,12(a3)
+20081f6a:	6529                	lui	a0,0xa
+20081f6c:	0eb50513          	addi	a0,a0,235 # a0eb <_stage2_boot-0x20077e15>
+20081f70:	cac8                	sw	a0,20(a3)
+20081f72:	00049537          	lui	a0,0x49
+20081f76:	2a850513          	addi	a0,a0,680 # 492a8 <_stage2_boot-0x20038c58>
+20081f7a:	ca88                	sw	a0,16(a3)
+20081f7c:	140005b7          	lui	a1,0x14000
+20081f80:	418c                	lw	a1,0(a1)
+20081f82:	48c51513          	bclri	a0,a0,0xc
+20081f86:	ca88                	sw	a0,16(a3)
+20081f88:	8282                	jr	t0
+
+20081f8a <wait_qmi_ready>:
+20081f8a:	4288                	lw	a0,0(a3)
+20081f8c:	8909                	andi	a0,a0,2
+20081f8e:	fd75                	bnez	a0,20081f8a <wait_qmi_ready>
+20081f90:	8082                	ret
+
+20081f92 <read_flash_sreg>:
+20081f92:	8306                	mv	t1,ra
+20081f94:	c2c8                	sw	a0,4(a3)
+20081f96:	c2c8                	sw	a0,4(a3)
+20081f98:	3fcd                	jal	20081f8a <wait_qmi_ready>
+20081f9a:	4688                	lw	a0,8(a3)
+20081f9c:	4688                	lw	a0,8(a3)
+20081f9e:	8302                	jr	t1
