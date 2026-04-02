@@ -30,62 +30,28 @@ void doorsense_init_lcd(){
 		home();
 		clear();
 
-	// Print messages
-		set_cursor(2,0);
-		message("hello");
-		set_cursor(0,1);
-		message("world");
-		show_blink(true);
-
     return;
 }
 
 
-/*******lcd_print_vals*******
+/*******lcd_print*******
  * Description
-        > prints the measured and ideal resistances of
-			the resistor being measured
+        > prints a string to the LCD
  * Arguments
-        > float measured_res: measured value of the resistor
-		> float ideal_res: interpolated ideal value of the res
-		> bool valid: is the resistance between 1k and 1Meg?
+        > char str[]: string to print to LCD
+		> uint8_t x: column where first char should be printed
+		> uint8_t y: row where first char should be printed
  * Returns
         > N/A
 */
-void lcd_print_vals(float measured_res, float ideal_res, bool valid){
+void lcd_print(char str[], uint8_t x, uint8_t y){
+	// ensure x,y coords are valid
+		if (x > 15 || y > 1){return;}
 
-	// if the value is out of range, print out of range
-		if (!valid){
-			set_cursor(7,0);
-			message("out of ra");
+	// set cursor
+		set_cursor(x,y);
 
-			set_cursor(7,1);
-			message("out of ra");
-			return;
-		}
-
-	// convert floating-point values to char arrays (strings)
-		char meas_res_str[10];  // 9 chars + null terminator
-		char ideal_res_str[10];
-
-		char meas_temp[9];
-		char ideal_temp[9];
-
-		sprintf(meas_temp, "%.2f", measured_res);
-		sprintf(ideal_temp, "%.0f", ideal_res);
-
-		sprintf(meas_res_str, "%-9s", meas_temp);
-		sprintf(ideal_res_str, "%-9s", ideal_temp);
-
-	// print measured resistance
-		set_cursor(7,0);
-		message(meas_res_str);
-
-	// print interpolated ideal resistance
-		set_cursor(7,1);
-		message(ideal_res_str);
-
-	// Lastly, return
-		return;
+	// print message
+		message(str);
 }
 /******************</Function definitions>*****************/

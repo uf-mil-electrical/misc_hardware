@@ -151,6 +151,14 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JPMTDOVX
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for door-sensor-pcb-v3\Design Rule Check - Main.html
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Main 04-01-26 18-21-40.WAS
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
@@ -1085,10 +1093,16 @@ NetClassManualEnabled=1
 NetClassSeparateForBusSections=0
 
 [LibraryUpdateOptions]
-SelectedOnly=0
+SelectedOnly=1
 UpdateVariants=1
 UpdateToLatestRevision=1
 PartTypes=0
+ComponentLibIdentifierKind0=Library Name And Type
+ComponentLibraryIdentifier0=Devices.IntLib
+ComponentDesignItemID0=[LCD] 16x2 Parallel
+ComponentSymbolReference0=[LCD] 16x2 Parallel
+ComponentUpdate0=1
+ComponentIsDeviceSheet0=0
 FullReplace=1
 UpdateDesignatorLock=1
 UpdatePartIDLock=1
@@ -1102,6 +1116,19 @@ RemoveParameters=0
 AddModels=1
 RemoveModels=1
 UpdateCurrentModels=1
+ParameterName0=Comment
+ParameterUpdate0=1
+ParameterName1=Component Kind
+ParameterUpdate1=1
+ParameterName2=Description
+ParameterUpdate2=1
+ParameterName3=Library Reference
+ParameterUpdate3=1
+ModelTypeGroup0=PCBLIB
+ModelTypeUpdate0=1
+ModelType0=PCBLIB
+ModelName0=[LCD] 16x2 Parallel
+ModelUpdate0=1
 
 [DatabaseUpdateOptions]
 SelectedOnly=0

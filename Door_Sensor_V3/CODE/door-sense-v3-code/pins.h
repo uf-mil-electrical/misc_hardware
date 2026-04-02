@@ -34,6 +34,7 @@
 #define DF_UART_RX_PIN			13
 #define DF_UART_TX_PIN			12
 
+
 #define PI_ZERO_UART_CH			uart1
 #define ZERO_UART_BAUDRATE		115200
 #define ZERO_UART_RX_PIN		9
@@ -54,7 +55,7 @@
 #define OVERRIDE_SW_PIN			0
 #define COUNTDOWN_ADC_PIN		26
 
-#define COUNTDOWN_ADC_CH		0		// GP26 is ADC Ch 1
+#define COUNTDOWN_ADC_CH		0		// GP26 is ADC Ch 0
 /******************</Switches & Pots>*****************/
 
 
