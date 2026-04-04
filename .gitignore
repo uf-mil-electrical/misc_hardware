@@ -7,3 +7,9 @@
 *.SchDocPreview
 *.PcbDocPreview
 *.BomDocPreview
+*.WAS
+*.drc
+*.APR_LIB
+*.EXTREP
+*.LEP
+*.REP
