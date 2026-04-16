@@ -40,7 +40,7 @@
 /******************<Function Declarations>*****************/
 void init_potentiometer_adc();
 float read_pot_val();
-void update_countdown_duration();
+void update_countdown_duration(uint8_t* countdown_duration);
 /******************</Function Declarations>*****************/
 
 #endif // POT_ADC_H

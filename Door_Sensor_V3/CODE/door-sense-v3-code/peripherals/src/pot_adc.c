@@ -9,7 +9,6 @@
 
 
 /******************<Public variables>*****************/
-uint8_t countdown_duration;
 /******************</Public variables>*****************/
 
 
@@ -52,10 +51,6 @@ uint8_t get_scaled_val(float voltage, uint8_t out_min, uint8_t out_max) {
         > N/A
 */
 void init_potentiometer_adc(){
-	// initialize relevant GPIO
-		gpio_init(COUNTDOWN_ADC_PIN);
-		gpio_set_dir(COUNTDOWN_ADC_PIN, GPIO_IN);
-
 	// initialize ADC system
 		adc_init();
 		adc_gpio_init(COUNTDOWN_ADC_PIN);
@@ -88,20 +83,21 @@ float read_pot_val(){
  * Description
         > determines what the duration of the countdown should be
 			based on the voltage seen at the pot's ADC pin
-		> updates the global variable "countdown_duration"
+		> updates a passed-in variable that stores countdown duration
  * Arguments
-        > N/A
+        > uint8_t* duration: pointer to variable that stores countdown
+			duration
  * Returns
         > N/A
 */
-void update_countdown_duration(){
+void update_countdown_duration(uint8_t* countdown_duration){
 	// read potentiometer ADC value
 		float voltage = read_pot_val();
 
 	// cast float ADC voltage to desired range
 		uint8_t duration = get_scaled_val(voltage, MIN_COUNTDOWN_TIME, MAX_COUNTDOWN_TIME);
 
-	// update global variable
-		countdown_duration = duration;
+	// update variable
+		*countdown_duration = duration;
 }
 /******************</Function definitions>*****************/

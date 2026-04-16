@@ -43,8 +43,8 @@
 
 
 /******************<LEDs>*****************/
-#define LED_R_PIN				5
-#define LED_Y_PIN				6
+#define LED_R_PIN				6
+#define LED_Y_PIN				5
 #define LED_G_PIN				4
 #define LED_W_PIN				2
 /******************</LEDs>*****************/
