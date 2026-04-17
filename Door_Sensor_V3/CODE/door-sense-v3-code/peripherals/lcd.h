@@ -37,6 +37,8 @@
 /******************<Function Declarations>*****************/
 void doorsense_init_lcd();
 void lcd_print(char str[], uint8_t x, uint8_t y);
+void print_countdown_duration(uint8_t duration);
+void print_open_screen();
 /******************</Function Declarations>*****************/
 
 #endif // LCD_H

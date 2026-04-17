@@ -1,10 +1,12 @@
-#ifndef LAB6_DAC_H
-#define LAB6_DAC_H
+#ifndef SWITCHES_H
+#define SWITCHES_H
 
 /******************<Summary>*****************
- * Name: lab6_dac.h
+ * Name: switches.h
  * Purpose:
- *      > Updates the DAC to output a waveform
+ *      > functions for digital switches
+ * 		> prompt type and override switches only
+ * 		> for countdown_length pot, see pot_adc.h
  * Written / updated by:
  *      > Russell
 ******************</Summary>*****************/
@@ -15,12 +17,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
-#include <math.h>
 #include "pico/stdlib.h"
-
-#include "hardware/spi.h"
-
-#include "peripherals/lab6_spi.h"
 
 #include "pins.h"
 /******************</Dependencies>*****************/
@@ -38,9 +35,8 @@
 
 
 /******************<Function Declarations>*****************/
-void lab6_dac_write(uint8_t channel, uint16_t value);
-float get_sample_delay();
-void update_waveform();
+void init_switches();
+void get_sw_state(char sw, bool *current_state);
 /******************</Function Declarations>*****************/
 
-#endif // LAB6_DAC_H
+#endif // SWITCHES_H

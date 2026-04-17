@@ -45,4 +45,31 @@ void play_track(uint8_t track){
 	dfplayer_play_mp3_folder(&dfplayer, track);
 	sleep_ms(200);	// always delay 200ms after sending instructions
 }
+
+/*
+		/*
+		play_track(1);
+		sleep_ms(4000);
+		play_track(2);
+		sleep_ms(4000);
+		play_track(3);
+		sleep_ms(4000);
+		play_track(4);
+		sleep_ms(4000);
+		play_track(5);
+		sleep_ms(4000);
+		play_track(6);
+		sleep_ms(4000);
+		play_track(7);
+		sleep_ms(4000);
+		play_track(8);
+		sleep_ms(4000);
+		play_track(9);
+		sleep_ms(4000);
+		play_track(10);
+		sleep_ms(4000);
+		play_track(11);
+		sleep_ms(4000);
+
+*/
 /******************</Function definitions>*****************/

@@ -79,7 +79,7 @@ float read_pot_val(){
 
 
 
-/*******update_countdown_duration*******
+/*******get_countdown_duration*******
  * Description
         > determines what the duration of the countdown should be
 			based on the voltage seen at the pot's ADC pin
@@ -90,7 +90,7 @@ float read_pot_val(){
  * Returns
         > N/A
 */
-void update_countdown_duration(uint8_t* countdown_duration){
+void get_countdown_duration(uint8_t* countdown_duration){
 	// read potentiometer ADC value
 		float voltage = read_pot_val();
 

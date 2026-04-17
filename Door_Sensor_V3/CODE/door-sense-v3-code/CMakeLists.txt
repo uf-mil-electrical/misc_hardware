@@ -37,21 +37,29 @@ pico_sdk_init()
 add_executable(door-sense-v3-code main.c )
 
 pico_set_program_name(door-sense-v3-code "door-sense-v3-code")
-pico_set_program_version(door-sense-v3-code "0.1")
+pico_set_program_version(door-sense-v3-code "1.0")
 
 
 # Add all .c files here
 target_sources(door-sense-v3-code PRIVATE
 	communication/src/doorsense_uart.c
+	communication/src/doorsense_i2c.c
 	
 	libraries/lcd/src/charlcd.c
 	libraries/lcd/src/functions.c
 	libraries/dfplayer/dfplayer.c
+	libraries/tof/src/tof_calibration.c
+	libraries/tof/src/tof_core.c
+	libraries/tof/src/tof_i2c.c
+
+	operation/operation.c
 
 	peripherals/src/audio.c
     peripherals/src/lcd.c
 	peripherals/src/leds.c
 	peripherals/src/pot_adc.c
+	peripherals/src/switches.c
+	peripherals/src/tof.c
 )
 
 
@@ -86,4 +94,3 @@ target_link_libraries(door-sense-v3-code
 )
 
 pico_add_extra_outputs(door-sense-v3-code)
-

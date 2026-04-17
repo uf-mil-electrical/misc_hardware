@@ -24,8 +24,16 @@
 /******************</General macros>*****************/
 
 
-/******************<I2C Setup>*****************/
-/******************</I2C Setup>*****************/
+
+/******************<TOF/I2C Setup>*****************/
+#define TOF_I2C_PORT			i2c0
+#define TOF_I2C_BAUDRATE		100000		// 100 kHz
+#define TOF_I2C_SDA				16
+#define TOF_I2C_SCL				17
+
+#define TOF_I2C_ADDRESS         0x29
+/******************</TOF/I2C Setup>*****************/
+
 
 
 /******************<UART Setup>*****************/
@@ -68,5 +76,23 @@
 #define LCD_7					22			// data pin 7
 #define LCD_BACKLIGHT			3			// backlight anode
 /******************</LCD>*****************/
+
+
+/******************<Endianness Conversions>*****************/
+#ifndef htons
+#define htons(x)	((uint16_t)(((uint16_t)(x) & 0x00ff) << 8 |		\
+            ((uint16_t)(x) & 0xff00) >> 8))
+#define ntohs(x)	htons(x)
+#endif
+
+#ifndef htonl
+#define htonl(x)	((uint32_t)(((uint32_t)(x) & 0x000000ff) << 24 |	\
+            ((uint32_t)(x) & 0x0000ff00) << 8  | 			\
+            ((uint32_t)(x) & 0x00ff0000) >> 8  |			\
+            ((uint32_t)(x) & 0xff000000) >> 24))
+#define ntohl(x)	htonl(x)
+#endif
+/******************</Endianness Conversions>*****************/
+
 
 #endif // PINS_H

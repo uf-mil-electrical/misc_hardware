@@ -1,10 +1,11 @@
-#ifndef LAB6_SPI_H
-#define LAB6_SPI_H
+#ifndef TOF_H
+#define TOF_H
 
 /******************<Summary>*****************
- * Name: lab6_spi.h
+ * Name: pot_adc.h
  * Purpose:
- *      > Functions to operate SPI peripheral
+ *      > high-level functions for interacting with
+ * 			the ToF sensor and its library
  * Written / updated by:
  *      > Russell
 ******************</Summary>*****************/
@@ -15,12 +16,13 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
-#include <math.h>
 #include "pico/stdlib.h"
 
-#include "hardware/spi.h"
-
 #include "pins.h"
+#include "libraries/tof/tof_calibration.h"
+#include "libraries/tof/tof_core.h"
+#include "libraries/tof/tof_i2c.h"
+#include "libraries/tof/tof_registers.h"
 /******************</Dependencies>*****************/
 
 
@@ -29,14 +31,12 @@
 /******************</Defines>*****************/
 
 
-
 /******************<Global variables>*****************/
 /******************</Global variables>*****************/
 
 
-
 /******************<Function Declarations>*****************/
-void lab6_spi_init();
+void get_distance(uint16_t* distance, bool* data_read);
 /******************</Function Declarations>*****************/
 
-#endif // LAB6_SPI_H
+#endif // TOF_H
