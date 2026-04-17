@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Inductor Breakout V1.PrjPcb]
+   Generated File[Main-RoundHoles.TXT]
+   Generated File[Main-SlotHoles.TXT]
+   Generated File[Main.LDP]
+   Generated File[Main.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 12:02:26 On 04/17/26
