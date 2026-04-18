@@ -4,6 +4,7 @@
 
 
 /******************<Private variables>*****************/
+bool old_lab_state = false;			// stores lab state from last time update_lcd() was called, if different, will update LCD, reduces flickering on LCD
 /******************</Private variables>*****************/
 
 
@@ -12,6 +13,8 @@
 
 
 /******************<Function definitions>*****************/
+
+
 
 /*******doorsense_init_lcd*******
  * Description
@@ -31,6 +34,21 @@ void doorsense_init_lcd(){
 		clear();
 
     return;
+}
+
+
+/*******clear_lcd*******
+ * Description
+        > clears LCD screen
+		> resets cursor to (0,0)
+ * Arguments
+        > N/A
+ * Returns
+        > N/A
+*/
+void clear_lcd(){
+	home();
+	clear();
 }
 
 
@@ -77,19 +95,80 @@ void print_countdown_duration(uint8_t duration){
 
 
 
-/*******print_open_screen*******
+/*******print_countdown_bar*******
  * Description
-        > displays information that should be shown when the lab is OPEN
+        > when countdown is running, this function can be called to
+			graphically show the time remaining in the countdown on the LCD
  * Arguments
-        > N/A
+        > int32_t time_remaining_ms: time remaining in countdown in ms
+		> uint8_t countdown_duration: total countdown length in s
  * Returns
         > N/A
 */
-void print_open_screen(){
+void print_countdown_bar(int32_t time_remaining_ms, uint8_t countdown_duration){
 
-	// update LCD display
-	lcd_print("Lab is OPEN!", 0, 0);
-	lcd_print("Cntdwn: ## sec", 0, 1);
+	// cast countdown_duration to int32_t
+		int32_t total_time_ms = (int32_t)countdown_duration * 1000;
+
+	// create char array to store bar
+		uint8_t bar_str_len = 3 + NUM_COUNTDOWN_BARS;		// 1 char for '[', 1 char for ']', 1 char for '\0', rest for segments
+		char bar_str[bar_str_len];	
+
+	// calculate how many segments should be filled
+		int filled = (int)((float)time_remaining_ms / (float)total_time_ms * NUM_COUNTDOWN_BARS + 0.5f);
+
+	// clamp to max num of bar segments
+		if (filled < 0) {filled = 0;}
+		if (filled > NUM_COUNTDOWN_BARS) {filled = NUM_COUNTDOWN_BARS;}
+
+	// build the bar string
+		bar_str[0] = '[';
+
+		for (int i = 0; i < NUM_COUNTDOWN_BARS; i++) {
+			bar_str[i + 1] = (i < filled) ? '\xFF' : ' ';
+		}
+
+		bar_str[bar_str_len - 2] = ']';
+		bar_str[bar_str_len - 1] = '\0';
+
+	// print bar string to LCD
+    	lcd_print(bar_str, 0, 1);
+}
+
+
+
+
+/*******update_lcd_screen*******
+ * Description
+        > displays information to the LCD
+		> high-level function to be called from the run_doorsense function
+ * Arguments
+        > bool lab_state: false=lab is closed, true=lab is open
+		> bool countdown_active: false=inactive, true=active
+		> int32_t time_remaining: remaining countdown time (in ms) when countdown is running
+		> uint8_t countdown_duration: duration of countdown (in s)
+ * Returns
+        > N/A
+*/
+void update_lcd_screen(bool lab_state, bool countdown_active, int32_t time_remaining, uint8_t countdown_duration){
+
+	// if countdown is not running
+		if (!countdown_active){
+			lcd_print("Lab is", 0, 0);
+			lcd_print(lab_state ? "OPEN     " : "CLOSED   ", 7, 0);
+			lcd_print("Cntdwn: ", 0, 1);
+
+			uint8_t duration = 0;
+			get_countdown_duration(&duration);
+			print_countdown_duration(duration);
+		}
+
+
+	// if countdown is running
+		else {
+			lcd_print("Cntdwn running!", 0, 0);
+			print_countdown_bar(time_remaining, countdown_duration);
+		}
 }
 
 /******************</Function definitions>*****************/

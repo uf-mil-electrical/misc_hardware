@@ -43,7 +43,7 @@ void get_distance(uint16_t* distance, bool* data_read){
 		tof_clear_int();
 		tof_clear_int();
 		sleep_ms(50);
-		printf("distance = %u\n", *distance);
+		//printf("distance = %u\n", *distance);
 
 	return;
 }

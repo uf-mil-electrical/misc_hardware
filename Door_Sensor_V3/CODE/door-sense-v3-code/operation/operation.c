@@ -12,6 +12,7 @@ uint8_t second_count = 0;					// counter, incremented once per countdown update,
 
 uint32_t last_tof_check_time = 0;			// time since ToF sensor has last been checked
 uint32_t last_sw_check_time = 0;			// time since switch & pot values were checked
+uint32_t last_lcd_update_time = 0;			// time since LCD was last updated
 uint32_t last_countdown_update_time = 0;	// time since countdown time has been updated
 
 uint16_t tof_distance = 0;					// distance measurement from ToF sensor
@@ -65,10 +66,11 @@ void update_leds(){
 	}
 
 	// if countdown is running
-	if (run_countdown){set_led('w', true);}
-
-	// if countdown is not running
-	if (!run_countdown){set_led('w', false);}
+	if (run_countdown){
+		if (second_count % 2 == 0){set_led('w', true);}
+		else {set_led('w', false);}
+	}
+	else {set_led('w', false);}
 
 	// if override is active
 	if (override_active){set_led('y', true);}
@@ -114,9 +116,8 @@ void init_doorsense_peripherals(){
 		tof_init();
 		sleep_ms(200);
 
-	// Get and print initial countdown time to LCD
-		get_countdown_duration(&countdown_duration);
-		print_countdown_duration(countdown_duration);
+	// Print initial LCD screen
+		update_lcd_screen(lab_state, run_countdown, countdown_time_remaining_ms, countdown_duration);
 
 	// Set LEDs to match current conditions
 		update_leds();
@@ -156,32 +157,42 @@ void run_doorsense(){
 					// determine if door is open or closed based on distance
 						door_state = (tof_distance <= DOOR_OPEN_DISTANCE);
 
-						printf("door is %s\n", door_state ? "OPEN" : "CLOSED");
+						//printf("door is %s\n", door_state ? "OPEN" : "CLOSED");
 
 					// check that door state is different from lab state, countdown not started, override not active
 						if ( (door_state != lab_state) && (run_countdown == false) && (override_active == false) ){
-							printf("Door state change detected!");
+							printf("Countdown started\n");
 							candidate_state = door_state;			// set candidate door state
 							reset_countdown_time_in_ms();			// reset countdown_time_ms	
 							run_countdown = true;					// run countdown
-							update_leds();							// turn on white LED
+							update_leds();							// update LEDs
 						}
 
 					// cancel countdown if door state changes during the countdown
-						if ( (run_countdown == true) && (candidate_state != door_state) ){
-							printf("Cancelled state change\n");
+						if ( (run_countdown == true) && (candidate_state != door_state) && (override_active == false) ){
+							printf("Countdown cancelled because door state returned to prev state\n");
 							reset_countdown_time_in_ms();			// reset countdown_time_ms
-							set_led('w', false);					// turn off white LED
 							run_countdown = false;					// stop countdown
-							update_leds();							// turn off white LED
+							lcd_print("      ", 10, 1); // clear countdown bars if still present
+							update_leds();							// update LEDs
+						}
+
+					// cancel countdown if override is enabled during countdown
+						if ( (run_countdown == true) && (override_active == true) ){
+							printf("Countdown cancelled because override was enabled\n");
+							reset_countdown_time_in_ms();
+							run_countdown = false;
+							lcd_print("      ", 10, 1); // clear countdown bars if still present
+							update_leds();
 						}
 				}
 		}
 
 	// Check digital switches & potentiometer at regular intervals
 	if (current_time - last_sw_check_time >= SWITCH_CHECK_INTERVAL_MS){
-		// check potentiometer/ADC val for countdown duration
-			get_countdown_duration(&countdown_duration);
+
+		// check potentiometer/ADC val for countdown duration, don't check while countdown in progress
+			if (!run_countdown) {get_countdown_duration(&countdown_duration);}
 
 		// check override switch
 			get_sw_state('o', &override_active);
@@ -189,8 +200,17 @@ void run_doorsense(){
 		// check prompt switch
 			get_sw_state('p', &special_prompts_allowed);
 
-			//printf("SWITCHES: override = %s, special prompts = %s\n", override_active ? "ACTIVE" : "INACTIVE", special_prompts_allowed ? "ALLOWED" : "NOT ALLOWED");
+		// update LEDs
+			update_leds();
 	}
+
+	
+
+	// Update LCD at regular intervals
+	if (current_time - last_lcd_update_time >= UPDATE_LCD_INTERVAL_MS){
+		update_lcd_screen(lab_state, run_countdown, countdown_time_remaining_ms, countdown_duration);
+	}
+
 
 	// If countdown is running and should be updated...
 		if ( (run_countdown == true) && (current_time - last_countdown_update_time >= COUNTDOWN_UPDATE_INTERVAL_MS) ){
@@ -200,16 +220,14 @@ void run_doorsense(){
 			// decrement countdown time remaining
 				countdown_time_remaining_ms = countdown_time_remaining_ms - COUNTDOWN_UPDATE_INTERVAL_MS;
 
-			// blink white LED
+			// blink white LED (handled in update_leds, but counter incremented here)
 				second_count += 1;
-				if (second_count % 2 == 0){set_led('w', true);}
-				else {set_led('w', false);}
 
 			// check to see if countdown time has elapsed
 				if (countdown_time_remaining_ms <= 0){
 					run_countdown = false;
 					change_state = true;
-					printf("new lab state!");
+					//printf("new lab state!\n");
 				}
 		}
 
@@ -223,12 +241,14 @@ void run_doorsense(){
 
 			if (lab_state == true){
 				printf("lab is now open!\n");
-				update_leds();		// turn on green LED, turn off red LED
+				play_audio_prompt(special_prompts_allowed, 0);	// play a lab-now-open voice prompt
+				update_leds();									// turn on green LED, turn off red LED
 			}
 
 			else {
-				printf("lab is now closed!\n");
-				update_leds();		// turn off green LED, turn on red LED
+				printf("lab is now closed!\n");							
+				play_audio_prompt(special_prompts_allowed, 1);	// play a lab-now-closed voice prompt
+				update_leds();									// turn off green LED, turn on red LED
 			}
 		}
 }

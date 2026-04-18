@@ -39,6 +39,7 @@
 #define TOF_CHECK_INTERVAL_MS			150		// how often to check ToF sensor for data ready (in ms)
 #define COUNTDOWN_UPDATE_INTERVAL_MS 	250		// how often to update the countdown (in ms)
 #define SWITCH_CHECK_INTERVAL_MS		300		// how often to check digital switch & potentiometer values 
+#define UPDATE_LCD_INTERVAL_MS			200		// how often to update the LCD
 /******************</Defines>*****************/
 
 

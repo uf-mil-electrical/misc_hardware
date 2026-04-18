@@ -26,13 +26,7 @@ int main()
 {
     stdio_init_all();
 
-	sleep_ms(2000);
-	printf("initializing...\n");
-
 	init_doorsense_peripherals();
-	printf("initialized! ready to start\n");
-
-	sleep_ms(2000);
 
 	while(true){
 		run_doorsense();
