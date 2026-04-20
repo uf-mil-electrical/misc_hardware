@@ -18,7 +18,10 @@ uint32_t last_countdown_update_time = 0;	// time since countdown time has been u
 uint16_t tof_distance = 0;					// distance measurement from ToF sensor
 bool tof_data_ready = false;				// true=tof ready to provide data, false=tof not ready to provide data
 
-bool door_state = false;					// current door state
+uint8_t num_like_readings = 0;				// number of ToF readings that agree on whether or not the door is open/closed
+
+bool door_state = false;					// current door state (false=closed, true=open)
+bool raw_door_state = false;				// instantaneous door state (from uncorrected ToF readings)
 bool candidate_state = false;				// candidate door state (state being considered during countdown)
 bool lab_state = false;						// true=lab is open, false=lab is closed
 bool change_state = false;					// true=lab state will change after countdown, false=no change
@@ -78,6 +81,45 @@ void update_leds(){
 	// if override is not active
 	if (!override_active){set_led('y', false);}
 }
+
+
+
+/*******determine_door_state*******
+ * Description
+        > checks the readings from the ToF sensor and history
+			and determines if the door is open or not
+		> protects against noisy / random values that pop in
+			around valid readings
+		> important for when nothing is in range of door sensor
+			(it sometimes spits out random values when nothing in range)
+ * Arguments
+        > uint16_t distance: distance measured by ToF sensor
+ * Returns
+        > N/A
+*/
+void determine_door_state(uint16_t distance){
+	// is something within the DOOR_OPEN_DISTANCE range?
+		bool new_reading = (tof_distance > 0 && tof_distance <= DOOR_OPEN_DISTANCE);
+
+	// debounce readings: require NUM_LIKE_READINGS_NEEDED readings to change door state
+		if (new_reading == raw_door_state){
+			if (num_like_readings < NUM_LIKE_READINGS_NEEDED){
+				num_like_readings += 1;
+			}
+		}
+		else {
+			// reading changed, reset streak
+			raw_door_state = new_reading;
+			num_like_readings = 1;
+		}
+
+	// only change door_state once consistent readings have been established
+		if (num_like_readings >= NUM_LIKE_READINGS_NEEDED){
+			door_state = raw_door_state;
+		}
+}
+
+
 /******************</Private Helper Functions>*****************/
 
 
@@ -108,13 +150,32 @@ void init_doorsense_peripherals(){
 	// Initialize ADC
 		init_potentiometer_adc();
 
-	// Initialize DF player
+	// Initialize audio / DF player
 		init_dfplayer();
 
 	// Initialize ToF sensor
 		sleep_ms(200);
 		tof_init();
 		sleep_ms(200);
+
+	// Initialize Pi Zero
+		init_pi_zero();
+
+		// play waiting for Pi voice prompt
+		play_audio_prompt(false, 10);
+
+		// show "waiting for Pi Zero ACK screen"
+		print_waiting_for_pi();
+
+		// wait for ACK from Pi Zero
+		await_pi_zero_ack();
+
+	// clear LCD
+		clear_lcd();
+		sleep_ms(10);
+
+	// Play door sensor online prompt
+		play_audio_prompt(false, 11);
 
 	// Print initial LCD screen
 		update_lcd_screen(lab_state, run_countdown, countdown_time_remaining_ms, countdown_duration);
@@ -128,6 +189,7 @@ void init_doorsense_peripherals(){
 
 
 /******************<Normal Operation>*****************/
+
 
 /*******run_doorsense*******
  * Description
@@ -149,15 +211,14 @@ void run_doorsense(){
 
 			// read from ToF
 				get_distance(&tof_distance, &tof_data_ready);
+				printf("distance = %u\n", tof_distance);
 
 			// if nonzero data was successfully read from ToF
-				if (tof_data_ready && tof_distance != 0){
+				if (tof_data_ready){
 					tof_data_ready = false;		// reset data ready status
 
 					// determine if door is open or closed based on distance
-						door_state = (tof_distance <= DOOR_OPEN_DISTANCE);
-
-						//printf("door is %s\n", door_state ? "OPEN" : "CLOSED");
+						determine_door_state(tof_distance);
 
 					// check that door state is different from lab state, countdown not started, override not active
 						if ( (door_state != lab_state) && (run_countdown == false) && (override_active == false) ){
@@ -173,7 +234,7 @@ void run_doorsense(){
 							printf("Countdown cancelled because door state returned to prev state\n");
 							reset_countdown_time_in_ms();			// reset countdown_time_ms
 							run_countdown = false;					// stop countdown
-							lcd_print("      ", 10, 1); // clear countdown bars if still present
+							lcd_print("       ", 10, 1); 			// clear countdown bars if still present
 							update_leds();							// update LEDs
 						}
 
@@ -182,7 +243,7 @@ void run_doorsense(){
 							printf("Countdown cancelled because override was enabled\n");
 							reset_countdown_time_in_ms();
 							run_countdown = false;
-							lcd_print("      ", 10, 1); // clear countdown bars if still present
+							lcd_print("       ", 10, 1); 			// clear countdown bars if still present
 							update_leds();
 						}
 				}
@@ -241,12 +302,14 @@ void run_doorsense(){
 
 			if (lab_state == true){
 				printf("lab is now open!\n");
+				send_lab_state("OPEN");							// send lab state to Pi Zero
 				play_audio_prompt(special_prompts_allowed, 0);	// play a lab-now-open voice prompt
 				update_leds();									// turn on green LED, turn off red LED
 			}
 
 			else {
 				printf("lab is now closed!\n");							
+				send_lab_state("CLOSED");						// send lab state to Pi Zero
 				play_audio_prompt(special_prompts_allowed, 1);	// play a lab-now-closed voice prompt
 				update_leds();									// turn off green LED, turn on red LED
 			}

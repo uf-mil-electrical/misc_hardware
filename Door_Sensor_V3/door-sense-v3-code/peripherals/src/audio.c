@@ -9,10 +9,10 @@
  * to the system, make sure to add its
  * file number in the correct category here!
 */
-const uint16_t serious_lab_open_prompts[] = {0, 1};
+const uint16_t serious_lab_open_prompts[] = {0, 1, 2};
 const uint16_t serious_lab_closed_prompts[] = {30, 31, 32};
-const uint16_t silly_lab_open_prompts[] = {100, 101, 102};
-const uint16_t silly_lab_closed_prompts[] = {130, 131, 132};
+const uint16_t silly_lab_open_prompts[] = {100, 101, 102, 103, 104};
+const uint16_t silly_lab_closed_prompts[] = {130, 131};
 /******************</Available Voice Prompts>*****************/
 
 
@@ -36,7 +36,9 @@ dfplayer_t dfplayer;		// create instance of DFplayer module
         > N/A
 */
 void get_random_val(uint32_t min, uint32_t max, uint32_t* res) {
-    *res = min + (get_rand_32() % (max - min + 1));
+    uint32_t range = max - min + 1;
+    uint32_t rand_val = get_rand_32();
+    *res = min + (uint32_t)((uint64_t)rand_val * range >> 32);
 }
 
 
@@ -114,6 +116,8 @@ void play_track(uint16_t track){
 		> uint8_t event_type:
 			- 0 = lab is now open
 			- 1 = lab is now closed
+			- 10 = waiting for RP to boot
+			- 11 = door sensor now online
  * Returns
         > N/A
 */
@@ -131,11 +135,21 @@ void play_audio_prompt(bool special_prompts_allowed, uint8_t event_type){
 			case (0): {
 				arr = special_prompts_allowed ? silly_lab_open_prompts : serious_lab_open_prompts;
 				arr_size = special_prompts_allowed ? ARRAY_SIZE(silly_lab_open_prompts) : ARRAY_SIZE(serious_lab_open_prompts);
+				pick_track(arr, arr_size, &track_id);
 				break;
 			}
 			case (1): {
 				arr = special_prompts_allowed ? silly_lab_closed_prompts : serious_lab_closed_prompts;
 				arr_size = special_prompts_allowed ? ARRAY_SIZE(silly_lab_closed_prompts) : ARRAY_SIZE(serious_lab_closed_prompts);
+				pick_track(arr, arr_size, &track_id);
+				break;
+			}
+			case (10): {
+				track_id = 1000;		// waiting for raspberry pi
+				break;
+			}
+			case (11): {
+				track_id = 900;			// door sensor now online
 				break;
 			}
 			default: {
@@ -143,9 +157,6 @@ void play_audio_prompt(bool special_prompts_allowed, uint8_t event_type){
 				return;
 			}
 		}
-
-	// Get audio prompt to play
-		pick_track(arr, arr_size, &track_id);
 
 	// Play audio prompt
 		play_track(track_id);

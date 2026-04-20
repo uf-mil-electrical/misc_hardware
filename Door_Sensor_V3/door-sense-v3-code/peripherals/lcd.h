@@ -41,6 +41,7 @@
 void doorsense_init_lcd();
 void clear_lcd();
 void lcd_print(char str[], uint8_t x, uint8_t y);
+void print_waiting_for_pi();
 void print_countdown_duration(uint8_t duration);
 void update_lcd_screen(bool lab_state, bool countdown_active, int32_t time_remaining, uint8_t countdown_duration);
 /******************</Function Declarations>*****************/

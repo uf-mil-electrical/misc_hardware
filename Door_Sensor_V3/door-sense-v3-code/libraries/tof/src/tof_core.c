@@ -576,9 +576,14 @@ void tof_set_measurement_period(uint32_t period){
         > uint16_t: distance in mm
 */
 uint16_t tof_get_distance(){
-	// First, read from distance register
+	// Read from distance register
 		uint16_t distance = 0;
 		tof_read_word(VL53L1X_RESULT__FINAL_CROSSTALK_CORRECTED_RANGE_MM_SD0, &distance);
+
+	// If distance is 0, assume nothing is in range of sensor (very far away)
+		if (distance == 0){
+			distance = 2500;		// arbitrarily the last value
+		}
 
 	// Lastly, return distance
 		return distance;

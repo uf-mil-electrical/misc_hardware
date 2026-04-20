@@ -74,6 +74,25 @@ void lcd_print(char str[], uint8_t x, uint8_t y){
 }
 
 
+
+/*******print_waiting_for_pi*******
+ * Description
+        > on startup, Pico waits for an ACK from the Pi Zero before beginning
+			normal operation
+		> this screen is shown to show the user that the Pico is just waiting
+			and that the system is starting up normally
+ * Arguments
+        > N/A
+ * Returns
+        > N/A
+*/
+void print_waiting_for_pi(){
+	lcd_print("Waiting for Pi", 0, 0);
+	lcd_print("Takes 30-90s...", 0, 1);
+}
+
+
+
 /*******print_countdown_duration*******
  * Description
         > prints how long the countdown will be to update lab state

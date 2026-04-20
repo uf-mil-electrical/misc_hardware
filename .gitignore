@@ -31,3 +31,6 @@ Configuration/Backups/
 *.LEP
 *.REP
 *.gbr
+
+# Ignore .json files
+*.json

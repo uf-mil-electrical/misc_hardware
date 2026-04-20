@@ -57,6 +57,7 @@ target_sources(door-sense-v3-code PRIVATE
 	peripherals/src/audio.c
     peripherals/src/lcd.c
 	peripherals/src/leds.c
+	peripherals/src/pi_zero.c
 	peripherals/src/pot_adc.c
 	peripherals/src/switches.c
 	peripherals/src/tof.c
