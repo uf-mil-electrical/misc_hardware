@@ -1,9 +1,36 @@
-# Ignore Altium backup files
+# Ignore Altium PCB Project backup files
 *.PcbDoc.Zip
 *.SchDoc.Zip
-*.PrjPcb.Zip
 *.BomDoc.Zip
+*.PrjPcb.Zip
 *.LOG
 *.SchDocPreview
 *.PcbDocPreview
 *.BomDocPreview
+
+# Ignore Altium Library backup files
+*.SchLib.Zip
+*.PcbLib.Zip
+*.LibPkg.Zip
+*.pas.Zip
+*.pasPreview
+*.PrjScr.Zip
+~$Altium Parts.xlsx
+
+# Ignore script config files that are unique to user's computer
+*.ini
+
+# Ignore Altium "Backups" folder
+Configuration/Backups/
+
+# Ignore project outputs
+*.WAS
+*.drc
+*.APR_LIB
+*.EXTREP
+*.LEP
+*.REP
+*.gbr
+
+# Ignore .json files
+*.json

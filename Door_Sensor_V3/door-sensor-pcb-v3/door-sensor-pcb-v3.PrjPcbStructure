@@ -1,0 +1,5 @@
+Record=TopLevelDocument|FileName=Connections.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=Connections.SchDoc|FileName=Controllers.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Connections.SchDoc|FileName=Input Devices.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Connections.SchDoc|FileName=Output Devices.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Connections.SchDoc|FileName=Power.SchDoc|SheetNumber=2

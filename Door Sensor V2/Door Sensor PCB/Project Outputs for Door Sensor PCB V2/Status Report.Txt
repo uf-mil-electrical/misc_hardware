@@ -1,12 +1,10 @@
-Output: NC Drill Files
-Type  : NC Drill
-From  : Project [Door Sensor PCB V2.PrjPcb]
-   Generated File[main.TXT]
-   Generated File[main.LDP]
-   Generated File[main.DRR]
+Output: Generates pick and place files
+Type  : Pick Place
+From  : Variant [[No Variations]] of Project [Door Sensor PCB V2.PrjPcb]
+   Generated File[Pick Place for main.txt]
 
 
-Files Generated   : 3
+Files Generated   : 1
 Documents Printed : 0
 
-Finished Output Generation At 23:34:44 On 12/03/25
+Finished Output Generation At 12:04:00 On 03/18/26
