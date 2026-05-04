@@ -260,27 +260,6 @@ uint8_t tof_check_booted(){
  * Returns
         > bool: true=data ready, false=no data ready
 */
-
-/*
-bool tof_check_data_ready(){
-	// First, determine if result interrupt polarity is active-high/low
-		bool active_high = tof_get_int_polarity();
-
-	// Second, read bit 0 from ToF result status register
-		uint8_t status_byte = 0;
-		tof_read_byte(GPIO__TIO_HV_STATUS, &status_byte);
-		uint8_t status_b0 = status_byte & 0b00000001;		// extract bit 0
-
-	// Third, check if data is ready to be read based on interrupt priority
-		bool data_ready = (status_b0 == active_high);
-
-	// Lastly, return value of data ready
-		return data_ready;
-}
-*/
-
-
-
 uint8_t tof_check_data_ready() {
   uint8_t tmp, iPol;
 
@@ -587,6 +566,73 @@ uint16_t tof_get_distance(){
 
 	// Lastly, return distance
 		return distance;
+}
+
+
+/*******tof_get_range_status*******
+ * Description
+        > Determines if the sensor thinks a reading was valid or not
+		> Possible values:
+			- 0: valid measurement
+			- 1: sigma failure (measurement has high uncertainty/noise, can occur due to motion, low reflectivity)
+			- 2: signal failure (return signal too weak, can occur if target too far, small, not present)
+			- 4: out of bounds (phase out of bounds, can occur when ranging into empty space or beyond sensor range)
+			- 7 OR 9: wraparound (is okay, occurs at short distances where target is close and highly reflective)
+ * Arguments
+		> N/A
+ * Returns
+        > N/A
+*/
+uint8_t tof_get_range_status(){
+    uint8_t range_status = 0;
+    tof_read_byte(VL53L1X_RESULT__RANGE_STATUS, &range_status);
+    return range_status & 0x1F;  // bits 4:0 are the range status
+}
+
+
+/*******tof_get_measurement*******
+ * Description
+        > Gets distance and range_status measurement from tof
+		> Useful when determining if a measurement was valid or not
+ * Arguments
+		> N/A
+ * Returns
+        > tof_measurement_t: distance and range_status outputs
+*/
+tof_measurement_t tof_get_measurement(){
+    tof_measurement_t result;
+
+    result.range_status    = tof_get_range_status();
+    result.distance_mm     = 0;
+    result.target_detected = false;
+
+    switch(result.range_status){
+        case 0: { // Valid measurement
+            tof_read_word(VL53L1X_RESULT__FINAL_CROSSTALK_CORRECTED_RANGE_MM_SD0, &result.distance_mm);
+            result.target_detected = true;
+            break;
+		}
+		case 9: { // valid measurement
+			tof_read_word(VL53L1X_RESULT__FINAL_CROSSTALK_CORRECTED_RANGE_MM_SD0, &result.distance_mm);
+            result.target_detected = true;
+            break;
+		}
+        case 1: {break;} // Sigma failure - high uncertainty, treat as no target
+        case 2: {break;} // Signal failure - too weak/no target
+        case 4: { // Phase out of bounds - empty space
+            result.distance_mm     = 0;
+            result.target_detected = false;
+            break;
+		}
+
+        default: {// Any other error
+            result.distance_mm     = 0;
+            result.target_detected = false;
+            break;
+		}
+    }
+
+    return result;
 }
 
 /******************</Public Functions>*****************/

@@ -10,8 +10,8 @@
  * file number in the correct category here!
 */
 const uint16_t serious_lab_open_prompts[] = {0, 1, 2};
-const uint16_t serious_lab_closed_prompts[] = {30, 31, 32};
-const uint16_t silly_lab_open_prompts[] = {100, 101, 102, 103, 104};
+const uint16_t serious_lab_closed_prompts[] = {30, 31, 32, 33};
+const uint16_t silly_lab_open_prompts[] = {100, 101, 102, 103, 104, 105};
 const uint16_t silly_lab_closed_prompts[] = {130, 131};
 /******************</Available Voice Prompts>*****************/
 

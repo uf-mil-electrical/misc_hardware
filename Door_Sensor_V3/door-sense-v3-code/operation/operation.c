@@ -93,30 +93,50 @@ void update_leds(){
 		> important for when nothing is in range of door sensor
 			(it sometimes spits out random values when nothing in range)
  * Arguments
-        > uint16_t distance: distance measured by ToF sensor
+        > tof_measurement_t meas: measurement from ToF sensor
  * Returns
         > N/A
 */
-void determine_door_state(uint16_t distance){
-	// is something within the DOOR_OPEN_DISTANCE range?
-		bool new_reading = (tof_distance > 0 && tof_distance <= DOOR_OPEN_DISTANCE);
+void determine_door_state(tof_measurement_t meas){
+    // If no valid target detected (signal failure, out of bounds, etc.),
+    // treat as door open (nothing blocking sensor)
+        if (!meas.target_detected){
+            bool new_reading = false;   // no target = door open = false
 
-	// debounce readings: require NUM_LIKE_READINGS_NEEDED readings to change door state
-		if (new_reading == raw_door_state){
-			if (num_like_readings < NUM_LIKE_READINGS_NEEDED){
-				num_like_readings += 1;
-			}
-		}
-		else {
-			// reading changed, reset streak
-			raw_door_state = new_reading;
-			num_like_readings = 1;
-		}
+            if (new_reading == raw_door_state){
+                if (num_like_readings < NUM_LIKE_READINGS_NEEDED){
+                    num_like_readings += 1;
+                }
+            } else {
+                raw_door_state = new_reading;
+                num_like_readings = 1;
+            }
 
-	// only change door_state once consistent readings have been established
-		if (num_like_readings >= NUM_LIKE_READINGS_NEEDED){
-			door_state = raw_door_state;
-		}
+            if (num_like_readings >= NUM_LIKE_READINGS_NEEDED){
+                door_state = raw_door_state;
+            }
+            return;
+        }
+
+    // Valid measurement — is something within the DOOR_OPEN_DISTANCE range?
+        bool new_reading = (meas.distance_mm > 0 && meas.distance_mm <= DOOR_OPEN_DISTANCE);
+
+    // debounce readings: require NUM_LIKE_READINGS_NEEDED readings to change door state
+        if (new_reading == raw_door_state){
+            if (num_like_readings < NUM_LIKE_READINGS_NEEDED){
+                num_like_readings += 1;
+            }
+        }
+        else {
+            // reading changed, reset streak
+            raw_door_state = new_reading;
+            num_like_readings = 1;
+        }
+
+    // only change door_state once consistent readings have been established
+        if (num_like_readings >= NUM_LIKE_READINGS_NEEDED){
+            door_state = raw_door_state;
+        }
 }
 
 
@@ -151,6 +171,7 @@ void init_doorsense_peripherals(){
 		init_potentiometer_adc();
 
 	// Initialize audio / DF player
+		sleep_ms(200);
 		init_dfplayer();
 
 	// Initialize ToF sensor
@@ -166,6 +187,9 @@ void init_doorsense_peripherals(){
 
 		// show "waiting for Pi Zero ACK screen"
 		print_waiting_for_pi();
+
+		// briefly delay to allow Ethan's voice prompt to play
+		sleep_ms(100);
 
 		// wait for ACK from Pi Zero
 		await_pi_zero_ack();
@@ -210,15 +234,29 @@ void run_doorsense(){
 				last_tof_check_time = current_time;
 
 			// read from ToF
-				get_distance(&tof_distance, &tof_data_ready);
-				printf("distance = %u\n", tof_distance);
+				if (!tof_check_data_ready()){
+					// skip this cycle
+				}
+				else {
+					tof_data_ready = true;
+				}
 
 			// if nonzero data was successfully read from ToF
 				if (tof_data_ready){
 					tof_data_ready = false;		// reset data ready status
 
 					// determine if door is open or closed based on distance
-						determine_door_state(tof_distance);
+						tof_measurement_t meas = tof_get_measurement();
+						tof_clear_int();
+						//tof_clear_int();
+
+						printf("distance = %u, status = %u, target = %s\n",
+						meas.distance_mm,
+						meas.range_status,
+						meas.target_detected ? "yes" : "no");
+
+						determine_door_state(meas);
+
 
 					// check that door state is different from lab state, countdown not started, override not active
 						if ( (door_state != lab_state) && (run_countdown == false) && (override_active == false) ){
@@ -263,6 +301,9 @@ void run_doorsense(){
 
 		// update LEDs
 			update_leds();
+
+		// update last SW check time
+			last_sw_check_time = current_time;
 	}
 
 	
@@ -270,6 +311,7 @@ void run_doorsense(){
 	// Update LCD at regular intervals
 	if (current_time - last_lcd_update_time >= UPDATE_LCD_INTERVAL_MS){
 		update_lcd_screen(lab_state, run_countdown, countdown_time_remaining_ms, countdown_duration);
+		last_lcd_update_time = current_time;
 	}
 
 

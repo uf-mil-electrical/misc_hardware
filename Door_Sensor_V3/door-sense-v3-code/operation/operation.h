@@ -37,7 +37,7 @@
 /******************<Defines>*****************/
 #define DOOR_OPEN_DISTANCE				200		// if object is within 200 distance units of sensor, door is considered OPEN
 
-#define NUM_LIKE_READINGS_NEEDED		5		// number of ToF readings needed to confirm new door state (higher val = less error but is slower)
+#define NUM_LIKE_READINGS_NEEDED		8		// number of ToF readings needed to confirm new door state (higher val = less error but is slower)
 
 #define TOF_CHECK_INTERVAL_MS			150		// how often to check ToF sensor for data ready (in ms)
 #define COUNTDOWN_UPDATE_INTERVAL_MS 	250		// how often to update the countdown (in ms)

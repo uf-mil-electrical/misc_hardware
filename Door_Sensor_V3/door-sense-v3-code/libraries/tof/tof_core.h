@@ -31,6 +31,18 @@
 /******************</Defines>*****************/
 
 
+/******************<Structs>*****************/
+
+// Used when measuring distance to door
+// Includes distance and also the tof sensor's status on whether it was a valid measurement or not
+typedef struct {
+    uint16_t distance_mm;
+    uint8_t  range_status;
+    bool     target_detected;
+} tof_measurement_t;
+/******************</Structs>*****************/
+
+
 /******************<Functions>*****************/
 int tof_init();
 void tof_enable(bool enable);
@@ -47,6 +59,8 @@ int tof_set_timing_budget(uint16_t time_budget);
 uint16_t tof_get_measurement_period();
 void tof_set_measurement_period();
 uint16_t tof_get_distance();
+uint8_t tof_get_range_status();
+tof_measurement_t tof_get_measurement();
 /******************</Functions>*****************/
 
 #endif // TOF_CORE_H
