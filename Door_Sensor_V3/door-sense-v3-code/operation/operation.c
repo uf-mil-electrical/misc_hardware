@@ -171,7 +171,7 @@ void init_doorsense_peripherals(){
 		init_potentiometer_adc();
 
 	// Initialize audio / DF player
-		sleep_ms(200);
+		sleep_ms(1000);
 		init_dfplayer();
 
 	// Initialize ToF sensor
