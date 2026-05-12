@@ -1,0 +1,82 @@
+; LED_output.pio
+; Program writes all desired pins high or low in accordance with the neopixel protocol
+
+.program LED_output
+
+.side_set 1 opt
+
+.define public NUM_OUTPUT_PINS 1
+
+.define public TIMER_ZERO       4
+.define public TIMER_ONE        6
+.define public TIMER_RESET      3
+ 
+.define public ALL_PINS_LOW 0b0
+.define public ALL_PINS_HIGH 0b1
+
+; configure register for SHIFTCTRL_OUT_SHIFTDIR to shift bits into lowest spot
+; check: will side hold pins high or will they return to low?
+
+.wrap_target
+
+  pull block                side ALL_PINS_LOW; wait for new dma info after 
+  set X, 23                 side ALL_PINS_LOW; loaded with 23 to count bits
+
+START_NEW:
+
+  out Y, 1                  side ALL_PINS_LOW [TIMER_RESET - 1]      ; Shift 1 bit into Y from OSR for comparison
+
+  jmp !Y, ZEROBIT_JMP       side ALL_PINS_HIGH  [TIMER_ZERO - 1] ; if y != 0, jump to low
+
+  nop                       side ALL_PINS_HIGH [TIMER_ONE - 1] ; reset the Y register for the next bit while waiting to make it a high bit
+
+ZEROBIT_JMP:
+
+  jmp X--, START_NEW             side ALL_PINS_LOW  [TIMER_ONE - 1] ; delay proper time for "zero" output 
+
+; if this is reached, that means 24 bits were sent, request new info:
+
+.wrap
+
+
+% c-sdk {
+
+static inline void LED_output_program_init(PIO pio, uint sm, uint offset)
+{
+  // Define a config object
+  pio_sm_config config = LED_output_program_get_default_config(offset);
+
+  // 2. Set and initialize the input pins
+  // There are no input pins for this program.
+  
+  // 3. Set and initialize the output pins
+  pio_gpio_init(pio, 16);
+  pio_gpio_init(pio, 17);
+    
+  sm_config_set_out_pins(&config, 16, 2); // base output pin is 16, and 4 to output to
+  pio_sm_set_consecutive_pindirs(pio, sm, 16, 2, true); // "true" sets pindir as output
+  sm_config_set_sideset_pins(&config, 16); // pins for sideset use
+
+  // 4. Set clock divider
+  sm_config_set_clkdiv(&config, 10.0f);
+  
+  // 5. Configure input shift register
+  // args: BOOL right_shift, BOOL auto_push, 1..32 push_threshold
+  sm_config_set_in_shift(&config, true, false, 32);
+  
+  // 6. Configure output shift register
+  // args: BOOL right_shift, BOOL auto_push, 1..32 push_threshold
+  sm_config_set_out_shift(&config, false, true, 24); // true == right shift/ MSB first, no auto-pull.
+
+  // 7. Join the ISR & OSR
+  // PIO_FIFO_JOIN_NONE = 0, PIO_FIFO_JOIN_TX = 1, PIO_FIFO_JOIN_RX = 2
+  sm_config_set_fifo_join(&config, PIO_FIFO_JOIN_NONE); // no joining
+  
+  // 8. Apply the configuration
+  pio_sm_init(pio, sm, offset, &config);
+  
+  // 9. Activate the State Machine
+  pio_sm_set_enabled(pio, sm, true);
+
+}
+%}
