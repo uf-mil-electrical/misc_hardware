@@ -7,14 +7,26 @@
 ### Structure of Project:
 
 ```
-code block showing file structure
+.ws2812_controller_code
+├── .vscode/
+├── build/
+├── include/
+│   └── ws2812_controller_functions.h
+├── src/
+│   ├── LED_output.pio
+│   ├── ws2812_controller_code.c
+│   └── ws2812_controller_functions.c
+├── .gitignore
+├── CMakeLists.txt
+├── pico_sdk_import.cmake
+└── README.md
 ```
 
-### Most important files:
-**LED_output.pio** : .pio program for controlling the output
-**ws2812_controller_functions.c** : c file with functions for code
-**ws2812_controller_functions.h** : header file for funcitons
-**ws2812_controller_code.c** : example uses of each function
+**LED_output.pio :**  .pio program for controlling the output
+**ws2812_controller_functions.c :** c file with functions for code
+**ws2812_controller_functions.h :** header file for funcitons
+**ws2812_controller_code.c :** example uses of each function
+**CMakeLists.txt :** example CMake file. Important note: must include directory where .pio file is located in target_include_directories (because the file makes the associated header file)
 
 <br>
 

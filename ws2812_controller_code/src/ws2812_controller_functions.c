@@ -8,19 +8,7 @@ File containing the .c functions that control the neopixels
 
 volatile uint32_t color_output_solid; 
 
-typedef struct configSettings {
-    PIO pio;
-    uint sm;
-    uint offset;
-
-    int new_output_dma_channel;
-    int to_pio_dma_channel;
-    dma_channel_config new_output_dma_channel_config;
-    dma_channel_config to_pio_dma_channel_config;
-
-};
-
-extern static struct configSettings np_settings;
+extern configSettings_t neopix_settings;
 
 // extern volatile uint sm_g;
 extern volatile uint8_t dummy_dma_value1;
@@ -34,18 +22,18 @@ extern volatile uint8_t dummy_dma_value2;
 
 */
 void __isr dma_irq_handler() {
-    if (dma_channel_get_irq0_status(to_pio_dma_channel)) {
-        dma_channel_acknowledge_irq0(to_pio_dma_channel);
+    if (dma_channel_get_irq0_status(neopix_settings.to_pio_dma_channel)) {
+        dma_channel_acknowledge_irq0(neopix_settings.to_pio_dma_channel);
 
         // Wait for FIFO to drain — this is fast, just a few cycles
-        while (!pio_sm_is_tx_fifo_empty(pio0, sm_g));
+        while (!pio_sm_is_tx_fifo_empty(neopix_settings.pio, neopix_settings.sm));
 
         // Re-arm to_pio but don't start — reset_timer will chain to it
-        dma_channel_set_read_addr(to_pio_dma_channel, &color_output, false);
-        dma_channel_set_trans_count(to_pio_dma_channel, NUMBER_OF_NP, false);
+        dma_channel_set_read_addr(neopix_settings.to_pio_dma_channel, &color_output, false);
+        dma_channel_set_trans_count(neopix_settings.to_pio_dma_channel, neopix_settings.num_pixels, false);
 
         // Start the reset timer channel — it will chain to to_pio after 50us
-        dma_channel_set_trans_count(new_output_dma_channel, 1, true);
+        dma_channel_set_trans_count(neopix_settings.new_output_dma_channel, 1, true);
     }
 }
 
@@ -61,7 +49,6 @@ Must be used after a function to set the color output.
 bool config_neopixel_gpio_pins(int gpio_pin1, int gpio_pin2)
 {
 
-
 }
 
 
@@ -73,7 +60,7 @@ set_color_solid_mode(uint8_t red_value, uint8_t blue_value, uint8_t green_value)
 Sets the color that will be output by the NeoPixels in solid color mode. 
 
 */
-bool set_color_solid_mode(uint8_t red_value, uint8_t blue_value, uint8_t green_value)
+void set_color_solid_mode(uint8_t red_value, uint8_t blue_value, uint8_t green_value)
 {
     // NP color is GRB order 2 zeros at end for padding
     color_output_solid = (green_value << 24) | (red_value << 16) | (blue_value << 8);
@@ -95,12 +82,13 @@ bool set_color_animated_mode()
 /*
 
 */
-struct configSettings start_output_solid_mode(PIO pio_used_for_NP)
+struct configSettings start_output_solid_mode(int num_pixels, PIO pio_used_for_NP)
 {
     // this struct holds all the configuration settings of the neopixel thing
     struct configSettings np_settings;
 
     // definition of variables to start program
+    np_settings.num_pixels = num_pixels;
     np_settings.pio = pio_used_for_NP;
     np_settings.sm = pio_claim_unused_sm(np_settings.pio, true);
     np_settings.offset = pio_add_program(np_settings.pio, &LED_output_program);
@@ -157,7 +145,7 @@ struct configSettings start_output_solid_mode(PIO pio_used_for_NP)
     dma_channel_configure(
         np_settings.to_pio_dma_channel,                             // Channel to be configured
         &np_settings.to_pio_dma_channel_config,                     // The configuration we just created
-        &pio0_hw->txf[sm_g],                            // The initial write address, the TX of the pio0's FIFO
+        &pio0_hw->txf[np_settings.sm],                            // The initial write address, the TX of the pio0's FIFO
         &color_output,                                  // The initial read address
         NUMBER_OF_NP,                                   // Number of transfers
         false                                           // Start immediately.
