@@ -27,7 +27,7 @@ volatile uint8_t dummy_dma_value2 = 0;
 
 int main()
 {
-    init_uart(); // remove when working
+    //init_uart(); // remove when working
     init_pio();
     init_dma();
 
