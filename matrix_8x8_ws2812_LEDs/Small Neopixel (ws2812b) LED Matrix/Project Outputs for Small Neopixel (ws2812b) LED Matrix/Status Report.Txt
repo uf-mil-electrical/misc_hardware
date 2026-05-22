@@ -1,0 +1,22 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [Small Neopixel (ws2812b) LED Matrix.PrjPcb]
+   Generated File[small_matrix_ws2812_LEDs_Copper_Signal_Top.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Copper_Signal_Bot.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Legend_Top.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Legend_Bot.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Soldermask_Top.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Soldermask_Bot.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Paste_Top.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Paste_Bot.gbr]
+   Generated File[small_matrix_ws2812_LEDs_Profile.gbr]
+   Generated File[small_matrix_ws2812_LEDs_NPTH_Drill.gbr]
+   Generated File[small_matrix_ws2812_LEDs_PTH_Drill.gbr]
+   Generated File[small_matrix_ws2812_LEDs.EXTREP]
+   Generated File[small_matrix_ws2812_LEDs.REP]
+
+
+Files Generated   : 13
+Documents Printed : 0
+
+Finished Output Generation At 4:02:39 PM On 5/22/2026
