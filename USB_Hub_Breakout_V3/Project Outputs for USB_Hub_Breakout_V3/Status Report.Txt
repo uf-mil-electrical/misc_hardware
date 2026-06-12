@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [USB_Hub_Breakout_V3.PrjPcb]
+   Generated File[Layout.TXT]
+   Generated File[Layout.LDP]
+   Generated File[Layout.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 13:52:38 On 6/12/2026
