@@ -135,7 +135,7 @@ GenerateClassCluster=0
 DocumentUniqueId=JSSEKJHX
 
 [Document6]
-DocumentPath=USB_Hub_Breakout_V3.BomDoc
+DocumentPath=USB_Hub_Breakout_V4.BomDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -156,119 +156,231 @@ DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Design Rule Check - Layout.
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Layout 6-12-2026 13-20-39.WAS
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Design Rule Check - Layout.html
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Layout 6-12-2026 13-29-23.WAS
+DocumentPath=Layout 6-12-2026 13-20-39.WAS
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Layout 6-12-2026 13-44-53.WAS
+DocumentPath=Layout 6-12-2026 13-29-23.WAS
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.DRR
+DocumentPath=Layout 6-12-2026 13-44-53.WAS
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.EXTREP
+DocumentPath=Layout 8-10-2026 21-09-36.WAS
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.LDP
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.REP
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.TXT
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_1.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_2.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_Bot.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_Top.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.REP
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Drawing_1.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout.REP
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Drillmap_1.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Keep-out.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Legend_Bot.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Legend_Top.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Copper_Signal_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_1.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_2.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument20]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_13.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Copper_Signal_2.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument21]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_15.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Pads_Bot.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument23]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Pads_Top.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument24]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Paste_Bot.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument25]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Paste_Top.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Drawing_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument26]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Poly_Planning.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Drawing_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument27]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Profile.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Drillmap_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument28]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_PTH_Drill.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Drillmap_1.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument29]
-DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Soldermask_Bot.gbr
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Keep-out.gbr
 DItemRevisionGUID=
 
 [GeneratedDocument30]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Keep-out.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument31]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Legend_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument32]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Legend_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument33]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Legend_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument34]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Legend_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument35]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_1.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument36]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Mechanical_1.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument37]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_13.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument38]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Mechanical_13.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument39]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Mechanical_15.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument40]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Mechanical_15.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument41]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Pads_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument42]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Pads_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument43]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Pads_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument44]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Pads_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument45]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Paste_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument46]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Paste_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument47]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Paste_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument48]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Paste_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument49]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Poly_Planning.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument50]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Poly_Planning.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument51]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Profile.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument52]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Profile.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument53]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_PTH_Drill.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument54]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_PTH_Drill.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument55]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Soldermask_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument56]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Soldermask_Bot.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument57]
 DocumentPath=Project Outputs for USB_Hub_Breakout_V3\Layout_Soldermask_Top.gbr
+DItemRevisionGUID=
+
+[GeneratedDocument58]
+DocumentPath=Project Outputs for USB_Hub_Breakout_V4\Layout_Soldermask_Top.gbr
 DItemRevisionGUID=
 
 [Configuration1]
@@ -551,7 +663,7 @@ OutputDefault5=0
 Configuration5_Name1=ForceUpdateSettings
 Configuration5_Item1=False
 Configuration5_Name2=OutputConfigurationParameter1
-Configuration5_Item2=BoardID=XRMUXJTL|FileComment= |FileSubject=Autodetect|GenerateDRCRulesFile=False|GenerateReports=True|GerberUnit=Metric|IncludeUnconnectedMidLayerPads=True|MergePadAndRegion=False|MinusApertureTolerance=50|NumberOfDecimals=3|OptimizeChangeLocationCommands=True|OutputFormat=Single|PlotBackDrillingPairs=False|PlotBlindViasPairs=False|PlotBoardProfile=True|PlotBoardProfileFileName= |PlotCounterHolesPairs=False|PlotDrillDrawingPair0_Backdrill=False|PlotDrillDrawingPair0_Checked=True|PlotDrillDrawingPair0_DrillType=Regular|PlotDrillDrawingPair0_FileName= |PlotDrillDrawingPair0_HighLayer=Bottom Layer|PlotDrillDrawingPair0_LowLayer=Top Layer|PlotDrillDrawingPairs=False|PlotDrillGuidePair0_Backdrill=False|PlotDrillGuidePair0_Checked=True|PlotDrillGuidePair0_DrillType=Regular|PlotDrillGuidePair0_FileName= |PlotDrillGuidePair0_HighLayer=Bottom Layer|PlotDrillGuidePair0_LowLayer=Top Layer|PlotDrillGuidePairs=False|PlotMicroViasPairs=False|PlotNPTHPairs=False|PlotPTHPair0_Backdrill=False|PlotPTHPair0_Checked=True|PlotPTHPair0_DrillType=Regular|PlotPTHPair0_FileName= |PlotPTHPair0_HighLayer=Top Layer|PlotPTHPair0_LowLayer=Bottom Layer|PlotPTHPairs=False|PlotViaTypeDrillDrawingPairs=False|PlotViaTypeDrillGuidePairs=False|PlotViaTypeDrillPairs=False|PlotX2.Set=SerializeLayerHash.Version~2,ClassName~TPlotLayerStateArray,16777217~1,16777218~1,16777219~1,16842751~1,16973830~1,16973831~1,16973834~1,16973835~1,16973832~1,16973833~1,16908289~1,16908290~1,16908301~1,16908303~1,16973837~1,16973848~1,16973849~1|PlusApertureTolerance=50|Record=GerberX2View|Sorted=False|UncheckPlotNPTHPair0_Backdrill=False|UncheckPlotNPTHPair0_Checked=False|UncheckPlotNPTHPair0_DrillType=Regular|UncheckPlotNPTHPair0_FileName= |UncheckPlotNPTHPair0_HighLayer=Top Layer|UncheckPlotNPTHPair0_LowLayer=Bottom Layer|DocumentPath=C:\Users\russe\Repositories\MIL\misc_hardware\USB_Hub_Breakout_V3\Layout.PcbDoc
+Configuration5_Item2=BoardID=XRMUXJTL|FileComment= |FileSubject=Autodetect|GenerateDRCRulesFile=False|GenerateReports=True|GerberUnit=Metric|IncludeUnconnectedMidLayerPads=True|MergePadAndRegion=False|MinusApertureTolerance=50|NumberOfDecimals=3|OptimizeChangeLocationCommands=True|OutputFormat=Single|PlotBackDrillingPairs=False|PlotBlindViasPairs=False|PlotBoardProfile=True|PlotBoardProfileFileName= |PlotCounterHolesPairs=False|PlotDrillDrawingPair0_Backdrill=False|PlotDrillDrawingPair0_Checked=True|PlotDrillDrawingPair0_DrillType=Regular|PlotDrillDrawingPair0_FileName= |PlotDrillDrawingPair0_HighLayer=Bottom Layer|PlotDrillDrawingPair0_LowLayer=Top Layer|PlotDrillDrawingPairs=False|PlotDrillGuidePair0_Backdrill=False|PlotDrillGuidePair0_Checked=True|PlotDrillGuidePair0_DrillType=Regular|PlotDrillGuidePair0_FileName= |PlotDrillGuidePair0_HighLayer=Bottom Layer|PlotDrillGuidePair0_LowLayer=Top Layer|PlotDrillGuidePairs=False|PlotMicroViasPairs=False|PlotNPTHPairs=False|PlotPTHPair0_Backdrill=False|PlotPTHPair0_Checked=True|PlotPTHPair0_DrillType=Regular|PlotPTHPair0_FileName= |PlotPTHPair0_HighLayer=Top Layer|PlotPTHPair0_LowLayer=Bottom Layer|PlotPTHPairs=False|PlotViaTypeDrillDrawingPairs=False|PlotViaTypeDrillGuidePairs=False|PlotViaTypeDrillPairs=False|PlotX2.Set=SerializeLayerHash.Version~2,ClassName~TPlotLayerStateArray,16777217~1,16777218~1,16777219~1,16842751~1,16973830~1,16973831~1,16973834~1,16973835~1,16973832~1,16973833~1,16908289~1,16908290~1,16908301~1,16908303~1,16973837~1,16973848~1,16973849~1|PlusApertureTolerance=50|Record=GerberX2View|Sorted=False|UncheckPlotNPTHPair0_Backdrill=False|UncheckPlotNPTHPair0_Checked=False|UncheckPlotNPTHPair0_DrillType=Regular|UncheckPlotNPTHPair0_FileName= |UncheckPlotNPTHPair0_HighLayer=Top Layer|UncheckPlotNPTHPair0_LowLayer=Bottom Layer|DocumentPath=C:\Users\russe\Repositories\MIL\misc_hardware\USB\USB_Hub_Breakout_V4\Layout.PcbDoc
 OutputType6=ODB
 OutputName6=ODB++ Files
 OutputDocumentPath6=
@@ -571,7 +683,7 @@ OutputDefault8=0
 Configuration8_Name1=ForceUpdateSettings
 Configuration8_Item1=False
 Configuration8_Name2=OutputConfigurationParameter1
-Configuration8_Item2=BoardEdgeRoutToolDia=2000000|GenerateBoardEdgeRout=False|GenerateDrilledSlotsG85=False|GenerateEIADrillFile=False|GenerateSeparatePlatedNonPlatedFiles=False|GenerateSeparateViaTypeFiles=False|GenerateToolsByDrillSymbols=False|NumberOfDecimals=3|NumberOfUnits=4|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Record=DrillView|Units=Metric|ZeroesMode=SuppressTrailingZeroes|DocumentPath=C:\Users\russe\Repositories\MIL\misc_hardware\USB_Hub_Breakout_V3\Layout.PcbDoc
+Configuration8_Item2=BoardEdgeRoutToolDia=2000000|GenerateBoardEdgeRout=False|GenerateDrilledSlotsG85=False|GenerateEIADrillFile=False|GenerateSeparatePlatedNonPlatedFiles=False|GenerateSeparateViaTypeFiles=False|GenerateToolsByDrillSymbols=False|NumberOfDecimals=3|NumberOfUnits=4|OptimizeChangeLocationCommands=True|OriginPosition=Relative|Record=DrillView|Units=Metric|ZeroesMode=SuppressTrailingZeroes|DocumentPath=C:\Users\russe\Repositories\MIL\misc_hardware\USB\USB_Hub_Breakout_V4\Layout.PcbDoc
 OutputType9=IPC2581
 OutputName9=IPC-2581 Files
 OutputDocumentPath9=
