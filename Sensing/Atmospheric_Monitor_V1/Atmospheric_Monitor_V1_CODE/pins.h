@@ -48,4 +48,11 @@
 /******************</BMP581 Sensor>*****************/
 
 
+/******************<Thermistors>*****************/
+#define THERMISTOR_0_PIN        26
+#define THERMISTOR_1_PIN        27
+#define THERMISTOR_2_PIN        28
+#define THERMISTOR_3_PIN        29        
+/******************</Thermistors>*****************/
+
 #endif // PINS_H

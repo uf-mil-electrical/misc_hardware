@@ -44,6 +44,37 @@ void set_led(uint8_t led, bool state){
 }
 
 
+
+/*******set_thermistor_led*******
+ * Description
+        > enables/disables an LED that corresponds to a thermistor
+        > only adjusts the yellow LEDs
+ * Arguments
+        > uint8_t led: target LED
+        > bool state: true=LED on, false=LED off
+ * Returns
+        > N/A
+*/
+void set_thermistor_led(uint8_t led, bool state){
+
+    // get GPIO corresponding to target LED
+        uint8_t led_pin = 0;
+
+        switch(led){
+            case 0: {led_pin = LED_Y0_PIN; break;}
+            case 1: {led_pin = LED_Y1_PIN; break;}
+            case 2: {led_pin = LED_Y2_PIN; break;}
+            case 3: {led_pin = LED_Y3_PIN; break;}
+            default: {printf("set_thermistor_led(): invalid LED '%u'\n", led); return;}
+        }
+
+    // set LED
+        gpio_put(led_pin, state);
+
+    return;
+}
+
+
 /*******set_all_led*******
  * Description
         > enables/disables all LEDs

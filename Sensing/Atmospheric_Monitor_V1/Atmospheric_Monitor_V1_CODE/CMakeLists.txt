@@ -34,7 +34,6 @@ project(Atmospheric_Monitor_V1_CODE C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
 add_executable(Atmospheric_Monitor_V1_CODE main.c )
 
 pico_set_program_name(Atmospheric_Monitor_V1_CODE "Atmospheric_Monitor_V1_CODE")
@@ -42,7 +41,10 @@ pico_set_program_version(Atmospheric_Monitor_V1_CODE "0.1")
 
 # Add all .c files here
 target_sources(Atmospheric_Monitor_V1_CODE PRIVATE
+    communication/src/pico_spi.c
+
 	peripherals/src/leds.c
+    peripherals/src/thermistors.c
 )
 
 # Modify the below lines to enable/disable output over UART/USB
@@ -52,7 +54,10 @@ pico_enable_stdio_usb(Atmospheric_Monitor_V1_CODE 1)
 # Add libraries to the build
 target_link_libraries(Atmospheric_Monitor_V1_CODE
         pico_stdlib
+        hardware_adc
+        hardware_gpio
         hardware_pwm
+        hardware_spi
         )
 
 # Add the standard include files to the build
@@ -61,4 +66,3 @@ target_include_directories(Atmospheric_Monitor_V1_CODE PRIVATE
 )
 
 pico_add_extra_outputs(Atmospheric_Monitor_V1_CODE)
-

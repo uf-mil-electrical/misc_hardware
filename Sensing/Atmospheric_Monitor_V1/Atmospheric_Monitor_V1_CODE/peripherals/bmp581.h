@@ -1,10 +1,12 @@
-#ifndef LEDS_H
-#define LEDS_H
+#ifndef BMP581_H
+#define BMP581_H
 
 /******************<Summary>*****************
- * Name: leds.h
+ * Name: bmp581.h
  * Purpose:
- *      > Functions for onboard LEDs
+ *      > Functions for interacting with BMP581 sensor
+ *      > BMP581: absolute barometric pressure sensor,
+ *          can also measure temperature
  * Written / updated by:
  *      > Russell
 ******************</Summary>*****************/
@@ -16,8 +18,9 @@
 #include <stdint.h>
 #include "pico/stdlib.h"
 
-#include "hardware/pwm.h"
-#include "pico/time.h"
+#include "hardware/gpio.h"
+
+#include "communication/pico_spi.h"
 
 #include "pins.h"
 /******************</Dependencies>*****************/
@@ -29,10 +32,8 @@
 
 
 /******************<Function Declarations>*****************/
-void set_led(uint8_t led, bool state);
-void set_thermistor_led(uint8_t led, bool state);
-void set_all_led(bool state);
-void init_leds();
+void set_bmp581_cs(bool state);
+void init_bmp581();
 /******************</Function Declarations>*****************/
 
-#endif // LEDS_H
+#endif // BMP581_H
