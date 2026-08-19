@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Small Neopixel (ws2812b) LED Matrix.PrjPcb]
+   Generated File[small_matrix_ws2812_LEDs.TXT]
+   Generated File[small_matrix_ws2812_LEDs.LDP]
+   Generated File[small_matrix_ws2812_LEDs.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 15:00:00 On 6/12/2026
