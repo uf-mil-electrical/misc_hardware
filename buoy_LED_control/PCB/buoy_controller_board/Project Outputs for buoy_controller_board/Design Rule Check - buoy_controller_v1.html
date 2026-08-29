@@ -1,0 +1,979 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8/29/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:34:26 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc" class="file"><acronym title="C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc">C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">16</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">181</td></tr>
+</table>
+</td>
+</table><a name="ID2QJVWATEKAUWGYC0JM0BTLB1RGDONPNTPP4OYDOO3NDNXPNGXHG"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGEORZ4I4PQKUJWZ25VGNBQT3ZMB01G34IUILENGJE5212SR30BSF">Design contains shelved or modified (but not repoured) polygons. The result of DRC is not correct. Recommended to restore/repour all polygons and proceed with DRC again</a></td>
+<td class="column2">16</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">16</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCCMITUDQZYKXCLHQJMHCGYE1OCXZFXLB4VJ20NB5M3RBEB1GCVOG">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLW1QYWEVO1DVNR1MRMSNWXTJPIN4Y2HZA1YURUCBSKFFWA1EN5CC">Clearance Constraint (Gap=0.3mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBRMTGW25NYUDOT4RQBTPZOXNWFPUP5XBMAAYRXCMXD0FO42ZRDFP">Clearance Constraint (Gap=0mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQVFFXSZ5LQLUFQQIJPT4YBPB0DB2YCHYNDWHE5DZWYU2J2XGVPRC">Clearance Constraint (Gap=0.3mm) (InPolygon),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDIU3GQU55EFEPSC1CRQPAPGKFG2DNZRLGQCFV0D0ZMBABHA02VRB">Clearance Constraint (Gap=0mm) ((InPolygon AND InNetClass('High_Current_Nets'))),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMEKYMEQV5HOMILC3NICXF2PIIESJSWITR3Y1XZOZCAP0XQE5OS0G">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSDCXTKF1L0ZQKQAKN50LHKEIHOVSZQFNL0YXP5EKBQ1AZKN4TE4P">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKHLWZZIHBFFUB3MDLGG1Q4CF4CKLKZAXN0P0M5PT3BP3KXW3WTII">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVCBLCTF2QMN2BJYS0TQGRR3U1OE4IKETTRLXCDGMXQ1OPPEVHQWB">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">16</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNVK2GHJXBFKWEE0KD0GFCJLUENJOOTNXNOK5Y0EOTB0ZKONKTDGF">Width Constraint (Min=0.263mm) (Max=0.379mm) (Preferred=0.379mm) (InNetClass('nRF Signal'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID14U0AWEVTFM0BD4JCNTR4CC32XLCAGQGUDATMODZSSXUNXEGMCM">Width Constraint (Min=0.1mm) (Max=100mm) (Preferred=0.5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5L0O42DBVPTVITF2VKPPMLPRLBSVQ1JLJSCKEPIKT1F3V2IGWWD">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNJGAPUGHVICVDDL1GOYKSUMERNDBZMG1X4NUGQCMI5PHMBNE0URE">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDURCNBTSUN540I5TBYJPMUKZ5MO1YZNPYIBXNMEL5UOS3JJMD35FE">Minimum Annular Ring (Minimum=0.2mm) (All)</a></td>
+<td class="column2">82</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTJLSVCFSMDUZJXQIWPNO4OLGRDW4NAIIPKED1CD14V5PNCDKU3I">Hole Size Constraint (Min=0.3mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCHA4UJDAOVV2HMCRJ5FPBGKTRLCVJTVWPB2C4QO0XELDSM14J5PM">Hole To Hole Clearance (Gap=0.25mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXKBZILBFQHXCPIYDP134BZYS1FEKBZMMM1S4O1F45YQ3QS1QVJUB">Minimum Solder Mask Sliver (Gap=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXKPAJFVNSLTYBXCNLIGETFZ3EK132PUCDU5P2OGKSCYJSGW2RATP">Silk To Solder Mask (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOJT3WAEFO24XHTQKHEJQBUE02IACIN3FRUYLMFJR2QFWH4YAHKVB">Silk to Silk (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDODJA1SFA1BZOMMJM41XL5LPR4BSLXHSUS5IIVCIW0ROTD2UF5P3O">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">83</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEMIYEK3KPPEVHGY2G2W01SBGKDLWKVC4O3IDDVMVGQJQ5BZKGEND">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJH1GQTUX443DHGPQ30OOACZF0IGIH1ZUMHVBIF00B4LDZFE4OCJ">Matched Lengths(Delay Tolerance=100ps) (Phase Delay Tolerance=5ps) (Matching Distance=12.7mm) (InDifferentialPairClass('Ethernet_Pairs') or InDifferentialPairClass('USB_Pairs') or InDifferentialPairClass('CAN_Pairs'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXSC5SRKWPIDPFYCS5XFXTH2AMGH5ZUAI52RLC0OLCVJVQX2YKZOG">Matched Lengths(Delay Tolerance=10ps) (InNetClass('XTAL_Nets'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDE4X0Y335W0TVNIK41TB2B01MEPJX4A3MCFHRCBCU311MCW2EZU0F">Height Constraint (Min=0mm) (Max=1816.048mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">181</td>
+</tr>
+</table><br><a name="IDYXUYAJJTQBJKNRXDMHY2GSXWDDEHYIKSOF1JNZN4ZWWETY1UYA3M"><h2>Warnings</h2></a><a name="IDGEORZ4I4PQKUJWZ25VGNBQT3ZMB01G34IUILENGJE5212SR30BSF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Design contains shelved or modified (but not repoured) polygons. The result of DRC is not correct. Recommended to restore/repour all polygons and proceed with DRC again</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net LX_MAX20410 On Mid Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net LX_MAX20410 On Mid Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net LX_MAX20410 On Mid Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Mid Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Mid Layer 2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: Top Layer 1-+5 In net +5 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: Top Layer 1-VSUP_MAX20410 In net VSUP_MAX20410 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net LX_MAX20410 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net +LiPo_22.2Vnom On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net VIN_TPS2663 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net BIAS_MAX20410 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net BST_MAX20410 On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Top Layer 1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: NONET_L01_P-001 In net GND On Bottom Layer 1</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDVCBLCTF2QMN2BJYS0TQGRR3U1OE4IKETTRLXCDGMXQ1OPPEVHQWB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Modified Polygon (Allow modified: No), (Allow shelved: No)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Mid Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1726.844mil|Location2.X=1766.214mil|Location1.Y=1922.244mil|Location2.Y=2053.15mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1726.844mil|Location2.X=1766.214mil|Location1.Y=1922.244mil|Location2.Y=2053.15mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Mid Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.441mil|Location2.X=1962.598mil|Location1.Y=1874.016mil|Location2.Y=1962.598mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1722.441mil|Location2.X=1962.598mil|Location1.Y=1874.016mil|Location2.Y=1962.598mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Mid Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.913mil|Location2.X=1963.401mil|Location1.Y=1875.984mil|Location2.Y=2068.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.913mil|Location2.X=1963.401mil|Location1.Y=1875.984mil|Location2.Y=2068.898mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Mid Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Mid Layer 2 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4061.024mil|Location1.Y=1000mil|Location2.Y=4346.457mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1594.488mil|Location2.X=1695.374mil|Location1.Y=1887.795mil|Location2.Y=1968.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1594.488mil|Location2.X=1695.374mil|Location1.Y=1887.795mil|Location2.Y=1968.504mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1110.236mil|Location2.X=3568.898mil|Location1.Y=1000mil|Location2.Y=2550.784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1110.236mil|Location2.X=3568.898mil|Location1.Y=1000mil|Location2.Y=2550.784mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1102.362mil|Location2.X=3194.882mil|Location1.Y=1000mil|Location2.Y=1433.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1102.362mil|Location2.X=3194.882mil|Location1.Y=1000mil|Location2.Y=1433.071mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1797.73mil|Location2.X=1899.606mil|Location1.Y=1887.795mil|Location2.Y=1970.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1797.73mil|Location2.X=1899.606mil|Location1.Y=1887.795mil|Location2.Y=1970.472mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.937mil|Location2.X=3049.213mil|Location1.Y=1369.095mil|Location2.Y=1608.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.937mil|Location2.X=3049.213mil|Location1.Y=1369.095mil|Location2.Y=1608.071mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1659.449mil|Location2.X=1788.587mil|Location1.Y=1852.362mil|Location2.Y=1973.525mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1659.449mil|Location2.X=1788.587mil|Location1.Y=1852.362mil|Location2.Y=1973.525mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.701mil|Location2.X=1850.394mil|Location1.Y=2033.465mil|Location2.Y=2265.748mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.701mil|Location2.X=1850.394mil|Location1.Y=2033.465mil|Location2.Y=2265.748mil|Absolute=True">Modified Polygon: Polygon Shelved  (NONET_L01_P-001) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=2179.134mil|Location1.Y=2285.433mil|Location2.Y=4346.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=2179.134mil|Location1.Y=2285.433mil|Location2.Y=4346.457mil|Absolute=True">Modified Polygon: Polygon Shelved  (Top Layer 1-+5) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1165.354mil|Location2.X=3039.37mil|Location1.Y=1722.441mil|Location2.Y=2200.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1165.354mil|Location2.X=3039.37mil|Location1.Y=1722.441mil|Location2.Y=2200.787mil|Absolute=True">Modified Polygon: Polygon Shelved  (Top Layer 1-VSUP_MAX20410) on Top Layer 1 </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDURCNBTSUN540I5TBYJPMUKZ5MO1YZNPYIBXNMEL5UOS3JJMD35FE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Annular Ring (Minimum=0.2mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.25mm,25.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.25mm,26.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1398.981mil|Location2.X=1408.105mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.25mm,27.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1418.666mil|Location2.X=1427.79mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (10.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.25mm,25.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.25mm,26.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1438.351mil|Location2.X=1447.475mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.25mm,27.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1458.036mil|Location2.X=1467.16mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1459.902mil|Location2.X=1469.026mil|Location1.Y=1891.793mil|Location2.Y=1900.917mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1459.902mil|Location2.X=1469.026mil|Location1.Y=1891.793mil|Location2.Y=1900.917mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (11.797mm,22.555mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (12.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (12.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1497.407mil|Location2.X=1506.531mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (12.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.272mil|Location2.X=1508.396mil|Location1.Y=1862.266mil|Location2.Y=1871.39mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.272mil|Location2.X=1508.396mil|Location1.Y=1862.266mil|Location2.Y=1871.39mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (12.797mm,21.805mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.272mil|Location2.X=1508.396mil|Location1.Y=1921.321mil|Location2.Y=1930.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1499.272mil|Location2.X=1508.396mil|Location1.Y=1921.321mil|Location2.Y=1930.445mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (12.797mm,23.305mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (13.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (13.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1536.777mil|Location2.X=1545.901mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (13.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=1988.056mil|Location2.Y=1997.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=1988.056mil|Location2.Y=1997.18mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.25mm,25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=2027.426mil|Location2.Y=2036.55mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=2027.426mil|Location2.Y=2036.55mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.25mm,26mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=2086.481mil|Location2.Y=2095.605mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1556.462mil|Location2.X=1565.586mil|Location1.Y=2086.481mil|Location2.Y=2095.605mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.25mm,27.5mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.147mil|Location2.X=1585.271mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (14.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1664.729mil|Location2.X=1673.853mil|Location1.Y=2076.639mil|Location2.Y=2085.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1664.729mil|Location2.X=1673.853mil|Location1.Y=2076.639mil|Location2.Y=2085.763mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (17mm,27.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1741.521mil|Location2.X=1750.645mil|Location1.Y=2036.776mil|Location2.Y=2045.9mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1741.521mil|Location2.X=1750.645mil|Location1.Y=2036.776mil|Location2.Y=2045.9mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (18.951mm,26.237mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.21mil|Location2.X=1831.334mil|Location1.Y=2076.639mil|Location2.Y=2085.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.21mil|Location2.X=1831.334mil|Location1.Y=2076.639mil|Location2.Y=2085.763mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (21mm,27.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1910.792mil|Location2.X=1919.916mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1926.54mil|Location2.X=1935.664mil|Location1.Y=2086.481mil|Location2.Y=2095.605mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1926.54mil|Location2.X=1935.664mil|Location1.Y=2086.481mil|Location2.Y=2095.605mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.65mm,27.5mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.477mil|Location2.X=1939.601mil|Location1.Y=1988.056mil|Location2.Y=1997.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.477mil|Location2.X=1939.601mil|Location1.Y=1988.056mil|Location2.Y=1997.18mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.75mm,25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.477mil|Location2.X=1939.601mil|Location1.Y=2027.426mil|Location2.Y=2036.55mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.477mil|Location2.X=1939.601mil|Location1.Y=2027.426mil|Location2.Y=2036.55mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.75mm,26mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.414mil|Location2.X=1943.538mil|Location1.Y=1921.127mil|Location2.Y=1930.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1934.414mil|Location2.X=1943.538mil|Location1.Y=1921.127mil|Location2.Y=1930.251mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (23.85mm,23.3mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (24.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (24.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1950.162mil|Location2.X=1959.286mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (24.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (25.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (25.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1989.532mil|Location2.X=1998.656mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (25.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1979.69mil|Location2.X=1988.814mil|Location1.Y=1862.072mil|Location2.Y=1871.196mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1979.69mil|Location2.X=1988.814mil|Location1.Y=1862.072mil|Location2.Y=1871.196mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (25mm,21.8mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1979.69mil|Location2.X=1988.814mil|Location1.Y=1921.127mil|Location2.Y=1930.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1979.69mil|Location2.X=1988.814mil|Location1.Y=1921.127mil|Location2.Y=1930.251mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (25mm,23.3mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2028.902mil|Location2.X=2038.026mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.75mm,25.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.75mm,26.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2048.588mil|Location2.X=2057.712mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26.75mm,27.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.06mil|Location2.X=2028.184mil|Location1.Y=1891.599mil|Location2.Y=1900.723mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.06mil|Location2.X=2028.184mil|Location1.Y=1891.599mil|Location2.Y=1900.723mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (26mm,22.55mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2068.273mil|Location2.X=2077.397mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2017.583mil|Location2.Y=2026.707mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.75mm,25.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2056.954mil|Location2.Y=2066.078mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.75mm,26.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2087.958mil|Location2.X=2097.082mil|Location1.Y=2096.324mil|Location2.Y=2105.448mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (27.75mm,27.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (28.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (28.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.643mil|Location2.X=2116.767mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (28.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2875.359mil|Location2.X=2884.483mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2875.359mil|Location2.X=2884.483mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (47.75mm,17.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2914.729mil|Location2.X=2923.853mil|Location1.Y=1653.41mil|Location2.Y=1662.534mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2914.729mil|Location2.X=2923.853mil|Location1.Y=1653.41mil|Location2.Y=1662.534mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (48.75mm,16.5mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2914.729mil|Location2.X=2923.853mil|Location1.Y=1712.466mil|Location2.Y=1721.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2914.729mil|Location2.X=2923.853mil|Location1.Y=1712.466mil|Location2.Y=1721.59mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (48.75mm,18mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (52.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (52.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.525mil|Location2.X=3061.649mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (52.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (53.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (53.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3091.895mil|Location2.X=3101.019mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (53.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1643.568mil|Location2.Y=1652.692mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (54.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1682.938mil|Location2.Y=1692.062mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (54.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.265mil|Location2.X=3140.389mil|Location1.Y=1722.308mil|Location2.Y=1731.432mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (54.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3372.393mil|Location2.X=3381.517mil|Location1.Y=1587.896mil|Location2.Y=1597.02mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3372.393mil|Location2.X=3381.517mil|Location1.Y=1587.896mil|Location2.Y=1597.02mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (60.375mm,14.836mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3373.216mil|Location2.X=3382.34mil|Location1.Y=1731.166mil|Location2.Y=1740.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3373.216mil|Location2.X=3382.34mil|Location1.Y=1731.166mil|Location2.Y=1740.29mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (60.396mm,18.475mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.763mil|Location2.X=3420.887mil|Location1.Y=1557.877mil|Location2.Y=1567.001mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.763mil|Location2.X=3420.887mil|Location1.Y=1557.877mil|Location2.Y=1567.001mil|Absolute=True">Minimum Annular Ring: (0.1mm &lt; 0.2mm) Via (61.375mm,14.086mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.1mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.763mil|Location2.X=3420.887mil|Location1.Y=1617.424mil|Location2.Y=1626.548mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.763mil|Location2.X=3420.887mil|Location1.Y=1617.424mil|Location2.Y=1626.548mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (61.375mm,15.586mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3412.586mil|Location2.X=3421.71mil|Location1.Y=1701.639mil|Location2.Y=1710.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3412.586mil|Location2.X=3421.71mil|Location1.Y=1701.639mil|Location2.Y=1710.763mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (61.396mm,17.725mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3412.586mil|Location2.X=3421.71mil|Location1.Y=1760.694mil|Location2.Y=1769.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3412.586mil|Location2.X=3421.71mil|Location1.Y=1760.694mil|Location2.Y=1769.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (61.396mm,19.225mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2135.694mil|Location2.Y=2144.818mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (9.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2175.064mil|Location2.Y=2184.188mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (9.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1379.296mil|Location2.X=1388.42mil|Location1.Y=2214.434mil|Location2.Y=2223.558mil|Absolute=True">Minimum Annular Ring: (0.075mm &lt; 0.2mm) Via (9.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 (Annular Ring=0.075mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDODJA1SFA1BZOMMJM41XL5LPR4BSLXHSUS5IIVCIW0ROTD2UF5P3O"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3097.878mil|Location2.X=3127.723mil|Location1.Y=1322.287mil|Location2.Y=1366.805mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3097.878mil|Location2.X=3127.723mil|Location1.Y=1322.287mil|Location2.Y=1366.805mil|Absolute=True">Net Antennae: Track (53.575mm,8.475mm)(53.575mm,14.312mm) on Top Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True">Net Antennae: Via (10.25mm,25.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True">Net Antennae: Via (10.25mm,26.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1387.248mil|Location2.X=1427.807mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True">Net Antennae: Via (10.25mm,27.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (10.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (10.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1406.933mil|Location2.X=1447.492mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (10.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True">Net Antennae: Via (11.25mm,25.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True">Net Antennae: Via (11.25mm,26.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1426.618mil|Location2.X=1467.177mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True">Net Antennae: Via (11.25mm,27.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (11.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (11.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.303mil|Location2.X=1486.862mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (11.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1448.169mil|Location2.X=1488.727mil|Location1.Y=1871.694mil|Location2.Y=1934.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1448.169mil|Location2.X=1488.727mil|Location1.Y=1871.694mil|Location2.Y=1934.066mil|Absolute=True">Net Antennae: Via (11.797mm,22.555mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (12.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (12.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1485.673mil|Location2.X=1526.232mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (12.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.539mil|Location2.X=1528.097mil|Location1.Y=1842.166mil|Location2.Y=1904.539mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.539mil|Location2.X=1528.097mil|Location1.Y=1842.166mil|Location2.Y=1904.539mil|Absolute=True">Net Antennae: Via (12.797mm,21.805mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.539mil|Location2.X=1528.097mil|Location1.Y=1901.222mil|Location2.Y=1963.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.539mil|Location2.X=1528.097mil|Location1.Y=1901.222mil|Location2.Y=1963.594mil|Absolute=True">Net Antennae: Via (12.797mm,23.305mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (13.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (13.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1525.043mil|Location2.X=1565.602mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (13.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=1967.957mil|Location2.Y=2030.329mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=1967.957mil|Location2.Y=2030.329mil|Absolute=True">Net Antennae: Via (14.25mm,25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=2007.327mil|Location2.Y=2069.699mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=2007.327mil|Location2.Y=2069.699mil|Absolute=True">Net Antennae: Via (14.25mm,26mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=2066.382mil|Location2.Y=2128.754mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1544.728mil|Location2.X=1585.287mil|Location1.Y=2066.382mil|Location2.Y=2128.754mil|Absolute=True">Net Antennae: Via (14.25mm,27.5mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (14.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (14.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.413mil|Location2.X=1604.972mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (14.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1652.996mil|Location2.X=1693.555mil|Location1.Y=2056.539mil|Location2.Y=2118.911mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1652.996mil|Location2.X=1693.555mil|Location1.Y=2056.539mil|Location2.Y=2118.911mil|Absolute=True">Net Antennae: Via (17mm,27.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1729.787mil|Location2.X=1770.346mil|Location1.Y=2016.677mil|Location2.Y=2079.049mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1729.787mil|Location2.X=1770.346mil|Location1.Y=2016.677mil|Location2.Y=2079.049mil|Absolute=True">Net Antennae: Via (18.951mm,26.237mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1810.476mil|Location2.X=1851.035mil|Location1.Y=2056.539mil|Location2.Y=2118.911mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1810.476mil|Location2.X=1851.035mil|Location1.Y=2056.539mil|Location2.Y=2118.911mil|Absolute=True">Net Antennae: Via (21mm,27.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (23.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (23.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.059mil|Location2.X=1939.618mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (23.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1914.807mil|Location2.X=1955.366mil|Location1.Y=2066.382mil|Location2.Y=2128.754mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1914.807mil|Location2.X=1955.366mil|Location1.Y=2066.382mil|Location2.Y=2128.754mil|Absolute=True">Net Antennae: Via (23.65mm,27.5mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1918.744mil|Location2.X=1959.303mil|Location1.Y=1967.957mil|Location2.Y=2030.329mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1918.744mil|Location2.X=1959.303mil|Location1.Y=1967.957mil|Location2.Y=2030.329mil|Absolute=True">Net Antennae: Via (23.75mm,25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1918.744mil|Location2.X=1959.303mil|Location1.Y=2007.327mil|Location2.Y=2069.699mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1918.744mil|Location2.X=1959.303mil|Location1.Y=2007.327mil|Location2.Y=2069.699mil|Absolute=True">Net Antennae: Via (23.75mm,26mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1922.681mil|Location2.X=1963.24mil|Location1.Y=1901.027mil|Location2.Y=1963.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1922.681mil|Location2.X=1963.24mil|Location1.Y=1901.027mil|Location2.Y=1963.4mil|Absolute=True">Net Antennae: Via (23.85mm,23.3mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (24.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (24.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1938.429mil|Location2.X=1978.988mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (24.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (25.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (25.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977.799mil|Location2.X=2018.358mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (25.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1967.957mil|Location2.X=2008.515mil|Location1.Y=1841.972mil|Location2.Y=1904.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1967.957mil|Location2.X=2008.515mil|Location1.Y=1841.972mil|Location2.Y=1904.344mil|Absolute=True">Net Antennae: Via (25mm,21.8mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1967.957mil|Location2.X=2008.515mil|Location1.Y=1901.027mil|Location2.Y=1963.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1967.957mil|Location2.X=2008.515mil|Location1.Y=1901.027mil|Location2.Y=1963.4mil|Absolute=True">Net Antennae: Via (25mm,23.3mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (26.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (26.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.169mil|Location2.X=2057.728mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (26.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True">Net Antennae: Via (26.75mm,25.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True">Net Antennae: Via (26.75mm,26.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2036.854mil|Location2.X=2077.413mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True">Net Antennae: Via (26.75mm,27.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2007.327mil|Location2.X=2047.885mil|Location1.Y=1871.5mil|Location2.Y=1933.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2007.327mil|Location2.X=2047.885mil|Location1.Y=1871.5mil|Location2.Y=1933.872mil|Absolute=True">Net Antennae: Via (26mm,22.55mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (27.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (27.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2056.539mil|Location2.X=2097.098mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (27.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=1997.484mil|Location2.Y=2059.856mil|Absolute=True">Net Antennae: Via (27.75mm,25.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=2036.854mil|Location2.Y=2099.226mil|Absolute=True">Net Antennae: Via (27.75mm,26.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2076.224mil|Location2.X=2116.783mil|Location1.Y=2076.224mil|Location2.Y=2138.596mil|Absolute=True">Net Antennae: Via (27.75mm,27.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (28.25mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (28.25mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2095.909mil|Location2.X=2136.468mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (28.25mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.626mil|Location2.X=2904.184mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.626mil|Location2.X=2904.184mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True">Net Antennae: Via (47.75mm,17.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.996mil|Location2.X=2943.555mil|Location1.Y=1633.311mil|Location2.Y=1695.683mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.996mil|Location2.X=2943.555mil|Location1.Y=1633.311mil|Location2.Y=1695.683mil|Absolute=True">Net Antennae: Via (48.75mm,16.5mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.996mil|Location2.X=2943.555mil|Location1.Y=1692.366mil|Location2.Y=1754.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.996mil|Location2.X=2943.555mil|Location1.Y=1692.366mil|Location2.Y=1754.738mil|Absolute=True">Net Antennae: Via (48.75mm,18mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True">Net Antennae: Via (52.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True">Net Antennae: Via (52.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.791mil|Location2.X=3081.35mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True">Net Antennae: Via (52.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True">Net Antennae: Via (53.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True">Net Antennae: Via (53.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.161mil|Location2.X=3120.72mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True">Net Antennae: Via (53.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1623.468mil|Location2.Y=1685.841mil|Absolute=True">Net Antennae: Via (54.25mm,16.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1662.839mil|Location2.Y=1725.211mil|Absolute=True">Net Antennae: Via (54.25mm,17.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3119.531mil|Location2.X=3160.09mil|Location1.Y=1702.209mil|Location2.Y=1764.581mil|Absolute=True">Net Antennae: Via (54.25mm,18.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3360.66mil|Location2.X=3401.218mil|Location1.Y=1567.797mil|Location2.Y=1630.169mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3360.66mil|Location2.X=3401.218mil|Location1.Y=1567.797mil|Location2.Y=1630.169mil|Absolute=True">Net Antennae: Via (60.375mm,14.836mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3361.483mil|Location2.X=3402.042mil|Location1.Y=1711.067mil|Location2.Y=1773.439mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3361.483mil|Location2.X=3402.042mil|Location1.Y=1711.067mil|Location2.Y=1773.439mil|Absolute=True">Net Antennae: Via (60.396mm,18.475mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.03mil|Location2.X=3440.588mil|Location1.Y=1538.269mil|Location2.Y=1600.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.03mil|Location2.X=3440.588mil|Location1.Y=1538.269mil|Location2.Y=1600.641mil|Absolute=True">Net Antennae: Via (61.375mm,14.086mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.03mil|Location2.X=3440.588mil|Location1.Y=1597.324mil|Location2.Y=1659.696mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.03mil|Location2.X=3440.588mil|Location1.Y=1597.324mil|Location2.Y=1659.696mil|Absolute=True">Net Antennae: Via (61.375mm,15.586mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.853mil|Location2.X=3441.412mil|Location1.Y=1681.54mil|Location2.Y=1743.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.853mil|Location2.X=3441.412mil|Location1.Y=1681.54mil|Location2.Y=1743.912mil|Absolute=True">Net Antennae: Via (61.396mm,17.725mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.853mil|Location2.X=3441.412mil|Location1.Y=1740.595mil|Location2.Y=1802.967mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3400.853mil|Location2.X=3441.412mil|Location1.Y=1740.595mil|Location2.Y=1802.967mil|Absolute=True">Net Antennae: Via (61.396mm,19.225mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2115.594mil|Location2.Y=2177.966mil|Absolute=True">Net Antennae: Via (9.75mm,28.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2154.965mil|Location2.Y=2217.337mil|Absolute=True">Net Antennae: Via (9.75mm,29.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1367.563mil|Location2.X=1408.122mil|Location1.Y=2194.335mil|Location2.Y=2256.707mil|Absolute=True">Net Antennae: Via (9.75mm,30.75mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
