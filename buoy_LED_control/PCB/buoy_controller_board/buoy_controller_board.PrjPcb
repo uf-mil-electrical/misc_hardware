@@ -83,6 +83,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YMBGSFEV
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for buoy_controller_board\Design Rule Check - buoy_controller_v1.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
