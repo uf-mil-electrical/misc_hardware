@@ -30,7 +30,6 @@ Configuration/Backups/
 *.EXTREP
 *.LEP
 *.REP
-*.gbr
 
 # Ignore .json files
 *.json
