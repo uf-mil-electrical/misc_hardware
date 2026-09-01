@@ -1,0 +1,452 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9/1/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:22:48</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc" class="file"><acronym title="C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc">C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">16</td></tr>
+</table>
+</td>
+</table><a name="IDK5UTVOV4QXMTJLYTZTJAHG0Z0EPJYTH1UCSUOSIU5TSLIP5OJ4BI"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZPUFNUU1CDWUKZ0Q2W4Q0FIFRMR33G0BMBSJN2N3WUKWPCGPU4LG">Clearance Constraint (Gap=0.3mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQBYYFKN5YJ3GMZ2SDCUKWXRDHKNW01GV45C0YTD5OWO2DVTMTH3L">Clearance Constraint (Gap=0mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL512K4QCF4AQBC3ZM1V0FACNRF2MGMXXMCF1XWCIBPXWGGGCCEAN">Clearance Constraint (Gap=0.3mm) (InPolygon),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDUHIM4MBISD5ORAV1IWUJU5RLMV1MXSPCQUDCZF1ITD1O0HVDNRB">Clearance Constraint (Gap=0mm) ((InPolygon AND InNetClass('High_Current_Nets'))),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZVOVDZ0BMPDCNR5OGK14D2XHTBKTQHQHDHXPUSI15EYIKS33QVOP">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGSE3334JSKRQJJAXULTPNPBVRO3C3M0TXWVDDWIZ3NDYNS41TW0H">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNHDDDKGOEOKSNHJDVRSLCCPNON11SBPIG5Q1KOLE3GOPLYO422UB">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2LIVYUT42JJ2P1VITMNMXHAZGJVPZGFHRJ1R5GBD4K1E2M2XZEBP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">16</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4XKDUD5XMGLTLUJ11JMTXIBCKC5VUJPX4NE4XENXECHSJBLXAKKF">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHILCTNYLWCF4PPNE55XAT1HORHVHPKMKI0ACDTKFUZVXO4TE2IOK">Width Constraint (Min=0.1mm) (Max=100mm) (Preferred=0.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDV2UY22PJJAOWMVTKCPYICVP22HIYA23OUODFKJNR54IWOU1Z51TN">Width Constraint (Min=0.263mm) (Max=0.379mm) (Preferred=0.379mm) (InNetClass('nRF Signal'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2BA4TCJJ5QRKMK1NDMHGQ0UPYPS3ODTUCKJCT5FPSS5GT4EEYJDL">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZQS0ZOZWMWXSHL3YDINY3NUGJRFVMPAKEU3HWD0II310MHEXYZB">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5KPPGQZKECUYDXKWB4GLFJ4OVKADJJW5W40DXZOHGNPFQVCT22GB">Minimum Annular Ring (Minimum=0.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDG40H2VOW42EWCNVLV014NWJRSJQ4BI54A3KCP2BKH3QPX3OCI45">Hole Size Constraint (Min=0.3mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0BMFQCBG3PQIIOVVUIOD11PKP2ITMQNJCUSF3KUMGIU2LWF42XD">Hole To Hole Clearance (Gap=0.25mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBYF4SVBA4ASXER4XGAMXYPAUXK5TVBVZIQJT0KO1AOZF0FNOC1UN">Minimum Solder Mask Sliver (Gap=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOZIO1GHISQ2POEZQYHUB3QA1FHWJV0AOCNF1EEDUPOSPBMYC5MVH">Silk To Solder Mask (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDN1JVSQ3M0VEWOIPNEMQQL5YIMOGQVVX21RI20UOLNKFVO3HDBWNL">Silk to Silk (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLJ0IDDTEUQYCFOMVZILKOYSBXGEZGY0JJ3NUUMJGUVNDHBMUMPFO">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZ2HBE2Y3VC1IHK1NL5A1WYMF0MLUPSYOVWNQDJFTWLP21KS0CHZN">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3M1QBJAVJF4XFQ2WUXBDW5354E3SISXXNGXJ1TGL2OZPHCOAD2TE">Matched Lengths(Delay Tolerance=10ps) (InNetClass('XTAL_Nets'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMDIRHVVSAJIKESLSZN1F1Z0MP1R4ZEJSWJGLAKU352LWUKXS3PJ">Matched Lengths(Delay Tolerance=100ps) (Phase Delay Tolerance=5ps) (Matching Distance=12.7mm) (InDifferentialPairClass('Ethernet_Pairs') or InDifferentialPairClass('USB_Pairs') or InDifferentialPairClass('CAN_Pairs'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0VVDYSJ2VT52JABKS1XZL0YPWYLABH3BJMTFFLHEOJ2STKCRKLJ">Room R8 (Bounding Region = (35.548mm, 67.948mm, 93.502mm, 73.852mm) (InComponentClass('R8'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1XI4G0PFHBTKG3FVPLUYADOP0JBJR3OFV5J35AJ0ZS2TB12AQS5O">Room R6 (Bounding Region = (35.548mm, 55.948mm, 93.502mm, 61.852mm) (InComponentClass('R6'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFEYKAXXECYWDM0RFFE0DSEUGLC0FTYX2AVP0TOBTVOUDU0NDUCZF">Room R1 (Bounding Region = (35.548mm, 25.948mm, 93.502mm, 31.852mm) (InComponentClass('R1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4XRFQNIII3ZCKVKQBTGQV40ALCPK11I4BYXPMMPNNNSAZUB4S1BP">Room R7 (Bounding Region = (35.548mm, 61.948mm, 93.502mm, 67.852mm) (InComponentClass('R7'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWX0GIKGZW01ODHGBISMSKI11RM04OGNYCHVKVIFX5K1I44JG3WKL">Room R2 (Bounding Region = (35.548mm, 31.949mm, 93.501mm, 37.852mm) (InComponentClass('R2'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWCMPD5HFP1DBCU0KTP3THJVJJGEUY2M45NA0RCL5POGZH3UOVAYG">Room R4 (Bounding Region = (35.548mm, 43.948mm, 93.502mm, 49.852mm) (InComponentClass('R4'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBR5ZTAXF4MBMJTU0JG1YNFRKRCFPWPQ5G2LKHJPPEI0PUD3TNDEC">Room R5 (Bounding Region = (35.549mm, 49.948mm, 93.502mm, 55.851mm) (InComponentClass('R5'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID02BEV2WJCTZYHG0QQ5XLVVZX0KSLO2QVTFMKQ5IHUWKF0UDSWITP">Room R3 (Bounding Region = (35.548mm, 37.948mm, 93.502mm, 43.852mm) (InComponentClass('R3'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID210VRUNO01HFOLOPKPISJTTLLLUZ2H4535VEP5KXLTXSKQQ1EUDB">Height Constraint (Min=0mm) (Max=1816.048mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">16</td>
+</tr>
+</table><br><a name="ID2LIVYUT42JJ2P1VITMNMXHAZGJVPZGFHRJ1R5GBD4K1E2M2XZEBP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.598mil|Location2.X=3359.236mil|Location1.Y=2004.937mil|Location2.Y=2099.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.598mil|Location2.X=3359.236mil|Location1.Y=2004.937mil|Location2.Y=2099.425mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C7_R5-2(56.575mm,27.5mm) on Bottom Layer [Unplated] And Via (59.5mm,25.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.457mil|Location2.X=1869.095mil|Location1.Y=2302.165mil|Location2.Y=2396.654mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.457mil|Location2.X=1869.095mil|Location1.Y=2302.165mil|Location2.Y=2396.654mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (18.75mm,35.05mm) from Top Layer to Bottom Layer And Pad C7_R6-2(21.675mm,33.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.614mil|Location2.X=3359.961mil|Location1.Y=2477.362mil|Location2.Y=2571.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3211.614mil|Location2.X=3359.961mil|Location1.Y=2477.362mil|Location2.Y=2571.85mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C7_R7-2(56.575mm,39.5mm) on Bottom Layer [Unplated] And Via (59.518mm,37.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.457mil|Location2.X=1869.095mil|Location1.Y=2774.606mil|Location2.Y=2869.095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.457mil|Location2.X=1869.095mil|Location1.Y=2774.606mil|Location2.Y=2869.095mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (18.75mm,47.05mm) from Top Layer to Bottom Layer And Pad C7_R8-2(21.675mm,45.5mm) on Bottom Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4080.709mil|Location1.Y=1000mil|Location2.Y=2919.291mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1000mil|Location2.X=4080.709mil|Location1.Y=1000mil|Location2.Y=2919.291mil|Absolute=True">Un-Routed Net Constraint: Polygon  (meow) on Power Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1613.189mil|Location2.X=1932.087mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1613.189mil|Location2.X=1932.087mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (16mm,1.95mm) from Top Layer to Bottom Layer And Via (23.25mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1898.622mil|Location2.X=2217.52mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1898.622mil|Location2.X=2217.52mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (23.25mm,1.95mm) from Top Layer to Bottom Layer And Via (30.5mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2184.055mil|Location2.X=2502.953mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2184.055mil|Location2.X=2502.953mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (30.5mm,1.95mm) from Top Layer to Bottom Layer And Via (37.75mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2469.488mil|Location2.X=2788.386mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2469.488mil|Location2.X=2788.386mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (37.75mm,1.95mm) from Top Layer to Bottom Layer And Via (45mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.921mil|Location2.X=3073.819mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.921mil|Location2.X=3073.819mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (45mm,1.95mm) from Top Layer to Bottom Layer And Via (52.25mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.354mil|Location2.X=3359.252mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3040.354mil|Location2.X=3359.252mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (52.25mm,1.95mm) from Top Layer to Bottom Layer And Via (59.5mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3325.787mil|Location2.X=3644.685mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3325.787mil|Location2.X=3644.685mil|Location1.Y=1060.04mil|Location2.Y=1093.504mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (59.5mm,1.95mm) from Top Layer to Bottom Layer And Via (66.75mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3434.035mil|Location2.X=3644.685mil|Location1.Y=1418.327mil|Location2.Y=1565.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3434.035mil|Location2.X=3644.685mil|Location1.Y=1418.327mil|Location2.Y=1565.945mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (62.25mm,11.05mm) from Top Layer to Bottom Layer And Via (66.75mm,13.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3434.055mil|Location2.X=3644.669mil|Location1.Y=1890.748mil|Location2.Y=2038.402mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3434.055mil|Location2.X=3644.669mil|Location1.Y=1890.748mil|Location2.Y=2038.402mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (62.25mm,23.05mm) from Top Layer to Bottom Layer And Via (66.75mm,25.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.22mil|Location2.X=3644.685mil|Location1.Y=1060.04mil|Location2.Y=1565.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.22mil|Location2.X=3644.685mil|Location1.Y=1060.04mil|Location2.Y=1565.945mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (66.75mm,13.95mm) from Top Layer to Bottom Layer And Via (66.75mm,1.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.205mil|Location2.X=3645.394mil|Location1.Y=2004.937mil|Location2.Y=2510.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\russe\Repositories\MIL\misc_hardware\LEDs\8x8 Neopixel Matrix V2\Layout.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.205mil|Location2.X=3645.394mil|Location1.Y=2004.937mil|Location2.Y=2510.827mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Via (66.75mm,25.95mm) from Top Layer to Bottom Layer And Via (66.768mm,37.95mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
