@@ -1,0 +1,408 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8/31/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">5:53:10 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc" class="file"><acronym title="C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc">C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">12</td></tr>
+</table>
+</td>
+</table><a name="IDSGWF0ZFVCYVEPAZOVE5YJSPEOGQELMWRQUJH4QKDTQHHE5IC5I5P"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDF2KPJVNWCERQHQBW5RUKARFHDJOBT1HXOPAZISDEUBQEPQSUEIHL">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDIQW1P4NISBFVHAY4IIQQ4SL5YNWVOG0LB0GV3VNAPHUZLR0MX2S">Clearance Constraint (Gap=0.3mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL2W1AUDLLJJUD0V4A1K3I1BM1MUKUVFA1JEUY3VJHVSSR4N2R4K">Clearance Constraint (Gap=0mm) (not InAnyDifferentialPair),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDALQ2XLXVWJTRK13LO0FYBIH12RPPS4M4ZKPRJHJAHX5Y2HVMC0G">Clearance Constraint (Gap=0.3mm) (InPolygon),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4J1JH3P2RWNQCPKIN4T0WUMZSEGK4JMVK5MZBQEI5RRXGJRPXD4E">Clearance Constraint (Gap=0mm) ((InPolygon AND InNetClass('High_Current_Nets'))),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZ3GDLALSDEX4CSZDPORE04TMDIHG302JERQSW3BZIQMKJOZNGIBL">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDC2XPIPCWIJEOENQZS0X2JLWJOBQK35NARRKTTKEIHVXDXWUZRAFD">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTNUHMZ0KTDEBD2EHPBQPFNJPLK2N2N4UWSKYZAMJMK22QP1SR4TH">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSSQLHCIX4GHFPBYDG1YOFCTSYLEV2XL1YVLFRJB50ITOPIWRVDG">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRIAG3XEBK3KBE43OQCYXCEVCBM2UFPW0KYEAHDGP10ZF21MZZ20F">Width Constraint (Min=0.263mm) (Max=0.379mm) (Preferred=0.379mm) (InNetClass('nRF Signal'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSE1O5PE0XFBQEXYPXYJDARLBEOC1EA0SL5SX3PFRC5YQEV11VAIN">Width Constraint (Min=0.1mm) (Max=100mm) (Preferred=0.5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCRPS1DWGLLFZJB0WQV1IJ4IJ0FNRFVUQRCJEQCB420MX1SKMUFVJ">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1U1AR0VRJ2ZMMRAMHCPS1JQOHFIRQN5SZ3MZII302UF0OMIBEUD">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMBQ1STE2UPQRNHIEEDUL2FYUC2DNRUYGBXVOQM1H0WDCZT4YZPH">Minimum Annular Ring (Minimum=0.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWIEA3HQDW532DEI4LLF31BMR3LLVF1IMJK3E03J0ZHKSXSS4SCVG">Hole Size Constraint (Min=0.3mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3MMXMPIVKUHIJZRQJ4PL3ZFMHMJDXFKBPDGVTRIURBB1VRDEFHCL">Hole To Hole Clearance (Gap=0.25mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBKKZIKRZYISAKDL01HONTWDO5LSN2EMMC0HA3NSAARQYXSQOBXK">Minimum Solder Mask Sliver (Gap=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQXE1JPMNEGNBIH4LILNXREAT0PPN42FR3UYPZFDFNLMDYDE0LWU">Silk To Solder Mask (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAQ4U2AJFWLE5HKZKPEBCDX3K4KCZAMJJFD5EVFDODU5DLFIVK0BM">Silk to Silk (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNZJLFVD2X53JL2WYG2L5KWZG5LMCRHVNAUBEUWGLOGBTH3SZI2VE">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEPOA1MG3ANBFO4YXIN103IVD1P54GJBXEROL1IBVFIWO21ZHEXNN">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBD5IOFCBLO5POPKN3TQA0GT1TBBKMR2VRLKAFWEJVYT3HGJRI2KJ">Matched Lengths(Delay Tolerance=100ps) (Phase Delay Tolerance=5ps) (Matching Distance=12.7mm) (InDifferentialPairClass('Ethernet_Pairs') or InDifferentialPairClass('USB_Pairs') or InDifferentialPairClass('CAN_Pairs'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDV1QQK0SJ1DSGPBXVQJODQHE0EWMPCGT5B1Y4CQ3GCICCGIYHWP">Matched Lengths(Delay Tolerance=10ps) (InNetClass('XTAL_Nets'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTTUYPEFLBOUZGESUTW1K0GRC03CG1VGBKPKKETWBVZP54YWFNP">Height Constraint (Min=0mm) (Max=1816.048mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">12</td>
+</tr>
+</table><br><a name="IDNZJLFVD2X53JL2WYG2L5KWZG5LMCRHVNAUBEUWGLOGBTH3SZI2VE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.153mil|Location2.X=1442.283mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.153mil|Location2.X=1442.283mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (10.5mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.524mil|Location2.X=1481.653mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1432.524mil|Location2.X=1481.653mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True">Net Antennae: Via (11.5mm,26.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1471.894mil|Location2.X=1521.023mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1471.894mil|Location2.X=1521.023mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (12.5mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1540.791mil|Location2.X=1589.921mil|Location1.Y=2003.39mil|Location2.Y=2080.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1540.791mil|Location2.X=1589.921mil|Location1.Y=2003.39mil|Location2.Y=2080.238mil|Absolute=True">Net Antennae: Via (14.25mm,26mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1914.807mil|Location2.X=1963.936mil|Location1.Y=2003.39mil|Location2.Y=2080.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1914.807mil|Location2.X=1963.936mil|Location1.Y=2003.39mil|Location2.Y=2080.238mil|Absolute=True">Net Antennae: Via (23.75mm,26mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1973.862mil|Location2.X=2022.992mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1973.862mil|Location2.X=2022.992mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (25.25mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.232mil|Location2.X=2062.362mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.232mil|Location2.X=2062.362mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True">Net Antennae: Via (26.25mm,26.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2052.602mil|Location2.X=2101.732mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2052.602mil|Location2.X=2101.732mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (27.25mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.972mil|Location2.X=2141.102mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2091.972mil|Location2.X=2141.102mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True">Net Antennae: Via (28.25mm,26.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2131.343mil|Location2.X=2180.472mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2131.343mil|Location2.X=2180.472mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (29.25mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1314.413mil|Location2.X=1363.543mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1314.413mil|Location2.X=1363.543mil|Location1.Y=1973.862mil|Location2.Y=2050.711mil|Absolute=True">Net Antennae: Via (8.5mm,25.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1353.783mil|Location2.X=1402.913mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Documents\GitHub\erikn-f\matrix_8x8_ws2812_LEDs\misc_hardware\buoy_LED_control\PCB\buoy_controller_board\buoy_controller_v1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1353.783mil|Location2.X=1402.913mil|Location1.Y=2013.232mil|Location2.Y=2090.081mil|Absolute=True">Net Antennae: Via (9.5mm,26.25mm) from Top Layer 1 to Bottom Layer 1 </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
