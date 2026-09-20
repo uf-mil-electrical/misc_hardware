@@ -1,0 +1,7 @@
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/pioasm.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/edit_cache.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/rebuild_cache.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/list_install_components.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/install.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/install/local.dir
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm/CMakeFiles/install/strip.dir

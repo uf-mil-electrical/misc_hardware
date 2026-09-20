@@ -1,0 +1,5 @@
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm-install/pioasm/pioasm
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm-install/pioasm/pioasmTargets.cmake
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm-install/pioasm/pioasmTargets-release.cmake
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm-install/pioasm/pioasmConfig.cmake
+/home/aiden/misc_hardware/RobotX2026/task-2/light-node/firmware/build/pioasm-install/pioasm/pioasmConfigVersion.cmake
