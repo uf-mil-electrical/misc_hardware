@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [EvoLogics_Transducer_Connector.PrjPcb]
+   Generated File[Connector.TXT]
+   Generated File[Connector.LDP]
+   Generated File[Connector.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 1:36:28 PM On 9/24/2026

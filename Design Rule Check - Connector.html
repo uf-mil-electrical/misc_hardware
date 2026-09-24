@@ -1,0 +1,536 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9/24/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">1:33:17 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc">C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">52</td></tr>
+</table>
+</td>
+</table><a name="IDD0PXYV0BFG01EHFZCZ0GISPYJBIZFA2CJ3Z31J0GFJTSBHAPDSL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKKQAUJWD1BAJG2YMCVINVPK2JD43TQ1UWP5AU3P04XI3RUC4EGYG">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4NYU3PWTTMIQMB4CZX5O2V2JQKAU2AD3LB2S5KCQWWJ0U5QJDCVN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOJAE1VZFFWIFCTO1JH1BT0FSSJQ3XE5DOM2ORMG5RYYL5TPRVX0K">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXLJXIAJEBJBRBRYJTXT5J5BNOGT5ZKE4YKQYJCEPK4T4LSFGDA2C">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIZJKFWQIMYS0GOQ34MN5JDS4YHDRNW5JLGOGE0SUXHHDSNCZVJK">Width Constraint (Min=0.1mm) (Max=1.5mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAZMRS433FIIZIMT21E5VP3DMUGKNEHOMI4A1G3JWA4GUF2ZONW5J">Routing Layers(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL24DCAL4JJSJGNDFJA1CWNUI0ONB3H0TPSXISDL3Y5UIB2PNDBE">Routing Via (MinHoleWidth=0.254mm) (MaxHoleWidth=0.254mm) (PreferredHoleWidth=0.254mm) (MinWidth=0.508mm) (MaxWidth=0.508mm) (PreferedWidth=0.508mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0UDSBZHOYKRHJYFD4QLOTACR2M4H4RP5CLU4DXPA1FI0ZD2H54MJ">Differential Pairs Uncoupled Length using the Gap Constraints (Min=0.254mm) (Max=0.254mm) (Prefered=0.254mm)  and Width Constraints (Min=0.254mm) (Max=0.254mm) (Prefered=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0UYK5T523VTYCZXSDT2ABSECBC3VSIKHY0ITJ0M2FLY3CNFZWTTP">SMD Neck-Down Constraint (Percent=100%) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVFMZ5PB1WLKPMSD0JQZNOZWQE1LHWFTY5ELREHKQZOHCKOS2FSK">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDLIC0GS5I5IUG3UQIHQFZEKQBMW5KPJPHXAOB4KAK2SGMYTQEMVJ">Minimum Annular Ring (Minimum=0.254mm) (All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1Y3OERXIHLNFCQKTHS4QBJZI4IVQASWWTJB545HXEPA0J1DBO0BO">Hole Size Constraint (Min=0.254mm) (Max=7.62mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYX5ADPLOJUUJPEY5IBVGKXX55NIPABIRHHV4DUO5L0I5C23NIIEG">Pads and Vias to follow the Drill pairs settings</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWLQE055FIOQWKLIRMYF13TRMFIPNO3DBXQWA45FZ3KJGOKNY3Y5L">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDU2DYHNHCYNL4JWFVPNPSPIWJCBOQGX1Y4NGPSU3PDULZII0H4OC">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC3VP3WJ0DRD2LBM3MAN4DBEPCKG4CSW0U20ACYM25UYBXLP1VGQN">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">27</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4BUTCY01MJURJM4RMXZBPX22BKQQQTYPJIZTWXGRUWRXRVYCNEHH">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">15</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4GHOB2YQB4DTY4I00X2AYBBMCZVDB24ZAZNN1FMCANXPXDSNEI">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZXYBNI0IULN2OSQSDLGPCSXOKBRGS5WRTRSXEABSWQKYH0RNDEAP">Component Clearance Constraint ( Horizontal Gap = 0.254mm, Vertical Gap = 0.254mm ) (All),(All) </a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEEAPA5UGNJ5QFWTPJRNDZOCILIKFNSEOLG5SKELVE4S3OAMCKDJK">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">52</td>
+</tr>
+</table><br><a name="IDKKQAUJWD1BAJG2YMCVINVPK2JD43TQ1UWP5AU3P04XI3RUC4EGYG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1096.613mil|Location2.X=1100.237mil|Location1.Y=96145.66mil|Location2.Y=96149.285mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1096.613mil|Location2.X=1100.237mil|Location1.Y=96145.66mil|Location2.Y=96149.285mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Arc (0.023mm,-0.039mm) on Keep-Out Layer And Pad Free-2(-16.4mm,-16.6mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2396.81mil|Location2.X=2400.434mil|Location1.Y=96145.66mil|Location2.Y=96149.285mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2396.81mil|Location2.X=2400.434mil|Location1.Y=96145.66mil|Location2.Y=96149.285mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Arc (0.027mm,0.029mm) on Keep-Out Layer And Pad Free-2(16.5mm,-16.6mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1096.613mil|Location2.X=1100.237mil|Location1.Y=96043.582mil|Location2.Y=96047.207mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1096.613mil|Location2.X=1100.237mil|Location1.Y=96043.582mil|Location2.Y=96047.207mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Free-2(-16.4mm,-16.6mm) on Multi-Layer And Track (-17.444mm,-19.193mm)(17.556mm,-19.193mm) on Keep-Out Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.967mil|Location2.X=2390.592mil|Location1.Y=96043.582mil|Location2.Y=96047.207mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.967mil|Location2.X=2390.592mil|Location1.Y=96043.582mil|Location2.Y=96047.207mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Free-2(16.5mm,-16.6mm) on Multi-Layer And Track (-17.444mm,-19.193mm)(17.556mm,-19.193mm) on Keep-Out Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDOJAE1VZFFWIFCTO1JH1BT0FSSJQ3XE5DOM2ORMG5RYYL5TPRVX0K"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.614mil|Location2.X=1911.575mil|Location1.Y=96542.985mil|Location2.Y=96877.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1576.614mil|Location2.X=1911.575mil|Location1.Y=96542.985mil|Location2.Y=96877.945mil|Absolute=True">Un-Routed Net Constraint: Via (0mm,-2.3mm) from Top Layer to Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDL24DCAL4JJSJGNDFJA1CWNUI0ONB3H0TPSXISDL3Y5UIB2PNDBE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Routing Via (MinHoleWidth=0.254mm) (MaxHoleWidth=0.254mm) (PreferredHoleWidth=0.254mm) (MinWidth=0.508mm) (MaxWidth=0.508mm) (PreferedWidth=0.508mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1582.114mil|Location2.X=1906.075mil|Location1.Y=96548.485mil|Location2.Y=96872.445mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1582.114mil|Location2.X=1906.075mil|Location1.Y=96548.485mil|Location2.Y=96872.445mil|Absolute=True">Routing Via Style: Via (0mm,-2.3mm) from Top Layer to Bottom Layer Actual Size : 8mm Actual Hole Size : 8mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDDLIC0GS5I5IUG3UQIHQFZEKQBMW5KPJPHXAOB4KAK2SGMYTQEMVJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Annular Ring (Minimum=0.254mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2622.151mil|Location2.X=2629.818mil|Location1.Y=97151.514mil|Location2.Y=97159.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2622.151mil|Location2.X=2629.818mil|Location1.Y=97151.514mil|Location2.Y=97159.18mil|Absolute=True">Minimum Annular Ring: (No Ring) Pad Free-2(22.4mm,9mm) on Multi-Layer (Annular Ring missing on Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=858.371mil|Location2.X=866.038mil|Location1.Y=97151.514mil|Location2.Y=97159.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=858.371mil|Location2.X=866.038mil|Location1.Y=97151.514mil|Location2.Y=97159.18mil|Absolute=True">Minimum Annular Ring: (No Ring) Pad Free-2(-22.4mm,9mm) on Multi-Layer (Annular Ring missing on Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1740.261mil|Location2.X=1747.928mil|Location1.Y=96706.632mil|Location2.Y=96714.298mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1740.261mil|Location2.X=1747.928mil|Location1.Y=96706.632mil|Location2.Y=96714.298mil|Absolute=True">Minimum Annular Ring: (No Ring) Via (0mm,-2.3mm) from Top Layer to Bottom Layer (Annular Ring missing on Top Layer)</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID1Y3OERXIHLNFCQKTHS4QBJZI4IVQASWWTJB545HXEPA0J1DBO0BO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=0.254mm) (Max=7.62mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.989mil|Location2.X=1902.2mil|Location1.Y=96552.36mil|Location2.Y=96868.57mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.989mil|Location2.X=1902.2mil|Location1.Y=96552.36mil|Location2.Y=96868.57mil|Absolute=True">Hole Size Constraint: (8mm &gt; 7.62mm) Via (0mm,-2.3mm) from Top Layer to Bottom Layer Actual Hole Size = 8mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDC3VP3WJ0DRD2LBM3MAN4DBEPCKG4CSW0U20ACYM25UYBXLP1VGQN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1253.056mil|Location2.X=1260.723mil|Location1.Y=97498.492mil|Location2.Y=97506.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1253.056mil|Location2.X=1260.723mil|Location1.Y=97498.492mil|Location2.Y=97506.158mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D1-2(-11.5mm,17.15mm) on Top Layer And Text "D3" (-12.62mm,17.813mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.811mil|Location2.X=2381.478mil|Location1.Y=97494.555mil|Location2.Y=97502.221mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.811mil|Location2.X=2381.478mil|Location1.Y=97494.555mil|Location2.Y=97502.221mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D2-2(17mm,17.05mm) on Top Layer And Text "D4" (15.33mm,17.713mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1071.954mil|Location2.X=1079.621mil|Location1.Y=97491.602mil|Location2.Y=97499.269mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1071.954mil|Location2.X=1079.621mil|Location1.Y=97491.602mil|Location2.Y=97499.269mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D3-1(-16.1mm,17.15mm) on Top Layer And Text "D1" (-17.416mm,17.638mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2194.001mil|Location2.X=2201.668mil|Location1.Y=97494.555mil|Location2.Y=97502.221mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2194.001mil|Location2.X=2201.668mil|Location1.Y=97494.555mil|Location2.Y=97502.221mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D4-1(12.4mm,17.05mm) on Top Layer And Text "D2" (11.13mm,17.713mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.706mil|Location2.X=2457.956mil|Location1.Y=96900.121mil|Location2.Y=96911.371mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.706mil|Location2.X=2457.956mil|Location1.Y=96900.121mil|Location2.Y=96911.371mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Pad D5-1(17mm,3.985mm) on Top Layer And Text "D8" (18.23mm,1.138mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.346mil|Location2.X=1098.013mil|Location1.Y=96872.449mil|Location2.Y=96880.115mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1090.346mil|Location2.X=1098.013mil|Location1.Y=96872.449mil|Location2.Y=96880.115mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D6-2(-16.1mm,3.35mm) on Top Layer And Text "D7" (-17.27mm,0.388mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1291.229mil|Location2.X=1298.896mil|Location1.Y=96872.449mil|Location2.Y=96880.115mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1291.229mil|Location2.X=1298.896mil|Location1.Y=96872.449mil|Location2.Y=96880.115mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D7-1(-11.2mm,3.35mm) on Top Layer And Text "D6" (-13.945mm,0.388mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2262.686mil|Location2.X=2270.353mil|Location1.Y=96901.976mil|Location2.Y=96909.643mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2262.686mil|Location2.X=2270.353mil|Location1.Y=96901.976mil|Location2.Y=96909.643mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad D8-2(12.5mm,4.05mm) on Top Layer And Text "D5" (10.73mm,1.138mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.755mil|Location2.X=1691.005mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.755mil|Location2.X=1691.005mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P1-1(-2.066mm,16.95mm) on Top Layer And Track (-1.266mm,16.4mm)(-0.741mm,16.4mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.755mil|Location2.X=1691.005mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1679.755mil|Location2.X=1691.005mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P1-2(-2.066mm,11.65mm) on Top Layer And Track (-1.266mm,12.2mm)(-0.741mm,12.2mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1476.999mil|Location2.X=1488.249mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1476.999mil|Location2.X=1488.249mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P1-5(-6.066mm,16.95mm) on Top Layer And Track (-7.391mm,16.4mm)(-6.866mm,16.4mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1476.999mil|Location2.X=1488.249mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1476.999mil|Location2.X=1488.249mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P1-6(-6.066mm,11.65mm) on Top Layer And Track (-7.391mm,12.2mm)(-6.866mm,12.2mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2014.4mil|Location2.X=2025.65mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2014.4mil|Location2.X=2025.65mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P2-1(6.434mm,16.95mm) on Top Layer And Track (7.234mm,16.4mm)(7.759mm,16.4mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.173mil|Location2.X=1981.423mil|Location1.Y=97247.102mil|Location2.Y=97258.352mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.173mil|Location2.X=1981.423mil|Location1.Y=97247.102mil|Location2.Y=97258.352mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.197mm &lt; 0.254mm) Between Pad P2-2(6.434mm,11.65mm) on Top Layer And Text "P4" (3.121mm,10.712mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2014.4mil|Location2.X=2025.65mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2014.4mil|Location2.X=2025.65mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P2-2(6.434mm,11.65mm) on Top Layer And Track (7.234mm,12.2mm)(7.759mm,12.2mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1893.115mil|Location2.X=1900.781mil|Location1.Y=97278.884mil|Location2.Y=97286.55mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1893.115mil|Location2.X=1900.781mil|Location1.Y=97278.884mil|Location2.Y=97286.55mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad P2-4(4.434mm,11.65mm) on Top Layer And Text "P4" (3.121mm,10.712mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1811.645mil|Location2.X=1822.895mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1811.645mil|Location2.X=1822.895mil|Location1.Y=97441.06mil|Location2.Y=97452.31mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P2-5(2.434mm,16.95mm) on Top Layer And Track (1.109mm,16.4mm)(1.634mm,16.4mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1854.166mil|Location2.X=1865.416mil|Location1.Y=97217.112mil|Location2.Y=97228.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1854.166mil|Location2.X=1865.416mil|Location1.Y=97217.112mil|Location2.Y=97228.362mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.11mm &lt; 0.254mm) Between Pad P2-6(2.434mm,11.65mm) on Top Layer And Text "P4" (3.121mm,10.712mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1811.645mil|Location2.X=1822.895mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1811.645mil|Location2.X=1822.895mil|Location1.Y=97275.706mil|Location2.Y=97286.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P2-6(2.434mm,11.65mm) on Top Layer And Track (1.109mm,12.2mm)(1.634mm,12.2mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.674mil|Location2.X=1486.924mil|Location1.Y=96944.997mil|Location2.Y=96956.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.674mil|Location2.X=1486.924mil|Location1.Y=96944.997mil|Location2.Y=96956.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P3-1(-6.1mm,3.25mm) on Top Layer And Track (-7.425mm,3.8mm)(-6.9mm,3.8mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.674mil|Location2.X=1486.924mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.674mil|Location2.X=1486.924mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P3-2(-6.1mm,8.55mm) on Top Layer And Track (-7.425mm,8mm)(-6.9mm,8mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1599.69mil|Location2.X=1610.94mil|Location1.Y=96944.997mil|Location2.Y=96956.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1599.69mil|Location2.X=1610.94mil|Location1.Y=96944.997mil|Location2.Y=96956.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P3-3(-4.1mm,3.25mm) on Top Layer And Track (-3.3mm,3.8mm)(-2.775mm,3.8mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1599.69mil|Location2.X=1610.94mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1599.69mil|Location2.X=1610.94mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P3-4(-4.1mm,8.55mm) on Top Layer And Track (-3.3mm,8mm)(-2.775mm,8mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1889.825mil|Location2.X=1901.075mil|Location1.Y=96948.934mil|Location2.Y=96960.184mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1889.825mil|Location2.X=1901.075mil|Location1.Y=96948.934mil|Location2.Y=96960.184mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P4-1(4.419mm,3.35mm) on Top Layer And Track (3.094mm,3.9mm)(3.619mm,3.9mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1889.825mil|Location2.X=1901.075mil|Location1.Y=97114.289mil|Location2.Y=97125.539mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1889.825mil|Location2.X=1901.075mil|Location1.Y=97114.289mil|Location2.Y=97125.539mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P4-2(4.419mm,8.65mm) on Top Layer And Track (3.094mm,8.1mm)(3.619mm,8.1mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.841mil|Location2.X=2025.091mil|Location1.Y=96948.934mil|Location2.Y=96960.184mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.841mil|Location2.X=2025.091mil|Location1.Y=96948.934mil|Location2.Y=96960.184mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P4-3(6.419mm,3.35mm) on Top Layer And Track (7.219mm,3.9mm)(7.744mm,3.9mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.841mil|Location2.X=2025.091mil|Location1.Y=97114.289mil|Location2.Y=97125.539mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2013.841mil|Location2.X=2025.091mil|Location1.Y=97114.289mil|Location2.Y=97125.539mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad P4-4(6.419mm,8.65mm) on Top Layer And Track (7.219mm,8.1mm)(7.744mm,8.1mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4BUTCY01MJURJM4RMXZBPX22BKQQQTYPJIZTWXGRUWRXRVYCNEHH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1291.229mil|Location2.X=1298.896mil|Location1.Y=96832.462mil|Location2.Y=96840.128mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1291.229mil|Location2.X=1298.896mil|Location1.Y=96832.462mil|Location2.Y=96840.128mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (-11.175mm,1.15mm) on Top Overlay And Text "D6" (-13.945mm,0.388mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2218.454mil|Location2.X=2226.12mil|Location1.Y=97544.538mil|Location2.Y=97552.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2218.454mil|Location2.X=2226.12mil|Location1.Y=97544.538mil|Location2.Y=97552.205mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (12.375mm,19.25mm) on Top Overlay And Text "D2" (11.13mm,17.713mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1111.983mil|Location2.X=1123.233mil|Location1.Y=97548.846mil|Location2.Y=97560.096mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1111.983mil|Location2.X=1123.233mil|Location1.Y=97548.846mil|Location2.Y=97560.096mil|Absolute=True">Silk To Silk Clearance Constraint: (0.1mm &lt; 0.254mm) Between Arc (-16.125mm,19.35mm) on Top Overlay And Text "D1" (-17.416mm,17.638mm) on Top Overlay Silk Text to Silk Clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1049.401mil|Location2.X=1061.925mil|Location1.Y=97484.173mil|Location2.Y=97495.423mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1049.401mil|Location2.X=1061.925mil|Location1.Y=97484.173mil|Location2.Y=97495.423mil|Absolute=True">Silk To Silk Clearance Constraint: (0.081mm &lt; 0.254mm) Between Text "D1" (-17.416mm,17.638mm) on Top Overlay And Track (-17.575mm,12.625mm)(-17.575mm,17.375mm) on Top Overlay Silk Text to Silk Clearance [0.081mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1052.813mil|Location2.X=1064.063mil|Location1.Y=97484.097mil|Location2.Y=97495.347mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1052.813mil|Location2.X=1064.063mil|Location1.Y=97484.097mil|Location2.Y=97495.347mil|Absolute=True">Silk To Silk Clearance Constraint: (0.036mm &lt; 0.254mm) Between Text "D1" (-17.416mm,17.638mm) on Top Overlay And Track (-17.575mm,17.375mm)(-17.35mm,17.375mm) on Top Overlay Silk Text to Silk Clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2176.675mil|Location2.X=2187.925mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2176.675mil|Location2.X=2187.925mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True">Silk To Silk Clearance Constraint: (0.211mm &lt; 0.254mm) Between Text "D2" (11.13mm,17.713mm) on Top Overlay And Track (10.925mm,17.275mm)(11.15mm,17.275mm) on Top Overlay Silk Text to Silk Clearance [0.211mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2276.642mil|Location2.X=2287.892mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2276.642mil|Location2.X=2287.892mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True">Silk To Silk Clearance Constraint: (0.211mm &lt; 0.254mm) Between Text "D2" (11.13mm,17.713mm) on Top Overlay And Track (13.65mm,17.275mm)(13.875mm,17.275mm) on Top Overlay Silk Text to Silk Clearance [0.211mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1333.367mil|Location2.X=1344.617mil|Location1.Y=97487.551mil|Location2.Y=97498.801mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1333.367mil|Location2.X=1344.617mil|Location1.Y=97487.551mil|Location2.Y=97498.801mil|Absolute=True">Silk To Silk Clearance Constraint: (0.219mm &lt; 0.254mm) Between Text "D3" (-12.62mm,17.813mm) on Top Overlay And Track (-10.25mm,17.375mm)(-10.025mm,17.375mm) on Top Overlay Silk Text to Silk Clearance [0.219mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1238.917mil|Location2.X=1252.569mil|Location1.Y=97487.564mil|Location2.Y=97498.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1238.917mil|Location2.X=1252.569mil|Location1.Y=97487.564mil|Location2.Y=97498.814mil|Absolute=True">Silk To Silk Clearance Constraint: (0.23mm &lt; 0.254mm) Between Text "D3" (-12.62mm,17.813mm) on Top Overlay And Track (-12.975mm,17.375mm)(-12.75mm,17.375mm) on Top Overlay Silk Text to Silk Clearance [0.23mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2349.69mil|Location2.X=2360.94mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2349.69mil|Location2.X=2360.94mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True">Silk To Silk Clearance Constraint: (0.211mm &lt; 0.254mm) Between Text "D4" (15.33mm,17.713mm) on Top Overlay And Track (15.525mm,12.525mm)(15.525mm,17.275mm) on Top Overlay Silk Text to Silk Clearance [0.211mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2349.69mil|Location2.X=2360.94mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2349.69mil|Location2.X=2360.94mil|Location1.Y=97483.605mil|Location2.Y=97494.855mil|Absolute=True">Silk To Silk Clearance Constraint: (0.211mm &lt; 0.254mm) Between Text "D4" (15.33mm,17.713mm) on Top Overlay And Track (15.525mm,17.275mm)(15.75mm,17.275mm) on Top Overlay Silk Text to Silk Clearance [0.211mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1739mil|Location2.X=1750.25mil|Location1.Y=97101.638mil|Location2.Y=97112.888mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1739mil|Location2.X=1750.25mil|Location1.Y=97101.638mil|Location2.Y=97112.888mil|Absolute=True">Silk To Silk Clearance Constraint: (0.077mm &lt; 0.254mm) Between Text "P2" (0.13mm,6.138mm) on Top Overlay And Text "P3" (-2.536mm,7.748mm) on Top Overlay Silk Text to Silk Clearance [0.077mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.466mil|Location2.X=1863.716mil|Location1.Y=97037.054mil|Location2.Y=97048.304mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1852.466mil|Location2.X=1863.716mil|Location1.Y=97037.054mil|Location2.Y=97048.304mil|Absolute=True">Silk To Silk Clearance Constraint: (0.198mm &lt; 0.254mm) Between Text "P2" (0.13mm,6.138mm) on Top Overlay And Track (3.094mm,3.9mm)(3.094mm,8.1mm) on Top Overlay Silk Text to Silk Clearance [0.198mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1633.392mil|Location2.X=1644.642mil|Location1.Y=97100.446mil|Location2.Y=97111.696mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1633.392mil|Location2.X=1644.642mil|Location1.Y=97100.446mil|Location2.Y=97111.696mil|Absolute=True">Silk To Silk Clearance Constraint: (0.012mm &lt; 0.254mm) Between Text "P3" (-2.536mm,7.748mm) on Top Overlay And Track (-2.775mm,3.8mm)(-2.775mm,8mm) on Top Overlay Silk Text to Silk Clearance [0.012mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1633.392mil|Location2.X=1644.642mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\EvoLogics_Transducer_Connector\Connector.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1633.392mil|Location2.X=1644.642mil|Location1.Y=97110.352mil|Location2.Y=97121.602mil|Absolute=True">Silk To Silk Clearance Constraint: (0.012mm &lt; 0.254mm) Between Text "P3" (-2.536mm,7.748mm) on Top Overlay And Track (-3.3mm,8mm)(-2.775mm,8mm) on Top Overlay Silk Text to Silk Clearance [0.012mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
