@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "LT6003")(type "Altium Designer")(uri "${KIPRJMOD}/Library/Linear_Technology_LT6003HS5_TRPBF_0.PcbLib")(options "")(descr ""))
+  (lib (name "ME2-CH2O-16×15")(type "KiCad")(uri "${KIPRJMOD}/ME2-CH2O-16×15.pretty")(options "")(descr ""))
+)
