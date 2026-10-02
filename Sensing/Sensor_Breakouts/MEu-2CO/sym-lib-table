@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "LT6003")(type "Legacy")(uri "${KIPRJMOD}/Library/LT6003S5/eec.lib")(options "")(descr ""))
+  (lib (name "MEu-2CO")(type "KiCad")(uri "${KIPRJMOD}/Library/MEu-2CO.kicad_sym")(options "")(descr ""))
+)
