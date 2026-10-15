@@ -51,7 +51,7 @@
 				(hide yes)
 			)
 		)
-		(property "ki_keywords" "Formaldehyde Sensor"
+		(property "ki_keywords" "CO Sensor, Carbon Monoxide"
 			(at 0 0 0)
 			(effects
 				(font
