@@ -92,6 +92,7 @@
 		(property "Reference" "J1"
 			(at 0 -2.38 90)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "cb6d9835-1c4c-40fe-871c-b8280d0e326f")
 			(effects
 				(font
@@ -6296,7 +6297,7 @@
 		(uuid "fc75b87b-0f54-439f-bba1-f0eacda6f0c9")
 	)
 	(gr_rect
-		(start 172 63.28)
+		(start 172 63.077396)
 		(end 187.1 89.52)
 		(stroke
 			(width 0.2)
