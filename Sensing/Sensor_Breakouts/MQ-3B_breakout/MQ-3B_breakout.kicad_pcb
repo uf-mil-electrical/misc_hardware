@@ -290,7 +290,7 @@
 		(uuid "cf99a456-6986-4482-a2ea-6f59f285e5a1")
 		(at 150.641 84.641)
 		(property "Reference" "U1"
-			(at 0 -9.525 0)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(uuid "338175ce-fef7-4c44-b3ad-271915ead8eb")
 			(effects
@@ -303,6 +303,7 @@
 		(property "Value" "TGS822"
 			(at 0 9.525 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "fefbd3c6-965a-45d2-af3c-155d2b55d2b6")
 			(effects
 				(font
@@ -404,6 +405,7 @@
 		(path "/47017b7e-70f9-4795-a894-ceb9404c835f")
 		(sheetname "/")
 		(sheetfile "MQ-3B_breakout.kicad_sch")
+		(solder_paste_margin 0)
 		(fp_circle
 			(center -8.575 -3.359)
 			(end -8.575 -3.484)
@@ -413,7 +415,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "a8921e35-8c12-42f9-8e13-652f3f87ae13")
+			(uuid "535669ce-cf7c-4429-b808-8635b538b9dd")
 		)
 		(fp_circle
 			(center 0 0)
@@ -424,7 +426,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "95552566-2c3c-4640-aed4-6d85afe9ffcb")
+			(uuid "b0cc6796-9465-4c41-8601-a50d99e14737")
 		)
 		(fp_line
 			(start -0.5 0)
@@ -434,7 +436,7 @@
 				(type solid)
 			)
 			(layer "Eco2.User")
-			(uuid "64629b7c-8a17-4375-ba16-bae02a80b8b4")
+			(uuid "d0c0ef8e-9d49-4fc4-aafe-7c79e6b4a471")
 		)
 		(fp_line
 			(start 0 0.5)
@@ -444,7 +446,7 @@
 				(type solid)
 			)
 			(layer "Eco2.User")
-			(uuid "c7b944d9-e0a1-46be-9c76-b7f115c60e94")
+			(uuid "c3178431-0516-4106-9fb1-b6dafd367103")
 		)
 		(fp_arc
 			(start -8.85 0)
@@ -455,7 +457,7 @@
 				(type solid)
 			)
 			(layer "Eco2.User")
-			(uuid "f994dc10-da46-4c24-b4a9-207063ec7e8b")
+			(uuid "c215092a-85a0-4d2d-b3d6-dea816b9b961")
 		)
 		(fp_arc
 			(start 8.85 0)
@@ -466,7 +468,7 @@
 				(type solid)
 			)
 			(layer "Eco2.User")
-			(uuid "a261794c-dbe2-44ee-9ddd-bde14f53052f")
+			(uuid "79742549-d88d-41b5-935e-ce194f64e58e")
 		)
 		(fp_circle
 			(center 0 0)
@@ -477,7 +479,7 @@
 			)
 			(fill no)
 			(layer "B.Fab")
-			(uuid "373f8108-e56d-4d6e-b925-42d27d7ccf5b")
+			(uuid "07ab5f9f-f383-488e-bdc9-ead470202e5c")
 		)
 		(fp_text user "${REFERENCE}"
 			(at -0.00001 -0.080569 0)
@@ -528,7 +530,7 @@
 			(pinfunction "VC")
 			(pintype "power_in")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(uuid "34ee24fe-1a69-49f4-8420-417fb9f5a707")
 		)
 		(pad "2" thru_hole circle
@@ -541,7 +543,7 @@
 			(pinfunction "VH")
 			(pintype "power_in")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(thermal_bridge_angle 90)
 			(uuid "b04b4087-7000-4062-b367-2fbba9f794dc")
 		)
@@ -555,7 +557,7 @@
 			(pinfunction "VC")
 			(pintype "power_in")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(thermal_bridge_angle 90)
 			(uuid "307b5a01-996a-46e6-975d-49323516a729")
 		)
@@ -569,7 +571,7 @@
 			(pinfunction "VRL")
 			(pintype "passive")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(thermal_bridge_angle 90)
 			(uuid "c2a55e64-a4df-45c8-878f-7d22945a283d")
 		)
@@ -583,7 +585,7 @@
 			(pinfunction "GND")
 			(pintype "power_in")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(thermal_bridge_angle 90)
 			(uuid "15578efb-5eff-47ba-bf0f-a1215a226604")
 		)
@@ -597,7 +599,7 @@
 			(pinfunction "VRL")
 			(pintype "passive")
 			(solder_mask_margin 0)
-			(solder_paste_margin -2147.483637)
+			(solder_paste_margin -2147.48364)
 			(thermal_bridge_angle 90)
 			(uuid "1be9e47f-b1da-416d-92cd-2872cfef7a08")
 		)
@@ -630,6 +632,7 @@
 		(property "Reference" "J1"
 			(at 0 -2.38 90)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "74737778-84a9-49d9-93af-19bfa779ff20")
 			(effects
 				(font
