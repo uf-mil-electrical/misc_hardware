@@ -4639,7 +4639,7 @@
 			)
 			(fill no)
 			(layer "Dwgs.User")
-			(uuid "38459a0a-8934-4ea8-9232-2e8678f24062")
+			(uuid "4fadd424-e51f-47c9-b22d-eb4c74f5fd1c")
 		)
 		(fp_circle
 			(center 0 0)
@@ -4650,7 +4650,7 @@
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "d07ea868-2bce-48df-97d7-d141ea551b93")
+			(uuid "2a915e94-d354-4d28-adcb-206413cf21ad")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 270)
@@ -4666,8 +4666,8 @@
 		)
 		(pad "1" thru_hole circle
 			(at 0 -6.75 270)
-			(size 3 3)
-			(drill 2)
+			(size 3.7 3.7)
+			(drill 2.7)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 13 "/Working")
@@ -4677,8 +4677,8 @@
 		)
 		(pad "2" thru_hole circle
 			(at -6.75 0 270)
-			(size 3 3)
-			(drill 2)
+			(size 3.7 3.7)
+			(drill 2.7)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 12 "/Reference")
@@ -4688,8 +4688,8 @@
 		)
 		(pad "3" thru_hole circle
 			(at 6.75 0 270)
-			(size 3 3)
-			(drill 2)
+			(size 3.7 3.7)
+			(drill 2.7)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 5 "/Counter")
