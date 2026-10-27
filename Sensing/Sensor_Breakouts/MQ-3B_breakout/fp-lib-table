@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MQ-3B")(type "Altium Designer")(uri "${KIPRJMOD}/ImportLibrary/Components - 24.09.26 - 10.48.IntLib")(options "")(descr ""))
+)
