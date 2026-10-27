@@ -1,1 +1,4 @@
-Record=TopLevelDocument|FileName=buoy_controller_v1.SchDoc|SheetNumber=1
+Record=TopLevelDocument|FileName=Connectors.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Connectors.SchDoc|FileName=E-Fuse.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Connectors.SchDoc|FileName=LoRa and Pico.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=Connectors.SchDoc|FileName=Power.SchDoc|SheetNumber=1
