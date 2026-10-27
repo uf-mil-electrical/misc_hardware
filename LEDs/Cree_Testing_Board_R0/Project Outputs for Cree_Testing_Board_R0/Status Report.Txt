@@ -1,0 +1,11 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Cree_Testing_Board_R0.PrjPcb]
+   Generated File[ALUMINUM_BOARD_RO.LDP]
+   Generated File[ALUMINUM_BOARD_RO.DRR]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 12:40:04 On 10/20/2026
