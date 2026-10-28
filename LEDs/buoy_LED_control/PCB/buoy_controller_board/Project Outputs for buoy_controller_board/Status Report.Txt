@@ -1,32 +1,13 @@
-Output: Gerber X2 Files
-Type  : GerberX2
-From  : Variant [[No Variations]] of Project [buoy_controller_board.PrjPcb]
-   Generated File[buoy_controller_v1_Copper_Signal_Top.gbr]
-   Generated File[buoy_controller_v1_Copper_Signal_1.gbr]
-   Generated File[buoy_controller_v1_Copper_Signal_2.gbr]
-   Generated File[buoy_controller_v1_Copper_Signal_Bot.gbr]
-   Generated File[buoy_controller_v1_Pads_Bot.gbr]
-   Generated File[buoy_controller_v1_Pads_Top.gbr]
-   Generated File[buoy_controller_v1_Legend_Top.gbr]
-   Generated File[buoy_controller_v1_Legend_Bot.gbr]
-   Generated File[buoy_controller_v1_Soldermask_Top.gbr]
-   Generated File[buoy_controller_v1_Soldermask_Bot.gbr]
-   Generated File[buoy_controller_v1_Paste_Top.gbr]
-   Generated File[buoy_controller_v1_Paste_Bot.gbr]
-   Generated File[buoy_controller_v1_Keep-out.gbr]
-   Generated File[buoy_controller_v1_Mechanical_1.gbr]
-   Generated File[buoy_controller_v1_Poly_Planning.gbr]
-   Generated File[buoy_controller_v1_Mechanical_13.gbr]
-   Generated File[buoy_controller_v1_Mechanical_15.gbr]
-   Generated File[buoy_controller_v1_Profile.gbr]
-   Generated File[buoy_controller_v1_PTH_Drill.gbr]
-   Generated File[buoy_controller_v1_Drawing_1.gbr]
-   Generated File[buoy_controller_v1_Drillmap_1.gbr]
-   Generated File[buoy_controller_v1.EXTREP]
-   Generated File[buoy_controller_v1.REP]
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [buoy_controller_board.PrjPcb]
+   Generated File[buoy_controller_v1-RoundHoles.TXT]
+   Generated File[buoy_controller_v1-SlotHoles.TXT]
+   Generated File[buoy_controller_v1.LDP]
+   Generated File[buoy_controller_v1.DRR]
 
 
-Files Generated   : 23
+Files Generated   : 4
 Documents Printed : 0
 
-Finished Output Generation At 8:38:56 PM On 10/27/2026
+Finished Output Generation At 20:58:49 On 10/27/2026
